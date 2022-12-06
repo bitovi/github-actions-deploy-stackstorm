@@ -24,3 +24,28 @@ export TF_STATE_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gene
 
 # Generate bitops config
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_bitops_config.sh
+
+
+TERRAFORM_COMMAND=""
+TERRAFORM_DESTROY=""
+if [ "$STACK_DESTROY" == "true" ]; then
+  TERRAFORM_COMMAND="destroy"
+  TERRAFORM_DESTROY="true"
+fi
+
+echo "Running BitOps for env: $BITOPS_ENVIRONMENT"
+docker run --rm --name bitops \
+-e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+-e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+-e AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
+-e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
+-e BITOPS_ENVIRONMENT="${BITOPS_ENVIRONMENT}" \
+-e SKIP_DEPLOY_TERRAFORM="${SKIP_DEPLOY_TERRAFORM}" \
+-e SKIP_DEPLOY_HELM="${SKIP_DEPLOY_HELM}" \
+-e BITOPS_TERRAFORM_COMMAND="${TERRAFORM_COMMAND}" \
+-e TERRAFORM_DESTROY="${TERRAFORM_DESTROY}" \
+-e TF_STATE_BUCKET="${TF_STATE_BUCKET}" \
+-e DEFAULT_FOLDER_NAME="_default" \
+-e BITOPS_FAST_FAIL="${BITOPS_FAST_FAIL}" \
+-v $(echo $GITHUB_ACTION_PATH)/operations:/opt/bitops_deployment \
+bitovi/bitops:2.1.0
