@@ -1,0 +1,9 @@
+---
+- name: Prep environment for st2 install
+  hosts: all
+  environment: "{{ st2_proxy_env | default({}) }}"
+  become: true
+
+  tasks:    
+    - name: Install python3-passlib
+      apt: "pkg=python3-passlib state=present"

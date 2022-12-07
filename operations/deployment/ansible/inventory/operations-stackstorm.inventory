@@ -1,0 +1,7 @@
+[single-vm]
+99.79.31.210 
+
+[single-vm:vars]
+ansible_connection=ssh 
+ansible_ssh_private_key_file=./ops_stackstorm_private_key
+ansible_user=ubuntu
