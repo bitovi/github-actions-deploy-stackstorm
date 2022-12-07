@@ -20,4 +20,4 @@ terraform:
     cli: 
       stack-action: ${CONFIG_STACK_ACTION}
     options: {}
-" >> "${GITHUB_ACTION_PATH}/operations/deployment/terraform/bitops.config.yaml"
+" > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/bitops.config.yaml"

@@ -19,7 +19,7 @@ resource "tls_private_key" "stackstorm_generated_key" {
 
 // Creates an ec2 key pair using the tls_private_key.stackstorm_generated_key public key
 resource "aws_key_pair" "deployer" {
-  key_name   = "${var.environment}-ec2-key-pair"
+  key_name   = "${var.ops_repo_environment}-ec2-key-pair"
   public_key = tls_private_key.stackstorm_generated_key.public_key_openssh
 }
 

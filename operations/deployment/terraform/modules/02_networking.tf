@@ -30,7 +30,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.environment}-public-subnet-${count.index + 1}"
+    Name = "${var.ops_repo_environment}-public-subnet-${count.index + 1}"
     Tier = "Public"
   }
 }
@@ -40,7 +40,7 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name        = "${var.environment}-routing-table-public"
+    Name        = "${var.ops_repo_environment}-routing-table-public"
   }
   
 }
