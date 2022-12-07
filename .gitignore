@@ -1,0 +1,17 @@
+app.env
+
+# ansible-st2
+stackstorm.yml
+roles/
+app/
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+
+bitops.config.yaml
+provider.tf
+*.tfvars
+
+# Testing
+*test*
