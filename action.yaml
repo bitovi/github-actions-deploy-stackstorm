@@ -36,6 +36,9 @@ inputs:
   domain_name:
     description: 'Define the root domain name for the application. e.g. app.com'
     required: true
+  create_domain:
+    description: "Bool, whether the domain should be created in the action. Default is false"
+    default: false
   sub_domain:
     description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
   app_directory:
@@ -68,6 +71,7 @@ runs:
         STACK_DESTROY: ${{ inputs.stack_destroy }}
         AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
         DOMAIN_NAME: ${{ inputs.domain_name }}
+        CREATE_DOMAIN: ${{ inputs.CREATE_DOMAIN }}
         SUB_DOMAIN: ${{ inputs.sub_domain }}
         BITOPS_FAST_FAIL: true
         APP_DIRECTORY: ${{ inputs.app_directory }}

@@ -25,6 +25,10 @@ export TF_STATE_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gene
 # Generate bitops config
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_bitops_config.sh
 
+# Generate `00_acm_create`
+if [[ "$CREATE_DOMAIN" == "true" ]]; then
+  /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_acm_tf.sh
+fi
 
 TERRAFORM_COMMAND=""
 TERRAFORM_DESTROY=""
@@ -32,6 +36,8 @@ if [ "$STACK_DESTROY" == "true" ]; then
   TERRAFORM_COMMAND="destroy"
   TERRAFORM_DESTROY="true"
 fi
+
+exit 1
 
 echo "Running BitOps for env: $BITOPS_ENVIRONMENT"
 docker run --rm --name bitops \

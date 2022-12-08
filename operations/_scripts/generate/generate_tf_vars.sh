@@ -53,22 +53,27 @@ app_branch_name = \"${GITHUB_BRANCH_NAME}\"
 # Path on the instance where the app will be cloned (do not include app_repo_name)
 app_install_root = \"/home/ubuntu\"
 
-# logs
+# Logs
 lb_access_bucket_name = \"${GITHUB_IDENTIFIER}-logs\"
 
-
+# Security Group names
 security_group_name = \"${GITHUB_IDENTIFIER}\"
 
+# EC2
 ec2_iam_instance_profile = \"${EC2_INSTANCE_PROFILE}\"
-
 ec2_instance_public_ip = \"${EC2_INSTANCE_PUBLIC_IP}\"
 
+# AWS Specific
 aws_resource_identifier = \"${GITHUB_IDENTIFIER}\"
-
 aws_resource_identifier_supershort = \"${GITHUB_IDENTIFIER_SS}\"
 
+# Domain+Sub Names
 sub_domain_name = \"${SUB_DOMAIN}\"
-
 domain_name = \"${DOMAIN_NAME}\"
+create_domain = \"${CREATE_DOMAIN}\"
+
+# Region
+region = \"${AWS_DEFAULT_REGION}\"
+
 
 " > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/terraform.tfvars"
