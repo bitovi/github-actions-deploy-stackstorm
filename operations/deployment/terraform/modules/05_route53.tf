@@ -12,5 +12,5 @@ resource "aws_route53_record" "root-a" {
 
 resource "aws_acm_certificate_validation" "cert_validation" {
   provider        = aws
-  certificate_arn = aws_acm_certificate.ssl_certificate.arn
+  certificate_arn = data.aws_acm_certificate.issued.arn
 }

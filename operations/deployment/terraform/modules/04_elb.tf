@@ -15,7 +15,7 @@ resource "aws_elb" "vm" {
     instance_protocol  = "https"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = aws_acm_certificate.ssl_certificate.arn
+    ssl_certificate_id = data.aws_acm_certificate.issued.arn
   }
 
   health_check {

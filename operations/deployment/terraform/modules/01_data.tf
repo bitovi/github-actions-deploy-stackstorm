@@ -25,7 +25,7 @@ resource "aws_key_pair" "deployer" {
 
 // Creates a secret manager secret for the operations_stackstorm public key
 resource "aws_secretsmanager_secret" "stackstorm_keys_sm_secret" {
-   name = "operations_stackstorm_keys"
+   name = "operations_stackstorm_keys-${random_string.random.result}"
 }
  
 resource "aws_secretsmanager_secret_version" "stackstorm_keys_sm_secret_version" {
@@ -40,4 +40,11 @@ resource "aws_secretsmanager_secret_version" "stackstorm_keys_sm_secret_version"
     "value": "${sensitive(tls_private_key.stackstorm_generated_key.private_key_openssh)}"
    }
 EOF
+}
+
+resource "random_string" "random" {
+  length    = 5
+  lower     = true
+  special   = false
+  numeric   = false
 }

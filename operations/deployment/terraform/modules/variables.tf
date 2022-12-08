@@ -92,6 +92,46 @@ variable "domain_name" {
 
 
 
+## NEW NEEDS REVIEW
+variable "vpc_cidr" {
+  description = "CIDR of the VPC"
+  type        = string
+  default     = "10.10.0.0/16"
+}
+
+variable "public_subnets" {
+  default     = ["10.10.110.0/24", "10.10.111.0/24"]
+  description = "A list of public subnets"
+  type        = list(string)
+}
+
+variable "private_subnets" {
+  default     = ["10.10.0.0/24", "10.10.1.0/24"]
+  description = "A list of private subnets"
+  type        = list(string)
+}
+
+variable "availability_zones" {
+  default     = ["a", "b"]
+  description = "A list of availability zones (to be mapped to the region \"{region}{availability_zones}\""
+  type        = list(string)
+}
+
+variable "create_domain" {
+  type = bool
+  description = "Create domain using Terraform"
+  default = false
+}
+
+variable "route53_zone_id" {
+  default     = ""
+  description = "Route53 Zone ID"
+  type        = string
+}
+
+
+
+
 
 
 # variable "common_tags" {

@@ -75,5 +75,8 @@ create_domain = \"${CREATE_DOMAIN}\"
 # Region
 region = \"${AWS_DEFAULT_REGION}\"
 
+# Route53
+route53_zone_id = \"${ROUTE53_ZONE_ID}\"
+
 
 " > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/terraform.tfvars"
