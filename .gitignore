@@ -10,7 +10,6 @@ app/
 .terraform/
 .terraform.lock.hcl
 
-bitops.config.yaml
 provider.tf
 *.tfvars
 
