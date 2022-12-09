@@ -29,3 +29,7 @@ locals {
 output "availability_zone" {
   value = local.availability_zones
 }
+
+output "Stackstorm-Single-VM" {
+  value = module.Stackstorm-Single-VM
+}

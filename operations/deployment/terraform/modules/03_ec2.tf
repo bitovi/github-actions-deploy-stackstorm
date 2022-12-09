@@ -14,3 +14,8 @@ EOF
    Name = "Bitovi Operations - StackStorm - VM-Single"
  }
 }
+
+output "ec2_public_dns" {
+  description = "Public IP address of the ec2"
+  value       = aws_instance.server.public_ip
+}

@@ -36,3 +36,8 @@ resource "aws_elb" "vm" {
     Name = "operations-stackstorm-vm-single"
   }
 }
+
+output "loadbalancer_public_dns" {
+  description = "Public DNS address of the LB"
+  value       = aws_elb.vm.dns_name
+}
