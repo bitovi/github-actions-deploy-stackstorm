@@ -17,3 +17,6 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
         aws_default_region: ca-central-1
         dot_env: ${{ secrets.DOT_ENV }}
+        domain_name: gha-stackstorm-testing1.com
+        create_domain: true
+        create_hosted_zone: true
