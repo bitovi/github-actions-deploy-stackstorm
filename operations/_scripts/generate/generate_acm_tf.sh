@@ -41,6 +41,15 @@ resource \"aws_route53_record\" \"cert_dns\" {
   ttl = 60
 }
 
+resource \"aws_route53_record\" \"cnames\" {
+  allow_overwrite = true
+  name =  tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_name
+  records = [tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_value]
+  type = \"CNAME\"
+  zone_id = data.aws_route53_zone.selected.zone_id
+  ttl = 60
+}
+
 $hosted_zone
 
 " > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/modules/00_generated_acm.tf"
