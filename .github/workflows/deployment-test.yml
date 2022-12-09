@@ -1,0 +1,19 @@
+name: Deploy Testing for GHA Stackstorm
+
+on:
+  workflow_dispatch: {}
+    
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - id: deploy
+      uses: bitovi/github-actions-deploy-stackstorm@main
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_default_region: ${{ github.event.inputs.aws-default-region }}
+        dot_env: ${{ secrets.DOT_ENV }}
