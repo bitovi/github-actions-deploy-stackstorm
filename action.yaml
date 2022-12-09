@@ -76,7 +76,6 @@ runs:
         SUB_DOMAIN: ${{ inputs.sub_domain }}
         CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
         BITOPS_FAST_FAIL: true
-        APP_DIRECTORY: ${{ inputs.app_directory }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh

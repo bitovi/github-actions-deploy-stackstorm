@@ -37,7 +37,7 @@ if [ "$STACK_DESTROY" == "true" ]; then
   TERRAFORM_DESTROY="true"
 fi
 
-if [[ "$GHA_TESTING" == "true"]]; then
+if [[ "$GHA_TESTING" == "true" ]]; then
   echo "Quitting before BitOps invoke"
   exit 1
 fi
