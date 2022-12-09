@@ -1,5 +1,4 @@
 terraform:
-  cli: 
-    stack-action: apply
+  cli: {}
   options: 
     stack-action: apply
