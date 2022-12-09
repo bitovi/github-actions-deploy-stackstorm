@@ -18,3 +18,6 @@ local.sh
 
 # Security
 *.ssh*
+
+# Github Action
+00_create_*

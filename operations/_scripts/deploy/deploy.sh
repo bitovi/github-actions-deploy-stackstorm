@@ -37,6 +37,11 @@ if [ "$STACK_DESTROY" == "true" ]; then
   TERRAFORM_DESTROY="true"
 fi
 
+if [[ "$GHA_TESTING" == "true"]]; then
+  echo "Quitting before BitOps invoke"
+  exit 1
+fi
+
 echo "Running BitOps for env: $BITOPS_ENVIRONMENT"
 docker run --rm --name bitops \
 -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \

@@ -1,5 +1,23 @@
 echo "In generate_acm_tf.sh"
 
+data_hosted_zone="data \"aws_route53_zone\" \"selected\" {
+  name          = \"\${var.domain_name}.\"
+  private_zone  = false
+}"
+
+
+if [[ "$CREATE_HOSTED_ZONE" == "true" ]]; then
+  hosted_zone="resource \"aws_route53_zone\" \"primary\" {
+  name = \"\${var.domain_name}.\"
+}"
+  # Trims the last 2 characters off the variable, results trimmed: "\n}"
+  data_hosted_zone=${data_hosted_zone%??}
+  data_hosted_zone="$data_hosted_zone
+  depends_on: [aws_route53_zone.primary]
+}"
+fi
+
+
 echo "
 # SSL Certificate
 resource \"aws_acm_certificate\" \"ssl_certificate\" {
@@ -23,24 +41,8 @@ resource \"aws_route53_record\" \"cert_dns\" {
   ttl = 60
 }
 
-data \"aws_route53_zone\" \"selected\" {
-  count        = local.fqdn_provided ? 1 : 0
-  name         = \"\${var.domain_name}.\"
-  private_zone = false
-}
+$data_hosted_zone
 
-locals {
-  fqdn_provided = (
-    (var.sub_domain_name != \"\") ?
-    (var.domain_name != \"\" ?
-      true :
-      false
-    ):
-    false
-  )
-}
+$hosted_zone
 
 " > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/modules/00_create_acm.tf"
-
-
-sed -i -e 's/##depends_on/depends_on/g' ${GITHUB_ACTION_PATH}/operations/deployment/terraform/modules/01_acm.tf
