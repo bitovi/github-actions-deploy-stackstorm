@@ -41,8 +41,6 @@ inputs:
     default: false
   sub_domain:
     description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
-  app_directory:
-    description: 'Relative path for the directory of the app (i.e. where `Dockerfile` and `docker-compose.yaml` files are located). This is the directory that is copied to the EC2 instance.  Default is the root of the repo.'
   create_hosted_zone:
     description: "Bool, whether the hosted zone should be created in the action. Default is false"
     default: false
