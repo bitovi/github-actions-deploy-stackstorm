@@ -13,7 +13,7 @@ if [[ "$CREATE_HOSTED_ZONE" == "true" ]]; then
   # Trims the last 2 characters off the variable, results trimmed: "\n}"
   data_hosted_zone=${data_hosted_zone%??}
   data_hosted_zone="$data_hosted_zone
-  depends_on: [aws_route53_zone.primary]
+  depends_on     = [aws_route53_zone.primary]
 }"
 fi
 
