@@ -41,8 +41,11 @@ resource \"aws_route53_record\" \"cert_dns\" {
   ttl = 60
 }
 
-$data_hosted_zone
-
 $hosted_zone
 
 " > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/modules/00_create_acm.tf"
+
+
+
+echo "
+$data_hosted_zone" >> "${GITHUB_ACTION_PATH}/operations/deployment/terraform/modules/05_route53.tf"
