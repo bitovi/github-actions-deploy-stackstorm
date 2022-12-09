@@ -18,3 +18,7 @@ locals {
     filename = format("%s/%s/%s", abspath(path.root), ".ssh", "bitops-ssh-key.pem")
 }
 
+output "localfile_path" {
+  description = "Filepath to local_file inventory.yaml"
+  value       = local_file.ansible_inventory.filename
+}
