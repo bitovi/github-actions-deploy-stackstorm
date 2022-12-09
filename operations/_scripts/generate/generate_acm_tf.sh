@@ -23,8 +23,8 @@ echo "
 resource \"aws_acm_certificate\" \"ssl_certificate\" {
   # Could be used to control whether to create the resource of not
   provider                  = aws
-  domain_name               = var.domain_name
-  subject_alternative_names = [\"*.\${var.domain_name}\"]
+  domain_name               = \"\${var.sub_domain_name}.\${var.domain_name}\"
+  subject_alternative_names = [\"*.\${var.sub_domain_name}.\${var.domain_name}\"]
   validation_method         = \"DNS\"
 
   lifecycle {

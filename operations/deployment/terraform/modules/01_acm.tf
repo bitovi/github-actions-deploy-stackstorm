@@ -1,5 +1,5 @@
 data "aws_acm_certificate" "issued" {
-  domain   = var.domain_name
+  domain   = "${var.sub_domain_name}.${var.domain_name}"
   statuses = ["ISSUED"]
   depends_on = [time_sleep.wait_60_seconds]
 }
