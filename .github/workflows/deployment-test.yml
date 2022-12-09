@@ -13,14 +13,12 @@ on:
         options:
           - false
           - true
-        type: bool
       create_hosted_zone:
         required: true
         type: choice
         options:
           - false
           - true
-        type: bool
       
 
     
