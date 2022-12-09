@@ -19,6 +19,13 @@ on:
         options:
           - false
           - true
+      stack_destroy:
+        required: true
+        type: choice
+        options:
+          - false
+          - true
+
       
 
     
@@ -39,3 +46,4 @@ jobs:
         domain_name: ${{ github.event.inputs.domain_name }}
         create_domain: ${{ github.event.inputs.create_domain }}
         create_hosted_zone: ${{ github.event.inputs.create_hosted_zone }}
+        stack_destroy: ${{ github.event.inputs.stack_destroy }}
