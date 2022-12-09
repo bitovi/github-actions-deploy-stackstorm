@@ -37,8 +37,6 @@ if [ "$STACK_DESTROY" == "true" ]; then
   TERRAFORM_DESTROY="true"
 fi
 
-exit 1
-
 echo "Running BitOps for env: $BITOPS_ENVIRONMENT"
 docker run --rm --name bitops \
 -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
