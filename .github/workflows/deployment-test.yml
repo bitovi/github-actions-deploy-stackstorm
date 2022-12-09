@@ -7,6 +7,10 @@ on:
         required: true
         default: gha-stackstorm-testing1.com
         type: string
+      sub_domain:
+        required: true
+        default: gha-stackstorm-testing1.com
+        type: string
       create_domain:
         required: true
         type: choice
@@ -44,6 +48,8 @@ jobs:
         aws_default_region: ca-central-1
         dot_env: ${{ secrets.DOT_ENV }}
         domain_name: ${{ github.event.inputs.domain_name }}
+        sub_domain: ${{ github.event.inputs.sub_domain }}
         create_domain: ${{ github.event.inputs.create_domain }}
         create_hosted_zone: ${{ github.event.inputs.create_hosted_zone }}
         stack_destroy: ${{ github.event.inputs.stack_destroy }}
+
