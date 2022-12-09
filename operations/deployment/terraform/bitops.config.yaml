@@ -1,7 +1,5 @@
-
 terraform:
-    cli: 
-      stack-action: apply
-    options: 
-      stack-action: apply
-
+  cli: 
+    stack-action: apply
+  options: 
+    stack-action: apply
