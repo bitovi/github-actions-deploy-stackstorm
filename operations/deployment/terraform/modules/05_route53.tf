@@ -4,7 +4,6 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 }
 
 resource "aws_route53_record" "root-a" {
-  # zone_id = var.route53_zone_id
   zone_id = data.aws_route53_zone.selected.zone_id
   name    = var.domain_name
   type    = "A"

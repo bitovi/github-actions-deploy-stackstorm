@@ -4,6 +4,12 @@ data "aws_acm_certificate" "issued" {
   depends_on = [time_sleep.wait_60_seconds]
 }
 
+data "aws_route53_zone" "selected" {
+  name          = "${var.domain_name}."
+  private_zone  = false
+  depends_on = [time_sleep.wait_60_seconds]
+}
+
 resource "null_resource" "previous" {}
 
 resource "time_sleep" "wait_60_seconds" {
