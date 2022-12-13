@@ -11,18 +11,18 @@ on:
         required: true
         default: gha-stackstorm-testing1.com
         type: string
-      create_domain:
-        required: true
-        type: choice
-        options:
-          - false
-          - true
-      create_hosted_zone:
-        required: true
-        type: choice
-        options:
-          - false
-          - true
+      # create_domain:
+      #   required: true
+      #   type: choice
+      #   options:
+      #     - false
+      #     - true
+      # create_hosted_zone:
+      #   required: true
+      #   type: choice
+      #   options:
+      #     - false
+      #     - true
       stack_destroy:
         required: true
         type: choice
@@ -49,7 +49,7 @@ jobs:
         dot_env: ${{ secrets.DOT_ENV }}
         domain_name: ${{ github.event.inputs.domain_name }}
         sub_domain: ${{ github.event.inputs.sub_domain }}
-        create_domain: ${{ github.event.inputs.create_domain }}
-        create_hosted_zone: ${{ github.event.inputs.create_hosted_zone }}
+        #create_domain: ${{ github.event.inputs.create_domain }}
+        #create_hosted_zone: ${{ github.event.inputs.create_hosted_zone }}
         stack_destroy: ${{ github.event.inputs.stack_destroy }}
 
