@@ -121,11 +121,11 @@ variable "region" {
   default = ""
 }
 
-variable "create_domain" {
-  type = bool
-  description = "Create domain using Terraform"
-  default = false
-}
+# variable "create_domain" {
+#   type = bool
+#   description = "Create domain using Terraform"
+#   default = false
+# }
 
 variable "route53_zone_id" {
   default     = ""

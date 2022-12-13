@@ -70,7 +70,6 @@ aws_resource_identifier_supershort = \"${GITHUB_IDENTIFIER_SS}\"
 # Domain+Sub Names
 sub_domain_name = \"${SUB_DOMAIN}\"
 domain_name = \"${DOMAIN_NAME}\"
-create_domain = \"${CREATE_DOMAIN}\"
 
 # Region
 region = \"${AWS_DEFAULT_REGION}\"
