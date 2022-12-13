@@ -29,7 +29,8 @@ on:
         options:
           - false
           - true
-
+      tf_state_bucket:
+        type: string
       
 
     
@@ -52,4 +53,5 @@ jobs:
         #create_domain: ${{ github.event.inputs.create_domain }}
         #create_hosted_zone: ${{ github.event.inputs.create_hosted_zone }}
         stack_destroy: ${{ github.event.inputs.stack_destroy }}
+        TF_STATE_BUCKET: ${{ github.event.inputs.tf_state_bucket }}
 
