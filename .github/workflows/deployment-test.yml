@@ -43,8 +43,8 @@ jobs:
     - id: deploy
       uses: bitovi/github-actions-deploy-stackstorm@main
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_default_region: ca-central-1
         dot_env: ${{ secrets.DOT_ENV }}
         domain_name: ${{ github.event.inputs.domain_name }}
