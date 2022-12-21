@@ -22,3 +22,7 @@ output "localfile_path" {
   description = "Filepath to local_file inventory.yaml"
   value       = local_file.ansible_inventory.filename
 }
+output "localfile_abspath" {
+  description = "value of abspath(path.root)"
+  value       = abspath(path.root)
+}
