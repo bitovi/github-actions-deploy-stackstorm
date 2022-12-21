@@ -5,4 +5,16 @@
   - name: Include install
     include_tasks: tasks/install.yml
 
-  - import_playbook: stackstorm.yml
+  - name: Install st2
+    environment: "{{ st2_proxy_env | default({}) }}"
+    roles:
+      - StackStorm.mongodb
+      - StackStorm.rabbitmq
+      - StackStorm.redis
+      - StackStorm.st2repo
+      - StackStorm.st2
+      - StackStorm.nginx
+      - StackStorm.st2web
+      - StackStorm.nodejs
+      - StackStorm.st2chatops
+      - StackStorm.st2smoketests

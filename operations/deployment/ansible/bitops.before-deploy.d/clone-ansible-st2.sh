@@ -20,8 +20,8 @@ echo "    $ANSIBLE_DIR/ansible-st2/roles/ -> $ANSIBLE_DIR/roles"
 cp -r $ANSIBLE_DIR/ansible-st2/roles/ $ANSIBLE_DIR/roles
 
 
-echo "    $ANSIBLE_DIR/ansible-st2/stackstorm.yml -> $ANSIBLE_DIR"
-cp $ANSIBLE_DIR/ansible-st2/stackstorm.yml $ANSIBLE_DIR
+# echo "    $ANSIBLE_DIR/ansible-st2/stackstorm.yml -> $ANSIBLE_DIR"
+# cp $ANSIBLE_DIR/ansible-st2/stackstorm.yml $ANSIBLE_DIR
 
 echo "clean up"
 rm -rf "${ANSIBLE_DIR}/ansible-st2"
