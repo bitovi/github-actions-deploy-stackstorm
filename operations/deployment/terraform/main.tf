@@ -24,7 +24,7 @@ module "Stackstorm-Single-VM" {
 
 
 resource "local_file" "test" {
-  filename = format("%s/%s", abspath(path.root), "test.txt")
+  filename = "/opt/bitops_deployment/test.txt"
   content = "foo"
 }
 output "file_test" {
