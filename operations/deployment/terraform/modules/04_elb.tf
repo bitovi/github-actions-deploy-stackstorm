@@ -10,13 +10,14 @@ resource "aws_elb" "vm" {
     lb_protocol       = "http"
   }
 
-  listener {
-    instance_port      = 443
-    instance_protocol  = "https"
-    lb_port            = 443
-    lb_protocol        = "https"
-    ssl_certificate_id = data.aws_acm_certificate.issued.arn
-  }
+  # TODO: handle ssl (see 01_acm.tf.skip)
+  # listener {
+  #   instance_port      = 443
+  #   instance_protocol  = "https"
+  #   lb_port            = 443
+  #   lb_protocol        = "https"
+  #   ssl_certificate_id = data.aws_acm_certificate.issued.arn
+  # }
 
   health_check {
     healthy_threshold   = 2
