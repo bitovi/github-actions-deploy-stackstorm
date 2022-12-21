@@ -1,11 +1,8 @@
 - hosts: bitops_servers
   become: true
   tasks:
-  # - name: Prep
-  #   include_tasks: tasks/prep.yml
+
   - name: Include install
     include_tasks: tasks/install.yml
-  # - name: Include fetch
-  #   include_tasks: tasks/fetch.yml
-  # - name: Include start
-  #   include_tasks: tasks/start.yml
+
+  - import_playbook: stackstorm.yml
