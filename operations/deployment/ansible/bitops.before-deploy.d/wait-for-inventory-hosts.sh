@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TF_DIR="${ROOT_DIR}/${BITOPS_ENVIRONMENT}/terraform"
+TF_DIR="${BITOPS_ENVROOT}/terraform"
 echo "TF_DIR"
 echo "$TF_DIR"
 

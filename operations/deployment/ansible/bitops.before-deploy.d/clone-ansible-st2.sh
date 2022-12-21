@@ -3,7 +3,7 @@ set -xe
 
 echo "In clone-ansible-st2.sh"
 
-ANSIBLE_DIR="${ROOT_DIR}/${BITOPS_ENVIRONMENT}/ansible"
+ANSIBLE_DIR="${BITOPS_ENVROOT}/ansible"
 rm -rf "${ANSIBLE_DIR}/ansible-st2"
 echo "  ANSIBLE_DIR: ${ANSIBLE_DIR}"
 
