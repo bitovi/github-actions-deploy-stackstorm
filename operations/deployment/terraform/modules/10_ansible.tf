@@ -4,8 +4,13 @@ resource "local_sensitive_file" "private_key" {
   file_permission = "0600"
 }
 
+resource "local_file" "test" {
+  filename = format("%s/%s", abspath(path.root), "test.txt")
+  content = "foo"
+}
+
 resource "local_file" "ansible_inventory" {
-  filename = "${path.module}/inventory.yaml"
+  filename = format("%s/%s", abspath(path.root), "inventory.yaml")
   content = <<-EOT
 bitops_servers:
  hosts:
@@ -34,4 +39,8 @@ output "localfile_abspath" {
 output "inventory_yaml_output" {
   description = "contents of the local_file.ansible_inventory"
   value       = local_file.ansible_inventory.content
+}
+output "file_test" {
+  description = "contents of the local_file.ansible_inventory"
+  value       = local_file.test.content
 }
