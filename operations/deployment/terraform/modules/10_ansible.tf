@@ -5,7 +5,7 @@ resource "local_sensitive_file" "private_key" {
 }
 
 resource "local_file" "ansible_inventory" {
-  filename = format("%s/%s", abspath(path.root), "inventory.yaml")
+  filename = "inventory.yaml"
   content = <<-EOT
 bitops_servers:
  hosts:
