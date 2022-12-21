@@ -14,6 +14,9 @@ echo "$TF_DIR"
 echo "ls TF_DIR"
 ls "$TF_DIR"
 
+echo "ls TF_DIR/modules"
+ls "$TF_DIR/modules"
+
 echo "TF_DIR/inventory.yaml"
 cat "$TF_DIR/inventory.yaml"
 
