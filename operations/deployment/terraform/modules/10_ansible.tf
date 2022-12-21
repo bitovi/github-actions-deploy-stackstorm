@@ -5,7 +5,7 @@ resource "local_sensitive_file" "private_key" {
 }
 
 resource "local_file" "ansible_inventory" {
-  content = templatefile("inventory.tmpl", {
+  content = templatefile("${abspath(path.root)}/inventory.tmpl", {
     ip          = aws_instance.server.public_ip
     ssh_keyfile = local.filename
     app_repo_name = var.app_repo_name
