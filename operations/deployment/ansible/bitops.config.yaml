@@ -1,6 +1,6 @@
 ansible:
     cli:
-      main-playbook: stackstorm.yml
+      main-playbook: playbook.yml
       extra-vars: "@extra-vars.json"
     options:
       dryrun: false
