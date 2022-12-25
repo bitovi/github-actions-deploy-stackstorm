@@ -1,5 +1,6 @@
 - hosts: bitops_servers
   become: true
+  environment: "{{ st2_proxy_env | default({}) }}"
   tasks:
 
   - name: Include install
