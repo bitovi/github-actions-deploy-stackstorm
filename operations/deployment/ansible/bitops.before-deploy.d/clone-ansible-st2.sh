@@ -38,10 +38,13 @@ ls $ANSIBLE_DIR/ansible-st2
 
 echo "  copying files from ansible-st2"
 
+echo "ls ANSIBLE_DIR/roles ($ANSIBLE_DIR/roles) before"
+ls $ANSIBLE_DIR/roles
+
 echo "    $ANSIBLE_DIR/ansible-st2/roles/ -> $ANSIBLE_DIR/roles"
 cp -r $ANSIBLE_DIR/ansible-st2/roles/ $ANSIBLE_DIR/roles
 
-echo "ls ANSIBLE_DIR/roles ($ANSIBLE_DIR/roles)"
+echo "ls ANSIBLE_DIR/roles ($ANSIBLE_DIR/roles) after"
 ls $ANSIBLE_DIR/roles
 
 
