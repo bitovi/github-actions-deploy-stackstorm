@@ -1,5 +1,5 @@
 - hosts: bitops_servers
-  environment: "{{ st2_proxy_env | default({}) }}"
+  environment: "{{ lookup('ansible.builtin.env', 'st2_proxy_env', default={}) }}"
   roles:
     - install
     - StackStorm.mongodb
