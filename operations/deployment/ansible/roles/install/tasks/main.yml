@@ -1,5 +1,6 @@
 # install aws connect
 - name: Install required system packages
+  become: true
   apt: name={{ item }} state=latest update_cache=yes
   loop:
     - 'ec2-instance-connect'

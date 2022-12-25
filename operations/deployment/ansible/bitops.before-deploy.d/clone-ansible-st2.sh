@@ -18,22 +18,13 @@ ls $ANSIBLE_DIR/ansible-st2
 
 echo "  copying files from ansible-st2"
 
-echo "ls ANSIBLE_DIR before"
-ls $ANSIBLE_DIR
-echo "ls ANSIBLE_DIR/roles before"
-ls $ANSIBLE_DIR/roles
-
 echo "    $ANSIBLE_DIR/ansible-st2/roles/ -> $ANSIBLE_DIR/roles"
 cp -r $ANSIBLE_DIR/ansible-st2/roles/* $ANSIBLE_DIR/roles
 
-echo "ls ANSIBLE_DIR after"
-ls $ANSIBLE_DIR
-echo "ls ANSIBLE_DIR/roles after"
-ls $ANSIBLE_DIR/roles
-
-
+# TODO: for now, we need a custom playbook.yaml file to include the install role
+#       there should be a way to merge/use the install role file without manually creating recreating the stackstorm.yml
 # echo "    $ANSIBLE_DIR/ansible-st2/stackstorm.yml -> $ANSIBLE_DIR"
 # cp $ANSIBLE_DIR/ansible-st2/stackstorm.yml $ANSIBLE_DIR
 
-echo "clean up"
+echo "  clean up"
 rm -rf "${ANSIBLE_DIR}/ansible-st2"
