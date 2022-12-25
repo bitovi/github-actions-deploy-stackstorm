@@ -24,7 +24,7 @@ echo "ls ANSIBLE_DIR/roles before"
 ls $ANSIBLE_DIR/roles
 
 echo "    $ANSIBLE_DIR/ansible-st2/roles/ -> $ANSIBLE_DIR/roles"
-cp -r $ANSIBLE_DIR/ansible-st2/roles/ $ANSIBLE_DIR/roles
+cp -r $ANSIBLE_DIR/ansible-st2/roles/* $ANSIBLE_DIR/roles
 
 echo "ls ANSIBLE_DIR after"
 ls $ANSIBLE_DIR
