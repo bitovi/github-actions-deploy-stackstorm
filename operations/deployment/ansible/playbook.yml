@@ -1,10 +1,14 @@
 - hosts: bitops_servers
-  become: true
   environment: "{{ st2_proxy_env | default({}) }}"
-  tasks:
-
-  - name: Include install
-    include_tasks: tasks/install.yml
-
-  - name: Install st2
-    include_tasks: tasks/st2.yml
+  roles:
+    - install
+    - StackStorm.mongodb
+    - StackStorm.rabbitmq
+    - StackStorm.redis
+    - StackStorm.st2repo
+    - StackStorm.st2
+    - StackStorm.nginx
+    - StackStorm.st2web
+    - StackStorm.nodejs
+    - StackStorm.st2chatops
+    - StackStorm.st2smoketests
