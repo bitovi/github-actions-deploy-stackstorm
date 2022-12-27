@@ -3,6 +3,7 @@
   vars:
     st2_auth_username: testu
     st2_auth_password: testp4
+    st2_save_credentials: yes
   roles:
     - install
     - StackStorm.mongodb
