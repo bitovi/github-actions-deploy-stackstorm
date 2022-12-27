@@ -19,11 +19,20 @@ resource "aws_elb" "vm" {
   #   ssl_certificate_id = data.aws_acm_certificate.issued.arn
   # }
 
+  # TODO: handle ssl (see 01_acm.tf.skip)
+  # health_check {
+  #   healthy_threshold   = 2
+  #   unhealthy_threshold = 2
+  #   timeout             = 3
+  #   target              = "HTTPS:443/"
+  #   interval            = 30
+  # }
+
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTPS:443/"
+    target              = "HTTPS:80/"
     interval            = 30
   }
 
