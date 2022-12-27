@@ -23,17 +23,6 @@ module "Stackstorm-Single-VM" {
   route53_zone_id=var.route53_zone_id
 }
 
-
-resource "local_file" "test" {
-  filename = "/opt/bitops_deployment/test.txt"
-  content = "foo"
-}
-output "file_test" {
-  description = "contents of the local_file.test"
-  value       = local_file.test.content
-}
-
-
 locals {
   availability_zones = "${formatlist("${var.region}%s", var.availability_zones)}"
 }
