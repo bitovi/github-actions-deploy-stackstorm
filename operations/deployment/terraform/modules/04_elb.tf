@@ -32,7 +32,7 @@ resource "aws_elb" "vm" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTPS:80/"
+    target              = "HTTP:80/"
     interval            = 30
   }
 
