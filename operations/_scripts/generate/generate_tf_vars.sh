@@ -24,6 +24,9 @@ fi
 GITHUB_IDENTIFIER="$($GITHUB_ACTION_PATH/operations/_scripts/generate/generate_identifier.sh)"
 echo "GITHUB_IDENTIFIER: [$GITHUB_IDENTIFIER]"
 
+GITHUB_IDENTIFIER_SS="$($GITHUB_ACTION_PATH/operations/_scripts/generate/generate_identifier_supershort.sh)"
+echo "GITHUB_IDENTIFIER SS: [$GITHUB_IDENTIFIER_SS]"
+
 if [ -z "$SUB_DOMAIN" ]; then
   SUB_DOMAIN="$GITHUB_IDENTIFIER"
 fi
@@ -62,6 +65,7 @@ security_group_name = \"${GITHUB_IDENTIFIER}\"
 # EC2
 ec2_iam_instance_profile = \"${EC2_INSTANCE_PROFILE}\"
 ec2_instance_public_ip = \"${EC2_INSTANCE_PUBLIC_IP}\"
+ec2_instance_type = \"${EC2_INSTANCE_TYPE}\"
 
 # AWS Specific
 aws_resource_identifier = \"${GITHUB_IDENTIFIER}\"

@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "I am a before ansible lifecycle script!"
-python3 $ROOT_DIR/_scripts/ansible/wait-for-inventory-hosts.py
+
+echo "Waiting for instances to be ready..."
+python3 $BITOPS_TEMPDIR/_scripts/ansible/wait-for-inventory-hosts.py

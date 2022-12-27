@@ -1,0 +1,16 @@
+- hosts: bitops_servers
+  environment: "{{ lookup('ansible.builtin.env', 'st2_proxy_env', default={}) }}"
+  vars_files:
+    - vars/st2.yaml
+  roles:
+    - install
+    - StackStorm.mongodb
+    - StackStorm.rabbitmq
+    - StackStorm.redis
+    - StackStorm.st2repo
+    - StackStorm.st2
+    - StackStorm.nginx
+    - StackStorm.st2web
+    - StackStorm.nodejs
+    - StackStorm.st2chatops
+    - StackStorm.st2smoketests

@@ -1,0 +1,13 @@
+# install aws connect
+- name: Install required system packages
+  become: true
+  apt: name={{ item }} state=latest update_cache=yes
+  loop:
+    - 'ec2-instance-connect'
+    - 'ca-certificates'
+    - 'curl'
+    - 'software-properties-common'
+    - 'python3-pip'
+    - 'virtualenv'
+    - 'python3-setuptools'
+    - 'python3-passlib'

@@ -12,6 +12,7 @@ module "Stackstorm-Single-VM" {
   ec2_instance_public_ip=var.ec2_instance_public_ip
   security_group_name=var.security_group_name
   ec2_iam_instance_profile=var.ec2_iam_instance_profile
+  ec2_instance_type=var.ec2_instance_type
   lb_access_bucket_name=var.lb_access_bucket_name
   aws_resource_identifier=var.aws_resource_identifier
   aws_resource_identifier_supershort=var.aws_resource_identifier_supershort

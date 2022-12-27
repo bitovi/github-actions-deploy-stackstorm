@@ -2,7 +2,7 @@
 resource "aws_vpc" "main" {
  cidr_block = var.vpc_cidr
  tags = {
-   Name = "operations-stackstorm-vm-single"
+   Name = "${var.aws_resource_identifier}"
  }
 }
  
@@ -17,7 +17,7 @@ resource "aws_internet_gateway" "gw" {
 #   availability_zone = element(var.availability_zones, count.index)
 
 #   tags = {
-#     Name = "${var.environment}-private-subnet-${count.index + 1}"
+#     Name = "${var.aws_resource_identifier}-private${count.index + 1}"
 #     Tier = "Private"
 #   }
 # }
@@ -30,7 +30,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.ops_repo_environment}-public-subnet-${count.index + 1}"
+    Name = "${var.aws_resource_identifier}-pub${count.index + 1}"
     Tier = "Public"
   }
 }
@@ -40,7 +40,7 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name        = "${var.ops_repo_environment}-routing-table-public"
+    Name        = "${var.aws_resource_identifier}"
   }
   
 }
