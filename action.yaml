@@ -49,9 +49,9 @@ inputs:
 
   # ST2 config
   st2_auth_username:
-    description: # Username used by StackStorm standalone authentication
+    description: Username used by StackStorm standalone authentication
   st2_auth_password:
-    description: # Password used by StackStorm standalone authentication
+    description: Password used by StackStorm standalone authentication
 outputs:
   vm_url:
     description: "The URL of the generated app"

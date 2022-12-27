@@ -11,3 +11,10 @@
     - 'virtualenv'
     - 'python3-setuptools'
     - 'python3-passlib'
+
+- name: DEBUG - check username
+  ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.env','ST2_AUTH_USERNAME', default='testu') }}"
+- name: DEBUG - check pw
+  ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.env','ST2_AUTH_PASSWORD', default='testpMain') }}"

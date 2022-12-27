@@ -39,12 +39,10 @@ st2_ssh_key_file: /home/{{ st2_system_user }}/.ssh/{{ st2_system_user }}_rsa
 st2_auth_enable: yes
 
 # Username used by StackStorm standalone authentication
-st2_auth_username: testu
-# st2_auth_username: "{{ lookup('ansible.builtin.env','ST2_AUTH_USERNAME', default='testu') }}"
+st2_auth_username: "{{ lookup('ansible.builtin.env','ST2_AUTH_USERNAME', default='testu') }}"
 
 # Password used by StackStorm standalone authentication
-st2_auth_password: testp3
-# st2_auth_password: "{{ lookup('ansible.builtin.env','ST2_AUTH_PASSWORD', default='testp3') }}"
+st2_auth_password: "{{ lookup('ansible.builtin.env','ST2_AUTH_PASSWORD', default='testp3') }}"
 
 
 
