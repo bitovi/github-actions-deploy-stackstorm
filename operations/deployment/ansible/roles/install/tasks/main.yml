@@ -10,3 +10,4 @@
     - 'python3-pip'
     - 'virtualenv'
     - 'python3-setuptools'
+    - 'python3-passlib'
