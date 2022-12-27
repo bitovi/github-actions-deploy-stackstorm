@@ -3,6 +3,15 @@ set -xe
 
 echo "In clone-ansible-st2.sh"
 
+echo ""
+echo "================================="
+echo "DEBUGGING"
+echo "ST2_AUTH_USERNAME: ${ST2_AUTH_USERNAME}"
+echo "ST2_AUTH_PASSWORD: ${ST2_AUTH_PASSWORD}"
+echo "END DEBUGGING"
+echo "================================="
+echo ""
+
 TF_DIR="${BITOPS_ENVROOT}/terraform"
 
 ANSIBLE_DIR="${BITOPS_ENVROOT}/ansible"
