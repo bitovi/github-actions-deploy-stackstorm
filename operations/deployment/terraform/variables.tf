@@ -45,7 +45,7 @@ variable "ops_repo_environment" {
 
 variable "ec2_instance_type" {
   type = string
-  default = "t2.small"
+  default = "t2.medium"
   description = "Instance type for the EC2 instance"
 }
 variable "ec2_instance_public_ip" {

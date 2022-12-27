@@ -1,6 +1,6 @@
 resource "aws_instance" "server" {
  ami                         = data.aws_ami.ubuntu.id
- instance_type               = "t2.medium"
+ instance_type               = "${var.ec2_instance_type}"
  key_name                    = aws_key_pair.deployer.key_name
  associate_public_ip_address = true
  subnet_id                   = aws_subnet.public.*.id[0]
