@@ -11,7 +11,7 @@ echo "symlink for python3 -> python"
 sudo ln -s /usr/bin/python3 /usr/bin/python
 EOF
  tags = {
-   Name = "Bitovi Operations - StackStorm - VM-Single"
+   Name = "${var.aws_resource_identifier}"
  }
 }
 

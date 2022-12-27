@@ -1,5 +1,5 @@
 resource "aws_elb" "vm" {
-  name               = "operations-stackstorm-vm-single"
+  name               = "${var.aws_resource_identifier}"
   subnets = aws_subnet.public.*.id
 
   security_groups = [aws_security_group.allow_http.id, aws_security_group.allow_https.id]
@@ -43,7 +43,7 @@ resource "aws_elb" "vm" {
   connection_draining_timeout = 400
 
   tags = {
-    Name = "operations-stackstorm-vm-single"
+    Name = "${var.aws_resource_identifier}"
   }
 }
 
