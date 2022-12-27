@@ -1,9 +1,9 @@
 - hosts: bitops_servers
   environment: "{{ lookup('ansible.builtin.env', 'st2_proxy_env', default={}) }}"
-  vars:
-    st2_auth_username: testu
-    st2_auth_password: testp4
-    st2_save_credentials: yes
+  include_vars:
+    dir: vars
+    extensions:
+      - 'yaml'
   roles:
     - install
     - StackStorm.mongodb
