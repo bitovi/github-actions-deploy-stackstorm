@@ -1,6 +1,7 @@
 ansible:
     cli:
       main-playbook: playbook.yml
-      extra-vars: "@extra-vars.yaml"
+      # todo: (currently handled via vars/st2.yaml)
+      # extra-vars: "@extra-vars.yaml"
     options:
       dryrun: false
