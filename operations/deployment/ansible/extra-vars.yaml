@@ -90,7 +90,7 @@ st2_rbac:
   mappings: []
 
 # Save credentials in ~/.st2/config file
-st2_save_credentials: no
+st2_save_credentials: yes
 # ST2 packs to be installed (list)
 st2_packs:
   - st2
