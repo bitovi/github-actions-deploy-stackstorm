@@ -52,6 +52,9 @@ inputs:
     description: Username used by StackStorm standalone authentication
   st2_auth_password:
     description: Password used by StackStorm standalone authentication
+  st2_packs:
+    description: List of packs to install. This flag does not work with a --python3 only pack. (default `[ st2 ]`). If you modify this option, be sure to also include `st2` in the list.
+    default: [ st2 ]
 outputs:
   vm_url:
     description: "The URL of the generated app"
@@ -89,6 +92,7 @@ runs:
         # ST2 config
         ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
         ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
+        ST2_PACKS: ${{ inputs.st2_packs }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
