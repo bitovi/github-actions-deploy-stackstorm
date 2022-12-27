@@ -1,9 +1,7 @@
 - hosts: bitops_servers
   environment: "{{ lookup('ansible.builtin.env', 'st2_proxy_env', default={}) }}"
-  include_vars:
-    dir: vars
-    extensions:
-      - 'yaml'
+  vars_files:
+    - vars/st2.yaml
   roles:
     - install
     - StackStorm.mongodb
