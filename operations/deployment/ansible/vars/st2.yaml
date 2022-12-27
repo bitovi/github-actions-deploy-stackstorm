@@ -42,7 +42,7 @@ st2_auth_enable: yes
 st2_auth_username: "{{ lookup('ansible.builtin.env','ST2_AUTH_USERNAME', default='testu') }}"
 
 # Password used by StackStorm standalone authentication
-st2_auth_password: "{{ lookup('ansible.builtin.env','ST2_AUTH_PASSWORD', default='testp3') }}"
+st2_auth_password: "{{ lookup('ansible.builtin.env','ST2_AUTH_PASSWORD', default='testp') }}"
 
 
 
