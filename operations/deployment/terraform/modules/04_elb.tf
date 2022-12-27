@@ -3,12 +3,12 @@ resource "aws_elb" "vm" {
   subnets = aws_subnet.public.*.id
 
   security_groups = [aws_security_group.allow_http.id, aws_security_group.allow_https.id]
-  listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
-  }
+  # listener {
+  #   instance_port     = 80
+  #   instance_protocol = "http"
+  #   lb_port           = 80
+  #   lb_protocol       = "http"
+  # }
 
   listener {
     instance_port      = 443
