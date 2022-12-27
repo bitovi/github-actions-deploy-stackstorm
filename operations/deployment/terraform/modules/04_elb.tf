@@ -1,5 +1,5 @@
 resource "aws_elb" "vm" {
-  name               = "${var.aws_resource_identifier}"
+  name               = "${var.aws_resource_identifier_supershort}"
   subnets = aws_subnet.public.*.id
 
   security_groups = [aws_security_group.allow_http.id, aws_security_group.allow_https.id]
@@ -43,7 +43,7 @@ resource "aws_elb" "vm" {
   connection_draining_timeout = 400
 
   tags = {
-    Name = "${var.aws_resource_identifier}"
+    Name = "${var.aws_resource_identifier_supershort}"
   }
 }
 
