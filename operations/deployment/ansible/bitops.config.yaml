@@ -1,6 +1,6 @@
 ansible:
     cli:
       main-playbook: playbook.yml
-      extra-vars: "@extra-vars.json"
+      extra-vars: "@extra-vars.yaml"
     options:
       dryrun: false

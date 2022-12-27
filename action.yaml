@@ -44,6 +44,12 @@ inputs:
   # create_hosted_zone:
   #   description: "Bool, whether the hosted zone should be created in the action. Default is false"
   #   default: false
+
+  # ST2 config
+  st2_auth_username:
+    description: # Username used by StackStorm standalone authentication
+  st2_auth_password:
+    description: # Password used by StackStorm standalone authentication
 outputs:
   vm_url:
     description: "The URL of the generated app"
@@ -76,6 +82,10 @@ runs:
         SUB_DOMAIN: ${{ inputs.sub_domain }}
         # CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
         BITOPS_FAST_FAIL: true
+
+        # ST2 config
+        ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
+        ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
