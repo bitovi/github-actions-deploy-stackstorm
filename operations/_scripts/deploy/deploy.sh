@@ -56,5 +56,7 @@ docker run --rm --name bitops \
 -e TF_STATE_BUCKET="${TF_STATE_BUCKET}" \
 -e DEFAULT_FOLDER_NAME="_default" \
 -e BITOPS_FAST_FAIL="${BITOPS_FAST_FAIL}" \
+-e ST2_AUTH_USERNAME="${ST2_AUTH_USERNAME}" \
+-e ST2_AUTH_PASSWORD="${ST2_AUTH_PASSWORD}" \
 -v $(echo $GITHUB_ACTION_PATH)/operations:/opt/bitops_deployment \
 bitovi/bitops:2.2.1
