@@ -40,7 +40,7 @@ st2_auth_enable: yes
 # Username used by StackStorm standalone authentication
 st2_auth_username: "{{ lookup('env','ST2_AUTH_USERNAME', default='testu') }}"
 # Password used by StackStorm standalone authentication
-st2_auth_password: "{{ lookup('env','ST2_AUTH_PASSWORD', default='testp') }}"
+st2_auth_password: "{{ lookup('env','ST2_AUTH_PASSWORD', default='testp3') }}"
 
 # By specifying a valid configuration for LDAP,
 # (See https://docs.stackstorm.com/latest/authentication.html#ldap )
