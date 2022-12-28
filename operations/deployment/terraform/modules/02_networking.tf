@@ -1,13 +1,23 @@
- resource "aws_vpc" "main" {
- count = var.create_vpc == "true" ? 1 : 0
- cidr_block = var.vpc_cidr
- tags = {
-   Name = "${var.aws_resource_identifier}"
- }
+locals {
+    vpc_id = var.create_vpc == "true" ? aws_vpc.main[0].id : var.provided_vpc != "" ? var.provided_vpc : ""
 }
+
+resource "aws_vpc" "main" {
+  count = var.create_vpc == "true" ? 1 : 0
+  cidr_block = var.vpc_cidr
+  tags = {
+    Name = "${var.aws_resource_identifier}"
+  }
+}
+
+data "aws_vpc" "provided_vpc" {
+  count = var.provided_vpc != "" ? 1 : 0
+  id = var.provided_vpc
+}
+
 resource "aws_internet_gateway" "gw" {
   count = var.create_vpc == "true" ? 1 : 0
-  vpc_id = aws_vpc.main[0].id
+  vpc_id = local.vpc_id
 }
 
 # resource "aws_subnet" "private" {
