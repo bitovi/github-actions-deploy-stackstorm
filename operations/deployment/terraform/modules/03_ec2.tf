@@ -4,7 +4,7 @@ resource "aws_instance" "server" {
  key_name                    = aws_key_pair.deployer.key_name
  associate_public_ip_address = true
  
- subnet_id                   = (var.create_vpc = "true") ? aws_subnet.public.*.id[0] : null
+ subnet_id                   = var.create_vpc = "true" ? aws_subnet.public.*.id[0] : null
  vpc_security_group_ids      = [aws_security_group.allow_http.id, aws_security_group.allow_https.id, aws_security_group.allow_ssh.id]
  user_data = <<EOF
 #!/bin/bash
