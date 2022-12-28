@@ -1,6 +1,7 @@
 resource "aws_elb" "vm" {
   name               = "${var.aws_resource_identifier_supershort}"
-  subnets = aws_subnet.public.*.id
+  subnets            = var.create_vpc == "true" ? aws_subnet.public.*.id : null
+  availability_zones = var.create_vpc == "true" ? null : [aws_instance.server.availability_zone]
 
   security_groups = [aws_security_group.allow_http.id, aws_security_group.allow_https.id]
 

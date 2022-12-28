@@ -1,19 +1,18 @@
- #   TODO: optional based on flag: create_vpc
-resource "aws_vpc" "main" {
+ resource "aws_vpc" "main" {
+ count = var.create_vpc == "true" ? 1 : 0
  cidr_block = var.vpc_cidr
  tags = {
    Name = "${var.aws_resource_identifier}"
  }
 }
- #   TODO: optional based on flag: create_vpc
 resource "aws_internet_gateway" "gw" {
- vpc_id = aws_vpc.main.id
+  count = var.create_vpc == "true" ? 1 : 0
+  vpc_id = aws_vpc.main[0].id
 }
 
-#   TODO: optional based on flag: create_vpc
 # resource "aws_subnet" "private" {
-#   vpc_id            = aws_vpc.main.id
-#   count             = length(var.private_subnets)
+#   vpc_id            = aws_vpc.main[0].id
+#   count             = var.create_vpc == "true" ? length(var.private_subnets) : 0
 #   cidr_block        = element(var.private_subnets, count.index)
 #   availability_zone = element(var.availability_zones, count.index)
 
@@ -23,12 +22,11 @@ resource "aws_internet_gateway" "gw" {
 #   }
 # }
 
-#   TODO: optional based on flag: create_vpc
 resource "aws_subnet" "public" {
-  vpc_id                  = aws_vpc.main.id
+  count = var.create_vpc == "true" ? length(var.public_subnets) : 0
+  vpc_id                  = aws_vpc.main[0].id
   cidr_block              = element(var.public_subnets, count.index)
   availability_zone       = element(var.availability_zones, count.index)
-  count                   = length(var.public_subnets)
   map_public_ip_on_launch = true
 
   tags = {
@@ -37,26 +35,27 @@ resource "aws_subnet" "public" {
   }
 }
 
-#   TODO: optional based on flag: create_vpc
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
+  count = var.create_vpc == "true" ? 1 : 0
+  vpc_id = aws_vpc.main[0].id
 
   tags = {
     Name        = "${var.aws_resource_identifier}"
   }
   
 }
-#   TODO: optional based on flag: create_vpc
+
 resource "aws_route" "public" {
-  route_table_id         = aws_route_table.public.id
+  count = var.create_vpc == "true" ? 1 : 0
+  route_table_id         = aws_route_table.public[0].id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.gw.id
+  gateway_id             = aws_internet_gateway.gw[0].id
 }
-#   TODO: optional based on flag: create_vpc
+
 resource "aws_route_table_association" "public" {
-  count          = length(var.public_subnets)
+  count = var.create_vpc == "true" ? length(var.public_subnets) : 0
   subnet_id      = element(aws_subnet.public.*.id, count.index)
-  route_table_id = aws_route_table.public.id
+  route_table_id = aws_route_table.public[0].id
 }
 
 
@@ -66,7 +65,7 @@ resource "aws_route_table_association" "public" {
 resource "aws_security_group" "allow_http" {
  name        = "allow_http"
  description = "Allow HTTP traffic"
- vpc_id      = aws_vpc.main.id
+ vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
  ingress {
    description = "HTTP"
    from_port   = 80
@@ -85,7 +84,7 @@ resource "aws_security_group" "allow_http" {
 resource "aws_security_group" "allow_https" {
  name        = "allow_https"
  description = "Allow HTTPS traffic"
- vpc_id      = aws_vpc.main.id
+ vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
  ingress {
    description = "HTTPS"
    from_port   = 443
@@ -104,7 +103,7 @@ resource "aws_security_group" "allow_https" {
 resource "aws_security_group" "allow_ssh" {
  name        = "allow_ssh"
  description = "Allow SSH traffic"
- vpc_id      = aws_vpc.main.id
+ vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
  ingress {
    description = "SSH"
    from_port   = 22

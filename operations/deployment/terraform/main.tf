@@ -18,6 +18,7 @@ module "Stackstorm-Single-VM" {
   aws_resource_identifier_supershort=var.aws_resource_identifier_supershort
   sub_domain_name=var.sub_domain_name
   domain_name=var.domain_name
+  create_vpc=var.create_vpc
   #create_domain=var.create_domain
   availability_zones=local.availability_zones
   route53_zone_id=var.route53_zone_id
