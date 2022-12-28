@@ -1,15 +1,16 @@
- 
+ #   TODO: optional based on flag: create_vpc
 resource "aws_vpc" "main" {
  cidr_block = var.vpc_cidr
  tags = {
    Name = "${var.aws_resource_identifier}"
  }
 }
- 
+ #   TODO: optional based on flag: create_vpc
 resource "aws_internet_gateway" "gw" {
  vpc_id = aws_vpc.main.id
 }
 
+#   TODO: optional based on flag: create_vpc
 # resource "aws_subnet" "private" {
 #   vpc_id            = aws_vpc.main.id
 #   count             = length(var.private_subnets)
@@ -22,6 +23,7 @@ resource "aws_internet_gateway" "gw" {
 #   }
 # }
 
+#   TODO: optional based on flag: create_vpc
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = element(var.public_subnets, count.index)
@@ -35,7 +37,7 @@ resource "aws_subnet" "public" {
   }
 }
 
-
+#   TODO: optional based on flag: create_vpc
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -44,13 +46,13 @@ resource "aws_route_table" "public" {
   }
   
 }
-
+#   TODO: optional based on flag: create_vpc
 resource "aws_route" "public" {
   route_table_id         = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.gw.id
 }
-
+#   TODO: optional based on flag: create_vpc
 resource "aws_route_table_association" "public" {
   count          = length(var.public_subnets)
   subnet_id      = element(aws_subnet.public.*.id, count.index)

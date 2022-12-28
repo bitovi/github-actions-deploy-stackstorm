@@ -90,8 +90,7 @@ st2_rbac:
 # Save credentials in ~/.st2/config file
 st2_save_credentials: yes
 # ST2 packs to be installed (list)
-st2_packs:
-  - st2
+st2_packs: "{{ lookup('ansible.builtin.env','ST2_PACKS', default='st2').split(',') | map('trim') | list }}"
 
 # Additional python packages to install
 st2_python_packages: []

@@ -3,6 +3,8 @@ resource "aws_instance" "server" {
  instance_type               = "${var.ec2_instance_type}"
  key_name                    = aws_key_pair.deployer.key_name
  associate_public_ip_address = true
+ 
+ #   TODO: handle no subnet_id (see 02_networking.tf) - flag create_vpc
  subnet_id                   = aws_subnet.public.*.id[0]
  vpc_security_group_ids      = [aws_security_group.allow_http.id, aws_security_group.allow_https.id, aws_security_group.allow_ssh.id]
  user_data = <<EOF
