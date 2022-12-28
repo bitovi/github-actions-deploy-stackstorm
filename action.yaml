@@ -54,7 +54,7 @@ inputs:
     description: Password used by StackStorm standalone authentication
   st2_packs:
     description: String. Comma separated list of packs to install. This flag does not work with a --python3 only pack. (default `"[ st2 ]"`). If you modify this option, be sure to also include `st2` in the list.
-    default: "[ st2 ]"
+    default: "st2"
 outputs:
   vm_url:
     description: "The URL of the generated app"
