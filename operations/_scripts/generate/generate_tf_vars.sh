@@ -75,6 +75,9 @@ aws_resource_identifier_supershort = \"${GITHUB_IDENTIFIER_SS}\"
 sub_domain_name = \"${SUB_DOMAIN}\"
 domain_name = \"${DOMAIN_NAME}\"
 
+# VPC
+create_vpc = \"${CREATE_VPC}\"
+
 # Region
 region = \"${AWS_DEFAULT_REGION}\"
 

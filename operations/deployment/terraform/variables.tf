@@ -88,6 +88,11 @@ variable "domain_name" {
   description = "root domain name without any subdomains"
   default = ""
 }
+variable "create_vpc" {
+  type = string
+  default = "false"
+  description = "Attach public IP to the EC2 instance"
+}
 
 
 ## NEW NEEDS REVIEW
