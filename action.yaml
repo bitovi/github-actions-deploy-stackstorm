@@ -24,9 +24,6 @@ inputs:
   tf_state_bucket:
     description: 'AWS S3 bucket to use for Terraform state. Defaults to `${org}-${repo}-{branch}-tf-state`'
     required: false
-  dot_env:
-    description: '`.env` file to be used with the app'
-    required: false
   ec2_instance_profile:
     description: 'The AWS IAM instance profile to use for the EC2 instance'
   ec2_instance_type:
@@ -82,7 +79,6 @@ runs:
         AWS_SESSION_TOKEN: ${{ inputs.aws_session_token }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
         TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
-        DOT_ENV: ${{ inputs.dot_env }}
         APP_PORT: ${{ inputs.app_port }}
         EC2_INSTANCE_PROFILE: ${{ inputs.ec2_instance_profile }}
         EC2_INSTANCE_TYPE: ${{ inputs.ec2_instance_type }}
