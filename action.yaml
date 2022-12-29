@@ -47,7 +47,7 @@ inputs:
     description: "Bool, whether an AWS VPC should be created in the action. Default is false"
     default: false
   infrastructure_only:
-    description: "Bool, does infrastructure (i.e. terraform) but **not** the deployment (i.e. ansible) . Default is true"
+    description: "Bool, does infrastructure (i.e. terraform) but **not** the deployment (i.e. ansible) . Default is false"
     default: false
 
 

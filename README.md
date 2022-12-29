@@ -68,6 +68,8 @@ The following inputs can be used as `step.with` keys
 | `st2_auth_username` | String | |  Username used by StackStorm standalone authentication |
 | `st2_auth_password` | String | |  Password used by StackStorm standalone authentication |
 | `st2_packs` | String |`"st2"` |  Comma separated list of packs to install. This flag does not work with a --python3 only pack.. If you modify this option, be sure to also include `st2` in the list. |
+| `infrastructure_only` | Bool | false |  Does infrastructure (i.e. terraform) but **not** the deployment (i.e. ansible) |
+
 
 ## Note about resource identifiers
 
