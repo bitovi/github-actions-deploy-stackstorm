@@ -93,6 +93,11 @@ variable "create_vpc" {
   default = "false"
   description = "Attach public IP to the EC2 instance"
 }
+variable "provided_vpc" {
+  type = string
+  default = "false"
+  description = "Existing VPC ID"
+}
 
 
 ## NEW NEEDS REVIEW
