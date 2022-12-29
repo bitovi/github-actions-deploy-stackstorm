@@ -49,6 +49,9 @@ inputs:
   create_vpc:
     description: "Bool, whether a VPC should be created in the action. Default is false"
     default: false
+  infrastructure_only:
+    description: "Bool, does infrastructure (i.e. terraform) but **not** the deployment (i.e. ansible) . Default is true"
+    default: false
 
 
   # ST2 config
@@ -93,6 +96,9 @@ runs:
         SUB_DOMAIN: ${{ inputs.sub_domain }}
         # CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
         CREATE_VPC: ${{ inputs.create_vpc }}
+
+        # Skip ansible deployment if deploying only infrastructure
+        ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}
         BITOPS_FAST_FAIL: true
 
         # ST2 config
@@ -102,3 +108,18 @@ runs:
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
+
+        echo "Setting up vars for GitHub"
+        $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
+
+    # output results to GitHub
+    - if: ${{ steps.deploy.outputs.vm_url != '' }}
+      name: Print result created
+      run: |
+        echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
+    - if: ${{ steps.deploy.outputs.vm_url == '' }}
+      name: Print result destroyed
+      run: |
+        echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
+        echo "Buckets and whole infrastructure should be gone now!" >> $GITHUB_STEP_SUMMARY
