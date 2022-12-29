@@ -113,13 +113,13 @@ runs:
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
 
     # output results to GitHub
-    - if: ${{ steps.deploy.outputs.vm_url != '' }}
+    - if: ${{ steps.deploy.outputs.lb_url != '' }}
       name: Print result created
       shell: bash
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
-    - if: ${{ steps.deploy.outputs.vm_url == '' }}
+        echo " ${{ steps.deploy.outputs.lb_url }}" >> $GITHUB_STEP_SUMMARY
+    - if: ${{ steps.deploy.outputs.lb_url == '' }}
       name: Print result destroyed
       shell: bash
       run: |
