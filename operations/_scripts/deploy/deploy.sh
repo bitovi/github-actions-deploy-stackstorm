@@ -35,6 +35,7 @@ TERRAFORM_DESTROY=""
 if [ "$STACK_DESTROY" == "true" ]; then
   TERRAFORM_COMMAND="destroy"
   TERRAFORM_DESTROY="true"
+  ANSIBLE_SKIP_DEPLOY="true"
 fi
 
 if [[ "$GHA_TESTING" == "true" ]]; then
