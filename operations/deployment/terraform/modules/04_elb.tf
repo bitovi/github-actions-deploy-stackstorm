@@ -40,3 +40,9 @@ output "loadbalancer_public_dns" {
   description = "Public DNS address of the LB"
   value       = aws_elb.vm.dns_name
 }
+output "loadbalancer_protocol" {
+  description = "Protocol of the LB url"
+  #   TODO: handle ssl (see 01_acm.tf.skip)
+  # value     = local.fqdn_provided ? 'https://' : 'http://'
+  value       = "http://"
+}
