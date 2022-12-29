@@ -32,14 +32,14 @@ inputs:
     description: 'Set to "true" to Destroy the stack'
   aws_resource_identifier:
     description: 'Set to override the AWS resource identifier for the deployment.  Defaults to `${org}-{repo}-{branch}`.  Use with destroy to destroy specific resources.'
-  domain_name:
-    description: 'Define the root domain name for the application. e.g. app.com'
-    required: true
+  # domain_name:
+  #   description: 'Define the root domain name for the application. e.g. app.com'
+  #   required: true
   # create_domain:
   #   description: "Bool, whether the domain should be created in the action. Default is false"
   #   default: false
-  sub_domain:
-    description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
+  # sub_domain:
+  #   description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
   # create_hosted_zone:
   #   description: "Bool, whether the hosted zone should be created in the action. Default is false"
   #   default: false
@@ -84,9 +84,9 @@ runs:
         EC2_INSTANCE_TYPE: ${{ inputs.ec2_instance_type }}
         STACK_DESTROY: ${{ inputs.stack_destroy }}
         AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
-        DOMAIN_NAME: ${{ inputs.domain_name }}
+        # DOMAIN_NAME: ${{ inputs.domain_name }}
         # CREATE_DOMAIN: ${{ inputs.CREATE_DOMAIN }}
-        SUB_DOMAIN: ${{ inputs.sub_domain }}
+        # SUB_DOMAIN: ${{ inputs.sub_domain }}
         # CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
         CREATE_VPC: ${{ inputs.create_vpc }}
         BITOPS_FAST_FAIL: true

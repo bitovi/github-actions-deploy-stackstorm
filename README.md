@@ -56,8 +56,6 @@ The following inputs can be used as `step.with` keys
 | `ec2_instance_type` | String |  The AWS EC2 instance type. Default is "t2.medium" |
 | `stack_destroy` | Bool |  Set to "true" to Destroy the stack |
 | `aws_resource_identifier` | String |  Set to override the AWS resource identifier for the deployment.  Defaults to `${org}-{repo}-{branch}`.  Use with destroy to destroy specific resources. |
-| `domain_name` | String |  Define the root domain name for the application. e.g. app.com |
-| `sub_domain` | String |  Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}` |
 | `create_vpc` | Bool |  Whether a VPC should be created in the action. Default is `false` |
 | `st2_auth_username` | String |  Username used by StackStorm standalone authentication |
 | `st2_auth_password` | String |  Password used by StackStorm standalone authentication |
