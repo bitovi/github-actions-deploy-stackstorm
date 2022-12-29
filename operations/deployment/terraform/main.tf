@@ -26,7 +26,7 @@ module "Stackstorm-Single-VM" {
 
 locals {
   availability_zones = "${formatlist("${var.region}%s", var.availability_zones)}"
-  url = "https://${trim(module.Stackstorm-Single-VM.loadbalancer_public_dns, ' ')}"
+  url = "https://${module.Stackstorm-Single-VM.loadbalancer_public_dns}"
 }
 
 output "availability_zone" {
