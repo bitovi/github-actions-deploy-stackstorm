@@ -38,28 +38,36 @@ jobs:
         st2_auth_password: ${{ secrets.ST2_AUTH_PASSWORD}}
 ```
 
+This will create the following resources in AWS:
+- An EC2 instance
+- A load balancer
+- Security groups
+- Optionally, a VPC with subnets
+
+> For more details about what is created, see `operations/deployment/terraform/modules`
+
 ## Customizing
 
 ### Inputs
 
 The following inputs can be used as `step.with` keys
 
-| Name             | Type    | Description                        |
-|------------------|---------|------------------------------------|
-| `checkout` | Bool |  Specifies if this action should checkout the code (Default is `true`) |
-| `aws_access_key_id` | String |  AWS access key ID (Required) |
-| `aws_secret_access_key` | String |  AWS secret access key (Required) |
-| `aws_session_token` | String |  AWS session token |
-| `aws_default_region` | String |  AWS default region (Default is `us-east-1`) (Required) |
-| `tf_state_bucket` | String |  AWS S3 bucket to use for Terraform state. Defaults to `${org}-${repo}-{branch}-tf-state` |
-| `ec2_instance_profile` | String |  The AWS IAM instance profile to use for the EC2 instance |
-| `ec2_instance_type` | String |  The AWS EC2 instance type. Default is "t2.medium" |
-| `stack_destroy` | Bool |  Set to "true" to Destroy the stack |
-| `aws_resource_identifier` | String |  Set to override the AWS resource identifier for the deployment.  Defaults to `${org}-{repo}-{branch}`.  Use with destroy to destroy specific resources. |
-| `create_vpc` | Bool |  Whether a VPC should be created in the action. Default is `false` |
-| `st2_auth_username` | String |  Username used by StackStorm standalone authentication |
-| `st2_auth_password` | String |  Password used by StackStorm standalone authentication |
-| `st2_packs` | String |  Comma separated list of packs to install. This flag does not work with a --python3 only pack. (default `"st2"`). If you modify this option, be sure to also include `st2` in the list. |
+| Name             | Type    | Default     | Description                        |
+|------------------|---------|-------------|------------------------------------|
+| `checkout` | Bool | true | Specifies if this action should checkout the code (i.e. whether or not to run the `uses: actions/checkout@v3` action prior to deploying so that the deployment has access to the repo files) |
+| `aws_access_key_id` | String | |  AWS access key ID (Required) |
+| `aws_secret_access_key` | String | |  AWS secret access key (Required) |
+| `aws_session_token` | String | |  AWS session token |
+| `aws_default_region` | String | us-east-1 |  AWS default region (Required) |
+| `tf_state_bucket` | String | `${org}-${repo}-{branch}-tf-state` |  AWS S3 bucket to use for Terraform state. |
+| `ec2_instance_profile` | String | |  The AWS IAM instance profile to use for the EC2 instance |
+| `ec2_instance_type` | String | t2.medium |  The AWS EC2 instance type. |
+| `stack_destroy` | Bool | false |  Set to "true" to Destroy the stack |
+| `aws_resource_identifier` | String | `${org}-{repo}-{branch}` |  Set to override the AWS resource identifier for the deployment.  Use with destroy to destroy specific resources. |
+| `create_vpc` | Bool | false |  Whether a VPC should be created in the action. |
+| `st2_auth_username` | String | |  Username used by StackStorm standalone authentication |
+| `st2_auth_password` | String | |  Password used by StackStorm standalone authentication |
+| `st2_packs` | String |`"st2"` |  Comma separated list of packs to install. This flag does not work with a --python3 only pack.. If you modify this option, be sure to also include `st2` in the list. |
 
 ## Note about resource identifiers
 
