@@ -43,8 +43,8 @@ inputs:
   # create_hosted_zone:
   #   description: "Bool, whether the hosted zone should be created in the action. Default is false"
   #   default: false
-  create_vpc:
-    description: "Bool, whether a VPC should be created in the action. Default is false"
+  aws_create_vpc:
+    description: "Bool, whether an AWS VPC should be created in the action. Default is false"
     default: false
 
 
@@ -88,7 +88,7 @@ runs:
         # CREATE_DOMAIN: ${{ inputs.CREATE_DOMAIN }}
         # SUB_DOMAIN: ${{ inputs.sub_domain }}
         # CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
-        CREATE_VPC: ${{ inputs.create_vpc }}
+        CREATE_VPC: ${{ inputs.aws_create_vpc }}
         BITOPS_FAST_FAIL: true
 
         # ST2 config

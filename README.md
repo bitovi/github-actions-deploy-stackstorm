@@ -64,7 +64,7 @@ The following inputs can be used as `step.with` keys
 | `ec2_instance_type` | String | t2.medium |  The AWS EC2 instance type. |
 | `stack_destroy` | Bool | false |  Set to "true" to Destroy the stack |
 | `aws_resource_identifier` | String | `${org}-{repo}-{branch}` |  Set to override the AWS resource identifier for the deployment.  Use with destroy to destroy specific resources. |
-| `create_vpc` | Bool | false |  Whether a VPC should be created in the action. |
+| `aws_create_vpc` | Bool | false |  Whether an AWS VPC should be created in the action. |
 | `st2_auth_username` | String | |  Username used by StackStorm standalone authentication |
 | `st2_auth_password` | String | |  Password used by StackStorm standalone authentication |
 | `st2_packs` | String |`"st2"` |  Comma separated list of packs to install. This flag does not work with a --python3 only pack.. If you modify this option, be sure to also include `st2` in the list. |
