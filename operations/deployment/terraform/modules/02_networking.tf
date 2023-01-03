@@ -63,7 +63,7 @@ resource "aws_route_table_association" "public" {
 
 
 resource "aws_security_group" "allow_http" {
- name        = "allow_http"
+ name = "${var.aws_resource_identifier_supershort}-http"
  description = "Allow HTTP traffic"
  vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
  ingress {
@@ -82,7 +82,7 @@ resource "aws_security_group" "allow_http" {
 }
  
 resource "aws_security_group" "allow_https" {
- name        = "allow_https"
+ name = "${var.aws_resource_identifier_supershort}-https"
  description = "Allow HTTPS traffic"
  vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
  ingress {
@@ -101,7 +101,7 @@ resource "aws_security_group" "allow_https" {
 }
 
 resource "aws_security_group" "allow_ssh" {
- name        = "allow_ssh"
+ name = "${var.aws_resource_identifier_supershort}-ssh"
  description = "Allow SSH traffic"
  vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
  ingress {
