@@ -13,4 +13,4 @@ if [ -z "${TF_STATE_BUCKET}" ]; then
   fi
 fi
 
-echo "$TF_STATE_BUCKET"
+echo "$TF_STATE_BUCKET" | tr '[:upper:]' '[:lower:]'
