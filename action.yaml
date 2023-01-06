@@ -111,6 +111,7 @@ runs:
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
 
     # output results to GitHub
+    #-# TERRAFORM #-#
     - if: ${{ steps.deploy.outputs.lb_url != '' }}
       name: Print result created
       shell: bash
@@ -123,3 +124,15 @@ runs:
       run: |
         echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
         echo "Buckets and whole infrastructure should be gone now!" >> $GITHUB_STEP_SUMMARY
+    
+    - if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
+      uses: robburger/terraform-pr-commenter@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        commenter_type: plan
+        commenter_input: ${{ format('{0}{1}', steps.deploy.outputs.stdout, steps.deploy.outputs.stderr) }}
+        commenter_exitcode: ${{ steps.deploy.outputs.exitcode }}
+
+    #-#-#-#-#-#-#-#-#-#-#
+
