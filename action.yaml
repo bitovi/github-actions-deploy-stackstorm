@@ -128,7 +128,7 @@ runs:
     - if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
       uses: robburger/terraform-pr-commenter@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       with:
         commenter_type: plan
         commenter_input: ${{ format('{0}{1}', steps.deploy.outputs.stdout, steps.deploy.outputs.stderr) }}
