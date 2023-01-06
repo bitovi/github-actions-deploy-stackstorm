@@ -60,7 +60,7 @@ The following inputs can be used as `step.with` keys
 | `aws_session_token` | String | |  AWS session token |
 | `aws_default_region` | String | us-east-1 |  AWS default region (Required) |
 | `tf_state_bucket` | String | `${org}-${repo}-{branch}-tf-state` |  AWS S3 bucket to use for Terraform state. |
-| `tf_state_bucket_destroy` | Bool | false | Force purge and deletion of tf_state_bucket defined. Any file contained there will be destroyed. |
+| `tf_state_bucket_destroy` | Bool | false | Force purge and deletion of tf_state_bucket defined. Any file contained there will be destroyed. `stack_destroy` must also be `true`  |
 | `ec2_instance_profile` | String | |  The AWS IAM instance profile to use for the EC2 instance |
 | `ec2_instance_type` | String | t2.medium |  The AWS EC2 instance type. |
 | `stack_destroy` | Bool | false |  Set to "true" to Destroy the stack |
