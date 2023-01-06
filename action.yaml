@@ -64,6 +64,10 @@ outputs:
     description: "The URL of the generated app"
     value: ${{ steps.deploy.outputs.lb_url }}
 
+permissions:
+  contents: read
+  pull-requests: write
+
 runs:
   using: 'composite'
   steps:
