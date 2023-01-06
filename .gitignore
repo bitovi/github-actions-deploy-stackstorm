@@ -20,5 +20,6 @@ local.sh
 *.ssh*
 
 # Github Action
-00_create_*
-00_generated_*
+*_generated_*
+
+st2.conf

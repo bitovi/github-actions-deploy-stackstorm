@@ -37,6 +37,12 @@ if [[ "$CREATE_DOMAIN" == "true" ]]; then
   /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_acm_tf.sh
 fi
 
+# Generate Ansible
+# -------------------------------- #
+/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/ansible/generate_st2_conf.sh
+
+# -------------------------------- #
+
 TERRAFORM_COMMAND=""
 TERRAFORM_DESTROY=""
 if [ "$STACK_DESTROY" == "true" ]; then
