@@ -25,10 +25,11 @@ export TF_STATE_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gene
 # Generate bitops config
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_bitops_config.sh
 
-# Generate `00_acm_create`
-if [[ "$CREATE_DOMAIN" == "true" ]]; then
-  /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_acm_tf.sh
-fi
+# Generate Terraform data+resources
+# -------------------------------- #
+/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/terraform/generate_vpc_tf.sh
+
+# -------------------------------- #
 
 TERRAFORM_COMMAND=""
 TERRAFORM_DESTROY=""

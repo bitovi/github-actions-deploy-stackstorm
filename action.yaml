@@ -43,6 +43,8 @@ inputs:
   # create_hosted_zone:
   #   description: "Bool, whether the hosted zone should be created in the action. Default is false"
   #   default: false
+  vpc_resource_arn:
+    description: "(Optionally Required) aws arn of the existing vpc that resource created will attach to. Required if aws_create_vpc is set to false."
   aws_create_vpc:
     description: "Bool, whether an AWS VPC should be created in the action. Default is false"
     default: false
@@ -93,6 +95,7 @@ runs:
         # CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
 
         CREATE_VPC: ${{ inputs.aws_create_vpc }}
+        VPC_ARN: ${{ inputs.vpc_resource_arn }}
 
         # Skip ansible deployment if deploying only infrastructure
         ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}

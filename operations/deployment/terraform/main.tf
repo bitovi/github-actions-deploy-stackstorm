@@ -22,6 +22,7 @@ module "Stackstorm-Single-VM" {
   #create_domain=var.create_domain
   availability_zones=local.availability_zones
   route53_zone_id=var.route53_zone_id
+  vpc_arn=var.vpc_arn
 }
 
 locals {

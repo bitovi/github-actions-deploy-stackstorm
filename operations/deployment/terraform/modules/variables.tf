@@ -122,6 +122,12 @@ variable "availability_zones" {
   type        = list(string)
 }
 
+variable "vpc_arn" {
+  type = string
+  description = "aws vpc arn"
+  default = ""
+}
+
 # variable "create_domain" {
 #   type = bool
 #   description = "Create domain using Terraform"
