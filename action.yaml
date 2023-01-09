@@ -64,7 +64,7 @@ inputs:
     description: String. Comma separated list of packs to install. This flag does not work with a --python3 only pack. (default `"st2"`). If you modify this option, be sure to also include `st2` in the list.
     default: "st2"
   st2_conf:
-    description: Relative path from Project Root to configuration file.
+    description: Relative path from Project Root to configuration file. This deletes [the default st2.yaml](operations/deployment/ansible/vars/st2.yaml) file.
 outputs:
   lb_url:
     description: "The URL of the generated app"
