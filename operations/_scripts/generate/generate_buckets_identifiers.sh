@@ -4,7 +4,9 @@ set -e
 
 GITHUB_IDENTIFIER="$(echo $($GITHUB_ACTION_PATH/operations/_scripts/generate/generate_identifier.sh) | tr '[:upper:]' '[:lower:]')"
 
-function generateIdentifiers () {
+# Function: generate_identifiers
+# Description: Generate all identifiers needs to poulate the IaC (terraform and ansible). Identifiers are a required component as cloud resources often have strict usage conventions that need to be appied to dynamic user input.
+function generate_identifiers () {
   # Generate TF_STATE_BUCKET ID if empty 
   if [ -z "${TF_STATE_BUCKET}" ]; then
     if [[ ${#GITHUB_IDENTIFIER} < 55 ]]; then
@@ -22,8 +24,10 @@ function generateIdentifiers () {
     export LB_LOGS_BUCKET="${GITHUB_IDENTIFIER}-lg"
   fi
 }
-
-function checkBucket() {
+# Function: check_bucket_names
+# Description: Runs a handful of RegEx to ensure strict usage requirements are followed.
+function generate_bucket_names() {
+  
   # check length of bucket name
   if [[ ${#1} -lt 3 || ${#1} -gt 63 ]]; then
     echo "Bucket name must be between 3 and 63 characters long."
@@ -71,10 +75,10 @@ function checkBucket() {
   fi
 }
 
-generateIdentifiers
+generate_identifiers
 
-checkBucket $TF_STATE_BUCKET
-checkBucket $LB_LOGS_BUCKET
+generate_bucket_names $TF_STATE_BUCKET
+generate_bucket_names $LB_LOGS_BUCKET
 
 export TF_STATE_BUCKET=${TF_STATE_BUCKET}
 export LB_LOGS_BUCKET=${LB_LOGS_BUCKET}
