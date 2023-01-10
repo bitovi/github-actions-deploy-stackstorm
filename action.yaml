@@ -24,6 +24,10 @@ inputs:
   tf_state_bucket:
     description: 'AWS S3 bucket to use for Terraform state. Defaults to `${org}-${repo}-{branch}-tf-state`'
     required: false
+  tf_state_bucket_destroy:
+    description: 'Force purge and deletion of S3 bucket defined. Any file contained there will be destroyed `stack_destroy` must also be `true`'
+    required: false
+    default: 'false'
   ec2_instance_profile:
     description: 'The AWS IAM instance profile to use for the EC2 instance'
   ec2_instance_type:
@@ -82,6 +86,8 @@ runs:
         AWS_SESSION_TOKEN: ${{ inputs.aws_session_token }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
         TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
+        TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
+
         APP_PORT: ${{ inputs.app_port }}
         EC2_INSTANCE_PROFILE: ${{ inputs.ec2_instance_profile }}
         EC2_INSTANCE_TYPE: ${{ inputs.ec2_instance_type }}
