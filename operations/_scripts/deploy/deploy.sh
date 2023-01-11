@@ -29,6 +29,15 @@ export LB_LOGS_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gener
 # Generate app repo
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_app_repo.sh
 
+# Configure Ansible
+# Ansible related generation/resourcing/configurations block
+# -------------------------------- #
+if [[ -n $ST2_ANSIBLE_VARS_FILE ]]; then
+    cp $GITHUB_WORKSPACE/$ST2_ANSIBLE_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/vars/
+    export ST2_CONF_FILE=$(basename $GITHUB_WORKSPACE/$ST2_ANSIBLE_VARS_FILE)
+fi
+# -------------------------------- #
+
 # Generate terraform bitops config
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/terraform/generate_bitops_config.sh
 
@@ -39,14 +48,6 @@ export LB_LOGS_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gener
 if [[ "$CREATE_DOMAIN" == "true" ]]; then
   /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_acm_tf.sh
 fi
-
-# Ansible related generation/resourcing/configurations block
-# -------------------------------- #
-if [[ -n $ST2_ANSIBLE_VARS_FILE ]]; then
-    cp $GITHUB_WORKSPACE/$ST2_CONF_PATH $GITHUB_ACTION_PATH/operations/deployment/ansible/vars/
-fi
-
-# -------------------------------- #
 
 TERRAFORM_COMMAND=""
 TERRAFORM_DESTROY=""
