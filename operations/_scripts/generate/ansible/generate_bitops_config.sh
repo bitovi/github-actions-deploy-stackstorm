@@ -2,19 +2,23 @@
 
 set -e
 
-# TODO: use templating
-#    provide '.tf.tmpl' files in the 'operations/deployment' repo
-#    and iterate over all of them to provide context with something like jinja
-#    Example: https://github.com/mattrobenolt/jinja2-cli
-#    jinja2 some_file.tmpl data.json --format=json
-
 echo "In ansible generate_bitops_config.sh"
+
+cli="cli:
+      main-playbook: playbook.yml"
+
+if [[ -n $ST2_CONF_FILE ]]; then
+cli="$cli
+      extra-vars: \"${ST2_CONF_FILE}\""
+fi
+
+
+options="options:
+      dryrun: false"
+
 
 echo "
 ansible:
-    cli:
-      main-playbook: playbook.yml
-      extra-vars: \"${ST2_CONF_FILE}\"
-    options:
-      dryrun: false
+    ${cli}
+    ${options}
 " > "${GITHUB_ACTION_PATH}/operations/deployment/ansible/bitops.config.yaml"
