@@ -69,7 +69,7 @@ The following inputs can be used as `step.with` keys
 | `st2_auth_username` | String | |  Username used by StackStorm standalone authentication |
 | `st2_auth_password` | String | |  Password used by StackStorm standalone authentication |
 | `st2_packs` | String |`"st2"` |  Comma separated list of packs to install. This flag does not work with a --python3 only pack.. If you modify this option, be sure to also include `st2` in the list. |
-| `st2_conf` | String | | Relative path from Project Root to configuration file. This deletes [the default st2.yaml](operations/deployment/ansible/vars/st2.yaml) file. |
+| `st2_ansible_vars_file` | String | | Relative path from Project Root to Ansible vars file. If you'd like to adjust more advanced configuration: st2 version, st2.conf, RBAC, chatops, auth and more. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings. |
 | `infrastructure_only` | Bool | false |  Does infrastructure (i.e. terraform) but **not** the deployment (i.e. ansible)
 ## Note about resource identifiers
 
