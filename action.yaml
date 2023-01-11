@@ -64,7 +64,7 @@ inputs:
     description: String. Comma separated list of packs to install. This flag does not work with a --python3 only pack. (default `"st2"`). If you modify this option, be sure to also include `st2` in the list.
     default: "st2"
   st2_ansible_vars_file:
-    description: Relative path from Project Root to Ansible vars file. If you'd like to adjust more advanced configuration: st2 version, st2.conf, RBAC, chatops, auth and more. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings.
+    description: Relative path from Project Root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth and more. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings.
 outputs:
   lb_url:
     description: "The URL of the generated app"
