@@ -8,16 +8,13 @@ set -e
 #    Example: https://github.com/mattrobenolt/jinja2-cli
 #    jinja2 some_file.tmpl data.json --format=json
 
-echo "In generate_bitops_config.sh"
-
-CONFIG_STACK_ACTION="apply"
-if [ "$STACK_DESTROY" == "true" ]; then
-  CONFIG_STACK_ACTION="destroy"
-fi
+echo "In ansible generate_bitops_config.sh"
 
 echo "
-terraform:
-    cli: 
-      stack-action: ${CONFIG_STACK_ACTION}
-    options: {}
-" > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/bitops.config.yaml"
+ansible:
+    cli:
+      main-playbook: playbook.yml
+      extra-vars: \"@extra-vars.yaml\"
+    options:
+      dryrun: false
+" > "${GITHUB_ACTION_PATH}/operations/deployment/ansible/bitops.config.yaml"
