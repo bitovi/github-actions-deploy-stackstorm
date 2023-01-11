@@ -63,8 +63,8 @@ inputs:
   st2_packs:
     description: String. Comma separated list of packs to install. This flag does not work with a --python3 only pack. (default `"st2"`). If you modify this option, be sure to also include `st2` in the list.
     default: "st2"
-  st2_conf:
-    description: Relative path from Project Root to configuration file. This deletes [the default st2.yaml](operations/deployment/ansible/vars/st2.yaml) file.
+  st2_ansible_vars_file:
+    description: Relative path from Project Root to Ansible vars file. If you'd like to adjust more advanced configuration: st2 version, st2.conf, RBAC, chatops, auth and more. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings.
 outputs:
   lb_url:
     description: "The URL of the generated app"
@@ -111,7 +111,7 @@ runs:
         ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
         ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
         ST2_PACKS: ${{ inputs.st2_packs }}
-        ST2_CONF_PATH: ${{ inputs.st2_conf }}
+        ST2_ANSIBLE_VARS_FILE: ${{ inputs.st2_ansible_vars_file }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
