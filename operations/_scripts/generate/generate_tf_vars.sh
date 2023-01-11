@@ -77,6 +77,7 @@ domain_name = \"${DOMAIN_NAME}\"
 
 # VPC
 create_vpc = \"${CREATE_VPC}\"
+vpc_arn = \"${VPC_ARN}\"
 
 # Region
 region = \"${AWS_DEFAULT_REGION}\"
