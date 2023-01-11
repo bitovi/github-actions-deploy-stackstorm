@@ -22,6 +22,3 @@ local.sh
 
 # Github Action
 *_generated_*
-
-# Stackstorm
-st2.conf
