@@ -14,7 +14,7 @@ echo "
 ansible:
     cli:
       main-playbook: playbook.yml
-      extra-vars: \"@extra-vars.yaml\"
+      extra-vars: \"${ST2_CONF_FILE}\"
     options:
       dryrun: false
 " > "${GITHUB_ACTION_PATH}/operations/deployment/ansible/bitops.config.yaml"
