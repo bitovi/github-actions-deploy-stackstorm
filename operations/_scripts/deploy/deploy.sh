@@ -29,8 +29,11 @@ export LB_LOGS_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gener
 # Generate app repo
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_app_repo.sh
 
-# Generate bitops config
-/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_bitops_config.sh
+# Generate terraform bitops config
+/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/terraform/generate_bitops_config.sh
+
+# Generate ansible bitops config
+/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/ansible/generate_bitops_config.sh
 
 # Generate `00_acm_create`
 if [[ "$CREATE_DOMAIN" == "true" ]]; then
