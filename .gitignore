@@ -22,3 +22,6 @@ local.sh
 
 # Github Action
 *_generated_*
+
+# BitOps
+bitops.config.yaml
