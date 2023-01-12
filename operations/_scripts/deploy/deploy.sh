@@ -81,6 +81,5 @@ docker run --rm --name bitops \
 -e BITOPS_FAST_FAIL="${BITOPS_FAST_FAIL}" \
 -e ST2_AUTH_USERNAME="${ST2_AUTH_USERNAME}" \
 -e ST2_AUTH_PASSWORD="${ST2_AUTH_PASSWORD}" \
--e ST2_PACKS="${ST2_PACKS}" \
 -v $(echo $GITHUB_ACTION_PATH)/operations:/opt/bitops_deployment \
 bitovi/bitops:2.3.0
