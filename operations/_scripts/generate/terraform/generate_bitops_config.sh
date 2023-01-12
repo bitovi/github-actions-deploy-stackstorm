@@ -8,7 +8,7 @@ set -e
 #    Example: https://github.com/mattrobenolt/jinja2-cli
 #    jinja2 some_file.tmpl data.json --format=json
 
-echo "In generate_bitops_config.sh"
+echo "In terraform generate_bitops_config.sh"
 
 CONFIG_STACK_ACTION="apply"
 if [ "$STACK_DESTROY" == "true" ]; then

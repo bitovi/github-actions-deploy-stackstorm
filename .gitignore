@@ -15,10 +15,13 @@ provider.tf
 
 # Testing
 local.sh
+*testing*
 
 # Security
 *.ssh*
 
 # Github Action
-00_create_*
-00_generated_*
+*_generated_*
+
+# BitOps
+bitops.config.yaml
