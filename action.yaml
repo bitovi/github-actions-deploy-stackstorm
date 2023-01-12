@@ -110,7 +110,6 @@ runs:
         # ST2 config
         ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
         ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
-        ST2_PACKS: ${{ inputs.st2_packs }}
         ST2_ANSIBLE_VARS_FILE: ${{ inputs.st2_ansible_vars_file }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
