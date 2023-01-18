@@ -38,11 +38,6 @@ if [[ -n $ST2_ANSIBLE_VARS_FILE ]]; then
 fi
 # -------------------------------- #
 
-# Configure Stackstorm
-# -------------------------------- #
-/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/stackstorm/validate.stackstorm.sh
-# -------------------------------- #
-
 # Generate terraform bitops config
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/terraform/generate_bitops_config.sh
 
