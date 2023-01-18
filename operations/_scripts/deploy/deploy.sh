@@ -40,7 +40,7 @@ fi
 
 # Configure Stackstorm
 # -------------------------------- #
-/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/Stackstorm/validate.stackstorm.sh
+/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/stackstorm/validate.stackstorm.sh
 # -------------------------------- #
 
 # Generate terraform bitops config
