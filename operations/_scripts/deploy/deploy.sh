@@ -40,7 +40,9 @@ fi
 
 # Configure Stackstorm
 # -------------------------------- #
-/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/stackstorm/validate_stackstorm.sh
+if [[ $ST2_PACKS == "" ]]; then
+    export ST2_PACKS="st2"
+fi
 # -------------------------------- #
 
 # Generate terraform bitops config
