@@ -32,6 +32,7 @@ inputs:
     description: 'The AWS IAM instance profile to use for the EC2 instance'
   ec2_instance_type:
     description: 'The AWS EC2 instance type. Default is "t2.medium"'
+    default: "t2.medium"
   stack_destroy:
     description: 'Set to "true" to Destroy the stack'
   aws_resource_identifier:
