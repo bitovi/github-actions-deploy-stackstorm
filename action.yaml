@@ -36,17 +36,6 @@ inputs:
     description: 'Set to "true" to Destroy the stack'
   aws_resource_identifier:
     description: 'Set to override the AWS resource identifier for the deployment.  Defaults to `${org}-{repo}-{branch}`.  Use with destroy to destroy specific resources.'
-  # domain_name:
-  #   description: 'Define the root domain name for the application. e.g. app.com'
-  #   required: true
-  # create_domain:
-  #   description: "Bool, whether the domain should be created in the action. Default is false"
-  #   default: false
-  # sub_domain:
-  #   description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
-  # create_hosted_zone:
-  #   description: "Bool, whether the hosted zone should be created in the action. Default is false"
-  #   default: false
   aws_create_vpc:
     description: "Bool, whether an AWS VPC should be created in the action. Default is false"
     default: false
@@ -58,10 +47,8 @@ inputs:
   # ST2 config
   st2_auth_username:
     description: Username used by StackStorm standalone authentication
-    default: "testu"
   st2_auth_password:
     description: Password used by StackStorm standalone authentication
-    default: "testp"
   st2_ansible_vars_file:
     description: Relative path from Project Root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth and more. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings.
   st2_packs:
@@ -98,11 +85,6 @@ runs:
         EC2_INSTANCE_TYPE: ${{ inputs.ec2_instance_type }}
         STACK_DESTROY: ${{ inputs.stack_destroy }}
         AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
-        # DOMAIN_NAME: ${{ inputs.domain_name }}
-        # CREATE_DOMAIN: ${{ inputs.CREATE_DOMAIN }}
-        # SUB_DOMAIN: ${{ inputs.sub_domain }}
-        # CREATE_HOSTED_ZONE: ${{ inputs.CREATE_HOSTED_ZONE }}
-
         CREATE_VPC: ${{ inputs.aws_create_vpc }}
 
         # Skip ansible deployment if deploying only infrastructure

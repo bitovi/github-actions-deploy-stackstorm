@@ -3,26 +3,9 @@ name: Deploy Testing for GHA Stackstorm
 on:
   workflow_dispatch:
     inputs:
-      domain_name:
-        required: true
-        default: gha-stackstorm-testing1.com
+      aws_default_region:
+        default: us-east-1
         type: string
-      sub_domain:
-        required: true
-        default: gha-stackstorm-testing1.com
-        type: string
-      # create_domain:
-      #   required: true
-      #   type: choice
-      #   options:
-      #     - false
-      #     - true
-      # create_hosted_zone:
-      #   required: true
-      #   type: choice
-      #   options:
-      #     - false
-      #     - true
       stack_destroy:
         required: true
         type: choice
@@ -31,9 +14,7 @@ on:
           - true
       tf_state_bucket:
         type: string
-      
 
-    
 permissions:
   contents: read
 
@@ -46,12 +27,6 @@ jobs:
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws_default_region: ca-central-1
-        dot_env: ${{ secrets.DOT_ENV }}
-        domain_name: ${{ github.event.inputs.domain_name }}
-        sub_domain: ${{ github.event.inputs.sub_domain }}
-        #create_domain: ${{ github.event.inputs.create_domain }}
-        #create_hosted_zone: ${{ github.event.inputs.create_hosted_zone }}
+        aws_default_region: ${{ github.event.inputs.aws_default_region }}
         stack_destroy: ${{ github.event.inputs.stack_destroy }}
         TF_STATE_BUCKET: ${{ github.event.inputs.tf_state_bucket }}
-
