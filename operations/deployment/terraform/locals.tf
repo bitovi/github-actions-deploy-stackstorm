@@ -7,6 +7,6 @@ locals {
     GitHubBranchName = "${var.app_branch_name}"
     GitHubAction = "bitovi/github-actions-node-app-to-aws-vm"
     OperationsRepoEnvironment = "deployment"
-    created_with = "terraform"
+    CreatedWith = "terraform"
   }
 }
