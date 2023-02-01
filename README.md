@@ -1,6 +1,11 @@
-# Github Action: Deploy StackStorm
+# Github Action: Deploy StackStorm (βeta)
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-green)](LICENSE.md)
+[![Latest Release](https://img.shields.io/github/v/release/bitovi/github-actions-deploy-stackstorm)](https://github.com/bitovi/github-actions-deploy-stackstorm/releases)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/bitovi/github-actions-deploy-stackstorm)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/bitovi/github-actions-deploy-stackstorm)
+[![Join our Slack](https://img.shields.io/badge/slack-join%20chat-611f69.svg?logo=slack)](https://www.bitovi.com/community/slack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 GitHub action to deploy [StackStorm](https://stackstorm.com/) to an AWS VM (EC2) with [Terraform](operations/deployment/terraform/modules) and [Ansible](https://github.com/stackstorm/ansible-st2).
 
