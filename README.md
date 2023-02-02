@@ -20,22 +20,24 @@ GitHub action to deploy [StackStorm](https://stackstorm.com/) to an AWS VM (EC2)
 
 ## Example usage
 
-Create a Github Action Workflow `.github/workflow/deploy.yaml` with the following to build on push to the `main` branch.
+Create a Github Action Workflow `.github/workflow/deploy-st2.yaml` with the following to build on push to the `main` branch.
 
 ```yaml
-name: Deploy ST2 Single VM with GHA
+# Deploy ST2 Single VM with GHA
+name: CD
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  deploy:
+  deploy-st2:
     runs-on: ubuntu-latest
     steps:
-    - id: deploy
+    - id: deploy-st2
       name: Deploy StackStorm
-      # TODO: pin to the specific version (best practices)
+      # NOTE: we recommend pinning to the latest numeric version
+      # See: https://github.com/bitovi/github-actions-deploy-stackstorm/releases
       uses: bitovi/github-actions-deploy-stackstorm@main
       with:
         aws_default_region: us-east-1
