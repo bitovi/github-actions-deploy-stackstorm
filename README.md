@@ -82,8 +82,8 @@ The following inputs can be used as `steps.with` keys:
 | `st2_auth_password` | string | | Password used by StackStorm standalone authentication. Set as a secret in GH Actions. |
 | `st2_packs` | string |`"st2"` | Comma separated list of packs to install. If you modify this option, be sure to also include `st2` in the list. |
 | **Cleanup** |
-| `stack_destroy` | bool | `false` | Set to `true` to Destroy the created AWS infrastructure for this instance |
-| `tf_state_bucket_destroy` | bool | `false` | Force purge and deletion of `tf_state_bucket` defined. Any file contained there will be destroyed. `stack_destroy` must also be `true`. Use if you want to clean up the resources |
+| `tf_stack_destroy` | bool | `false` | Set to `true` to Destroy the created AWS infrastructure for this instance |
+| `tf_state_bucket_destroy` | bool | `false` | Force purge and deletion of `tf_state_bucket` defined. Any file contained there will be destroyed. `tf_stack_destroy` must also be `true`. Use if you want to clean up the resources |
 
 
 ## Note about AWS resource identifiers

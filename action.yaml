@@ -25,7 +25,7 @@ inputs:
     description: 'AWS S3 bucket to use for Terraform state. Defaults to `${org}-${repo}-{branch}-tf-state`'
     required: false
   tf_state_bucket_destroy:
-    description: 'Force purge and deletion of S3 bucket defined. Any file contained there will be destroyed `stack_destroy` must also be `true`'
+    description: 'Force purge and deletion of S3 bucket defined. Any file contained there will be destroyed `tf_stack_destroy` must also be `true`'
     required: false
     default: 'false'
   aws_ec2_instance_profile:
@@ -33,8 +33,8 @@ inputs:
   aws_ec2_instance_type:
     description: 'The AWS EC2 instance type'
     default: t2.medium
-  stack_destroy:
-    description: 'Set to "true" to Destroy the stack'
+  tf_stack_destroy:
+    description: 'Set to "true" to Destroy the created AWS infrastructure for this instance'
   aws_resource_identifier:
     description: 'Set to override the AWS resource identifier for the deployment.  Defaults to `${org}-{repo}-{branch}`.  Use with destroy to destroy specific resources.'
   # domain_name:
@@ -92,7 +92,7 @@ runs:
         APP_PORT: ${{ inputs.app_port }}
         EC2_INSTANCE_PROFILE: ${{ inputs.aws_ec2_instance_profile }}
         EC2_INSTANCE_TYPE: ${{ inputs.aws_ec2_instance_type }}
-        STACK_DESTROY: ${{ inputs.stack_destroy }}
+        STACK_DESTROY: ${{ inputs.tf_stack_destroy }}
         AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
         # DOMAIN_NAME: ${{ inputs.domain_name }}
         # CREATE_DOMAIN: ${{ inputs.CREATE_DOMAIN }}
