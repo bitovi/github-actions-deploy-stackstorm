@@ -50,13 +50,18 @@ if [[ "$GHA_TESTING" == "true" ]]; then
   exit 1
 fi
 
+# Bypass all the 'BITOPS_' ENV vars to docker
+DOCKER_EXTRA_ARGS=""
+for i in $(env | grep BITOPS_); do
+  DOCKER_EXTRA_ARGS="${DOCKER_EXTRA_ARGS} -e ${i}"
+done
+
 echo "Running BitOps for env: $BITOPS_ENVIRONMENT"
 docker run --rm --name bitops \
 -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
 -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
 -e AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
 -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
--e BITOPS_ENVIRONMENT="${BITOPS_ENVIRONMENT}" \
 -e SKIP_DEPLOY_TERRAFORM="${SKIP_DEPLOY_TERRAFORM}" \
 -e SKIP_DEPLOY_HELM="${SKIP_DEPLOY_HELM}" \
 -e BITOPS_TERRAFORM_COMMAND="${TERRAFORM_COMMAND}" \
@@ -66,9 +71,9 @@ docker run --rm --name bitops \
 -e TF_STATE_BUCKET_DESTROY="${TF_STATE_BUCKET_DESTROY}" \
 -e DEFAULT_FOLDER_NAME="_default" \
 -e CREATE_VPC="${CREATE_VPC}" \
--e BITOPS_FAST_FAIL="${BITOPS_FAST_FAIL}" \
 -e ST2_AUTH_USERNAME="${ST2_AUTH_USERNAME}" \
 -e ST2_AUTH_PASSWORD="${ST2_AUTH_PASSWORD}" \
 -e ST2_PACKS="${ST2_PACKS}" \
+${DOCKER_EXTRA_ARGS} \
 -v $(echo $GITHUB_ACTION_PATH)/operations:/opt/bitops_deployment \
 bitovi/bitops:2.3.0
