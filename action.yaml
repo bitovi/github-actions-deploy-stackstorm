@@ -28,10 +28,11 @@ inputs:
     description: 'Force purge and deletion of S3 bucket defined. Any file contained there will be destroyed `stack_destroy` must also be `true`'
     required: false
     default: 'false'
-  ec2_instance_profile:
-    description: 'The AWS IAM instance profile to use for the EC2 instance'
+  aws_ec2_instance_profile:
+    description: 'The AWS IAM instance profile to use for the EC2 instance. Use if you want to pass an AWS role with specific permissions granted to the instance'
   aws_ec2_instance_type:
-    description: 'The AWS EC2 instance type. Default is "t2.medium"'
+    description: 'The AWS EC2 instance type'
+    default: t2.medium
   stack_destroy:
     description: 'Set to "true" to Destroy the stack'
   aws_resource_identifier:
@@ -89,7 +90,7 @@ runs:
         TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
 
         APP_PORT: ${{ inputs.app_port }}
-        EC2_INSTANCE_PROFILE: ${{ inputs.ec2_instance_profile }}
+        EC2_INSTANCE_PROFILE: ${{ inputs.aws_ec2_instance_profile }}
         EC2_INSTANCE_TYPE: ${{ inputs.aws_ec2_instance_type }}
         STACK_DESTROY: ${{ inputs.stack_destroy }}
         AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
