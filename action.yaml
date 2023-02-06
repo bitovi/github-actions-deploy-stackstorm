@@ -63,6 +63,8 @@ inputs:
   st2_packs:
     description: String. Comma separated list of packs to install. This flag does not work with a --python3 only pack. (default `"st2"`). If you modify this option, be sure to also include `st2` in the list.
     default: "st2"
+  st2_ansible_extra_vars_file:
+     description: 'Relative path from project root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth, etc. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings. The Ansible vars will take higher precedence over the GHA inputs.'
 outputs:
   lb_url:
     description: "The URL of the generated app"
@@ -109,6 +111,7 @@ runs:
         ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
         ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
         ST2_PACKS: ${{ inputs.st2_packs }}
+        BITOPS_ANSIBLE_EXTRA_VARS: ${{ inputs.st2_ansible_extra_vars_file }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh

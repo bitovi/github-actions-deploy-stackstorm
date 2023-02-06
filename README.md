@@ -81,6 +81,7 @@ The following inputs can be used as `steps.with` keys:
 | `st2_auth_username` | string | | Username used by StackStorm standalone authentication. Set as a secret in GH Actions. |
 | `st2_auth_password` | string | | Password used by StackStorm standalone authentication. Set as a secret in GH Actions. |
 | `st2_packs` | string |`"st2"` | Comma separated list of packs to install. If you modify this option, be sure to also include `st2` in the list. |
+| `st2_ansible_extra_vars_file` | string | | Relative path from project root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth, etc. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings. The Ansible vars will take higher precedence over the GHA inputs. |
 | **Cleanup** |
 | `stack_destroy` | bool | `false` | Set to `true` to Destroy the created AWS infrastructure for this instance |
 | `tf_state_bucket_destroy` | bool | `false` | Force purge and deletion of `tf_state_bucket` defined. Any file contained there will be destroyed. `stack_destroy` must also be `true`. Use if you want to clean up the resources |
