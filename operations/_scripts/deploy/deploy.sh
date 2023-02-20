@@ -65,4 +65,4 @@ docker run --rm --name bitops \
 -e ST2_PACKS="${ST2_PACKS}" \
 ${DOCKER_EXTRA_ARGS} \
 -v $(echo $GITHUB_ACTION_PATH)/operations:/opt/bitops_deployment \
-bitovi/bitops:2.3.0
+bitovi/bitops:2.4.0
