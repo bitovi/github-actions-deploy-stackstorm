@@ -1,7 +1,5 @@
+# https://github.com/bitops-plugins/ansible
 ansible:
-    cli:
-      main-playbook: playbook.yml
-      # todo: (currently handled via vars/st2.yaml)
-      # extra-vars: "@extra-vars.yaml"
-    options:
-      dryrun: false
+  cli:
+    main-playbook: playbook.yml
+  options: {}
