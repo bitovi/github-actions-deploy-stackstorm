@@ -103,8 +103,6 @@ runs:
         # Skip ansible deployment if deploying only infrastructure
         ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}
 
-        BITOPS_FAST_FAIL: true
-
         # ST2 config
         ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
         ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
