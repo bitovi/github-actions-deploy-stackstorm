@@ -106,10 +106,10 @@ You can pass additional `BITOPS_` ENV variables to adjust the deployment behavio
   uses: bitovi/github-actions-deploy-stackstorm@main
   env:
     # Extra BitOps configuration:
-    BITOPS_LOGGING_LEVEL: DEBUG
+    BITOPS_LOGGING_LEVEL: INFO
     # Extra Terraform configuration:
     # https://bitops.sh/tool-configuration/configuration-terraform/#terraform-bitops-schema
-    BITOPS_TERRAFORM_COMMAND: plan
+    BITOPS_TERRAFORM_SKIP_DEPLOY: true
     # Extra Ansible configuration:
     # https://bitops.sh/tool-configuration/configuration-ansible/#cli-configuration
     BITOPS_ANSIBLE_DRYRUN: true
