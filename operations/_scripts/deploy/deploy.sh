@@ -35,8 +35,8 @@ if [[ "$CREATE_DOMAIN" == "true" ]]; then
 fi
 
 if [ "$STACK_DESTROY" == "true" ]; then
-  BITOPS_TERRAFORM_STACK_ACTION="destroy"
-  BITOPS_ANSIBLE_SKIP_DEPLOY="true"
+  export BITOPS_TERRAFORM_STACK_ACTION="destroy"
+  export BITOPS_ANSIBLE_SKIP_DEPLOY="true"
 fi
 
 if [[ "$GHA_TESTING" == "true" ]]; then
