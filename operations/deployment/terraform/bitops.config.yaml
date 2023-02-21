@@ -1,6 +1,5 @@
-
+# https://github.com/bitops-plugins/terraform
 terraform:
-    cli: 
-      stack-action: apply
-    options: {}
-
+  cli:
+    stack-action: apply
+  options: {}

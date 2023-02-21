@@ -97,7 +97,30 @@ For some specific resources, we have a `32` characters limit. If the identifier 
 Bucket names can be made of up to 63 characters. If the length allows us to add `-tf-state`, we will do so. If not, a simple `-tf` will be added.
 
 ## Made with BitOps
-[BitOps](https://bitops.sh/) allows you to define Infrastructure-as-Code for multiple tools in a central place. This action uses BitOps [Operations Repository Structure](https://bitops.sh/operations-repo-structure/) to organize the necessary Terraform and Ansible steps, create infrastructure and deploy to it.
+[BitOps](https://bitops.sh/) allows you to define Infrastructure-as-Code for multiple tools in a central place. This action uses BitOps Docker container with prebuilt deployment tools and [Operations Repository Structure](https://bitops.sh/operations-repo-structure/) to organize the necessary Terraform and Ansible steps, create infrastructure and deploy to it.
+
+### Extra BitOps Configuration
+You can pass additional `BITOPS_` ENV variables to adjust the deployment behavior.
+```yaml
+- name: Deploy StackStorm to AWS (dry-run)
+  uses: bitovi/github-actions-deploy-stackstorm@main
+  env:
+    # Extra BitOps configuration:
+    BITOPS_LOGGING_LEVEL: INFO
+    # Extra Terraform configuration:
+    # https://bitops.sh/tool-configuration/configuration-terraform/#terraform-bitops-schema
+    BITOPS_TERRAFORM_SKIP_DEPLOY: true
+    # Extra Ansible configuration:
+    # https://bitops.sh/tool-configuration/configuration-ansible/#cli-configuration
+    BITOPS_ANSIBLE_DRYRUN: true
+  with:
+    aws_default_region: us-east-1
+    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    st2_auth_username: ${{ secrets.ST2_AUTH_USERNAME }}
+    st2_auth_password: ${{ secrets.ST2_AUTH_PASSWORD}}
+```
+In this example, we instruct BitOps to run a `terraform plan` instead of `terraform apply` and to run Ansible in `--check` mode, additionally, we set the BitOps container logging level to `DEBUG`.
 
 ## Future
 In the future, this action may support more cloud providers (via [BitOps Plugins](https://bitops.sh/plugins/) like [AWS](https://github.com/bitops-plugins/aws)) such as:
