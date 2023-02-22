@@ -44,6 +44,23 @@ if [[ "$GHA_TESTING" == "true" ]]; then
   exit 1
 fi
 
+# Ansible Extra vars file to override the StackStorm configuration
+if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS ]]; then
+  if [[ ! -f $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS ]]; then
+    echo "Configuration error for 'st2_ansible_extra_vars_file'!"
+    echo "File '$BITOPS_ANSIBLE_EXTRA_VARS' does not exist"
+    exit 1
+  fi
+
+  --------
+  env
+  --------
+
+  cp $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS $GITHUB_ACTION_PATH/operations/deployment/ansible/
+  # Ansible var files are prefixed with '@'
+  export BITOPS_ANSIBLE_EXTRA_VARS="@${BITOPS_ANSIBLE_EXTRA_VARS}"
+fi
+
 # Bypass all the 'BITOPS_' ENV vars to docker
 DOCKER_EXTRA_ARGS=""
 for i in $(env | grep BITOPS_); do
