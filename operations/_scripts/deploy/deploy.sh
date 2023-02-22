@@ -41,8 +41,7 @@ fi
 # 'st2_ansible_extra_vars_file' to override the default StackStorm configuration
 if [[ -n $ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
   if [[ ! -f $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
-    echo "Configuration error:"
-    echo "File '$ST2_ANSIBLE_EXTRA_VARS_FILE' set in 'st2_ansible_extra_vars_file' does not exist!"
+    echo "::error::File '$ST2_ANSIBLE_EXTRA_VARS_FILE' set in 'st2_ansible_extra_vars_file' does not exist!"
     exit 1
   fi
 
