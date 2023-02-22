@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 echo "In deploy.sh"
 GITHUB_REPO_NAME=$(echo $GITHUB_REPOSITORY | sed 's/^.*\///')
@@ -54,7 +53,7 @@ if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
 
   cp $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/
   # Ansible var files are prefixed with '@'
-  export BITOPS_ANSIBLE_EXTRA_VARS="@${BITOPS_ANSIBLE_EXTRA_VARS_FILE}"
+  export BITOPS_ANSIBLE_EXTRA_VARS="@$(basename $BITOPS_ANSIBLE_EXTRA_VARS_FILE)"
 fi
 
 # Bypass all the 'BITOPS_' ENV vars to docker
