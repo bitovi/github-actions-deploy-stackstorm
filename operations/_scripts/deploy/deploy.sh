@@ -43,6 +43,8 @@ if [[ "$GHA_TESTING" == "true" ]]; then
   exit 1
 fi
 
+set -x
+
 # Ansible Extra vars file to override the default StackStorm configuration
 if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
   if [[ ! -f $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
