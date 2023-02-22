@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e -o pipefail
+set -x
 
 echo "In deploy.sh"
 GITHUB_REPO_NAME=$(echo $GITHUB_REPOSITORY | sed 's/^.*\///')
