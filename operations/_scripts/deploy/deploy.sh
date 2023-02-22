@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -e -o pipefail
 
 echo "In deploy.sh"
 GITHUB_REPO_NAME=$(echo $GITHUB_REPOSITORY | sed 's/^.*\///')
@@ -44,33 +44,17 @@ if [[ "$GHA_TESTING" == "true" ]]; then
   exit 1
 fi
 
-
-echo "--------"
-env
-echo "--------"
-echo "current dir:"
-pwd
-echo "--------"
-echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-ls -la $GITHUB_WORKSPACE
-echo "--------"
-echo "GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH"
-ls -la $GITHUB_ACTION_PATH
-echo "--------"
---------
-
-
-# Ansible Extra vars file to override the StackStorm configuration
-if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS ]]; then
-  if [[ ! -f $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS ]]; then
-    echo "Configuration error for 'st2_ansible_extra_vars_file'!"
-    echo "File '$BITOPS_ANSIBLE_EXTRA_VARS' does not exist"
+# Ansible Extra vars file to override the default StackStorm configuration
+if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
+  if [[ ! -f $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
+    echo "Configuration error:"
+    echo "File '$BITOPS_ANSIBLE_EXTRA_VARS_FILE' set in 'st2_ansible_extra_vars_file' does not exist!"
     exit 1
   fi
 
-  cp $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS $GITHUB_ACTION_PATH/operations/deployment/ansible/
+  cp $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/
   # Ansible var files are prefixed with '@'
-  export BITOPS_ANSIBLE_EXTRA_VARS="@${BITOPS_ANSIBLE_EXTRA_VARS}"
+  export BITOPS_ANSIBLE_EXTRA_VARS="@${BITOPS_ANSIBLE_EXTRA_VARS_FILE}"
 fi
 
 # Bypass all the 'BITOPS_' ENV vars to docker
