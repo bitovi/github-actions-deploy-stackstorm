@@ -46,16 +46,16 @@ fi
 set -x
 
 # Ansible Extra vars file to override the default StackStorm configuration
-if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
-  if [[ ! -f $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS_FILE ]]; then
+if [[ -n $ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
+  if [[ ! -f $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
     echo "Configuration error:"
-    echo "File '$BITOPS_ANSIBLE_EXTRA_VARS_FILE' set in 'st2_ansible_extra_vars_file' does not exist!"
+    echo "File '$ST2_ANSIBLE_EXTRA_VARS_FILE' set in 'st2_ansible_extra_vars_file' does not exist!"
     exit 1
   fi
 
-  cp $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/
+  cp $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/
   # Ansible var files are prefixed with '@'
-  export BITOPS_ANSIBLE_EXTRA_VARS="@$(basename $BITOPS_ANSIBLE_EXTRA_VARS_FILE)"
+  export BITOPS_ANSIBLE_EXTRA_VARS="@$(basename $ST2_ANSIBLE_EXTRA_VARS_FILE)"
 fi
 
 # Bypass all the 'BITOPS_' ENV vars to docker

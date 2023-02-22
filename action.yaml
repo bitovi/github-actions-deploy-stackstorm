@@ -102,7 +102,7 @@ runs:
         ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
         ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
         ST2_PACKS: ${{ inputs.st2_packs }}
-        BITOPS_ANSIBLE_EXTRA_VARS: ${{ inputs.st2_ansible_extra_vars_file }}
+        ST2_ANSIBLE_EXTRA_VARS_FILE: ${{ inputs.st2_ansible_extra_vars_file }}
       run: |
         echo "running operations/_scripts/deploy/deploy.sh"
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
