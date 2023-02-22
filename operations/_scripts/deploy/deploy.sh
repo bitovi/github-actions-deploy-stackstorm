@@ -38,14 +38,7 @@ if [ "$STACK_DESTROY" == "true" ]; then
   export BITOPS_ANSIBLE_SKIP_DEPLOY="true"
 fi
 
-if [[ "$GHA_TESTING" == "true" ]]; then
-  echo "Quitting before BitOps invoke"
-  exit 1
-fi
-
-set -x
-
-# Ansible Extra vars file to override the default StackStorm configuration
+# 'st2_ansible_extra_vars_file' to override the default StackStorm configuration
 if [[ -n $ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
   if [[ ! -f $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
     echo "Configuration error:"
@@ -56,6 +49,11 @@ if [[ -n $ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
   cp $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/
   # Ansible var files are prefixed with '@'
   export BITOPS_ANSIBLE_EXTRA_VARS="@$(basename $ST2_ANSIBLE_EXTRA_VARS_FILE)"
+fi
+
+if [[ "$GHA_TESTING" == "true" ]]; then
+  echo "Quitting before BitOps invoke"
+  exit 1
 fi
 
 # Bypass all the 'BITOPS_' ENV vars to docker
