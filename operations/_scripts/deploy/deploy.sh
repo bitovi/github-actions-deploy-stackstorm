@@ -52,8 +52,15 @@ if [[ -n $BITOPS_ANSIBLE_EXTRA_VARS ]]; then
     exit 1
   fi
 
-  --------
+  echo "--------"
   env
+  echo "--------"
+  echo "current dir:"
+  pwd
+  echo "--------"
+  echo "GITHUB_WORKSPACE: $GITHUB_ACTION_PATH"
+  ls -la $GITHUB_ACTION_PATH
+  echo "--------"
   --------
 
   cp $GITHUB_WORKSPACE/$BITOPS_ANSIBLE_EXTRA_VARS $GITHUB_ACTION_PATH/operations/deployment/ansible/
