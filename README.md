@@ -45,6 +45,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         st2_auth_username: ${{ secrets.ST2_AUTH_USERNAME}}
         st2_auth_password: ${{ secrets.ST2_AUTH_PASSWORD}}
+        st2_packs: "st2,aws,github"
 ```
 
 This will create the following resources in AWS:
@@ -87,7 +88,7 @@ The following inputs can be used as `steps.with` keys:
 | `tf_state_bucket_destroy` | bool | `false` | Force purge and deletion of `tf_state_bucket` defined. Any file contained there will be destroyed. `tf_stack_destroy` must also be `true` |
 
 
-## Note about AWS resource identifiers
+### Note about AWS resource identifiers
 Most resources will contain the tag `GITHUB_ORG-GITHUB_REPO-GITHUB_BRANCH` to make them unique. Because some AWS resources have a length limit, we shorten identifiers to a `60` characters max string.
 
 We use the Kubernetes style for this. For example, `Kubernetes` -> `k(# of characters)s` -> `k8s`. And so you might see how compressions are made.
