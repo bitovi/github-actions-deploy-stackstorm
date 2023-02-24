@@ -35,6 +35,18 @@ if [ "$STACK_DESTROY" == "true" ]; then
   export BITOPS_ANSIBLE_SKIP_DEPLOY="true"
 fi
 
+# 'st2_ansible_extra_vars_file' to override the default StackStorm configuration
+if [[ -n $ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
+  if [[ ! -f $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE ]]; then
+    echo "::error::File '$ST2_ANSIBLE_EXTRA_VARS_FILE' set in 'st2_ansible_extra_vars_file' does not exist!"
+    exit 1
+  fi
+
+  cp $GITHUB_WORKSPACE/$ST2_ANSIBLE_EXTRA_VARS_FILE $GITHUB_ACTION_PATH/operations/deployment/ansible/
+  # Ansible var files are prefixed with '@'
+  export BITOPS_ANSIBLE_EXTRA_VARS="@$(basename $ST2_ANSIBLE_EXTRA_VARS_FILE)"
+fi
+
 if [[ "$GHA_TESTING" == "true" ]]; then
   echo "Quitting before BitOps invoke"
   exit 1
