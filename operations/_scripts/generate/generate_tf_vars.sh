@@ -84,5 +84,7 @@ region = \"${AWS_DEFAULT_REGION}\"
 # Route53
 route53_zone_id = \"${ROUTE53_ZONE_ID}\"
 
+additional_tags =\"${ADDITIONAL_TAGS}\"
+
 
 " > "${GITHUB_ACTION_PATH}/operations/deployment/terraform/terraform.tfvars"

@@ -138,6 +138,13 @@ variable "route53_zone_id" {
   type        = string
 }
 
+variable "additional_tags" {
+  type        = map(string)
+  description = "A list of strings that will be added to created resources"
+  default     = {}
+
+}
+
 # variable "common_tags" {
 #   default     = {}
 #   description = "Common resource tags"
