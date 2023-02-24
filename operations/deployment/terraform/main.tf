@@ -22,7 +22,6 @@ module "Stackstorm-Single-VM" {
   #create_domain=var.create_domain
   availability_zones=local.availability_zones
   route53_zone_id=var.route53_zone_id
-  aws_tags=local.aws_tags
 }
 
 locals {
