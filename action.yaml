@@ -37,10 +37,9 @@ inputs:
     description: 'Set to true to provision infrastructure (with Terraform) but skip the app deployment (with ansible)'
     default: "false"
   additional_tags:
-    description: 'A JSON object of additional tags that will be included on created resources. Example: `{"key1": "value1", "key2": "value2"}`'
+    description: 'A list of additional tags that will be included on created resources. Example: `{"key1": "value1", "key2": "value2"}`'
     required: false
-    default: {}
-  
+    default: '{}'
 
   # Terraform configuration
   tf_state_bucket:
