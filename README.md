@@ -87,7 +87,6 @@ The following inputs can be used as `steps.with` keys:
 | `tf_stack_destroy` | bool | `false` | Set to `true` to Destroy the created AWS infrastructure for this instance |
 | `tf_state_bucket_destroy` | bool | `false` | Force purge and deletion of `tf_state_bucket` defined. Any file contained there will be destroyed. `tf_stack_destroy` must also be `true` |
 
-
 ### Note about AWS resource identifiers
 Most resources will contain the tag `GITHUB_ORG-GITHUB_REPO-GITHUB_BRANCH` to make them unique. Because some AWS resources have a length limit, we shorten identifiers to a `60` characters max string.
 
@@ -97,6 +96,48 @@ For some specific resources, we have a `32` characters limit. If the identifier 
 
 ### S3 buckets naming
 Bucket names can be made of up to 63 characters. If the length allows us to add `-tf-state`, we will do so. If not, a simple `-tf` will be added.
+
+### Advanced StackStorm configuration with Ansible vars
+This action runs [`ansible-st2`](https://github.com/stackStorm/ansible-st2) roles under the hood. You can customize the Ansible configuration by creating a yaml file in your repo. This file will be passed to the Ansible playbook as extra vars. See the [Ansible-st2](https://github.com/stackStorm/ansible-st2#variables) documentation for a full list of available options.
+
+Here is an example `st2_vars.yaml` pinning the stackstorm to `v3.8.0`, installing several packs from [StackStorm Exchange](https://exchange.stackstorm.org) and configuring `st2.conf` with extra settings for `garbagecollector`:
+
+```yaml
+st2_version: "3.8.0"
+
+# Install specific pack versions from StackStorm Exchange
+st2_packs:
+  - st2
+  - aws=1.2.0
+  - github=2.1.3
+
+# https://github.com/StackStorm/st2/blob/master/conf/st2.conf.sample
+st2_config:
+  garbagecollector:
+    # Action executions and related objects (live actions, action output objects) older than this value (days) will be automatically deleted. Defaults to None (disabled).
+    action_executions_ttl = 90
+```
+
+Example GHA deployment job referencing the Ansible `st2_vars.yaml` file:
+```yaml
+jobs:
+  deploy-st2:
+    runs-on: ubuntu-latest
+    steps:
+    - id: deploy-st2-advanced
+      name: Deploy StackStorm with extra Ansible vars
+      uses: bitovi/github-actions-deploy-stackstorm@main
+      with:
+        aws_default_region: us-east-1
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        st2_auth_username: ${{ secrets.ST2_AUTH_USERNAME}}
+        st2_auth_password: ${{ secrets.ST2_AUTH_PASSWORD}}
+        # Pass the Ansible vars file
+        st2_ansible_extra_vars_file: "st2_vars.yaml"
+```
+
+We encourage to keep your infrastructure codified!
 
 ## Made with BitOps
 [BitOps](https://bitops.sh/) allows you to define Infrastructure-as-Code for multiple tools in a central place. This action uses BitOps Docker container with prebuilt deployment tools and [Operations Repository Structure](https://bitops.sh/operations-repo-structure/) to organize the necessary Terraform and Ansible steps, create infrastructure and deploy to it.
