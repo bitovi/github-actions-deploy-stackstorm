@@ -75,12 +75,14 @@ resource "aws_security_group" "ec2_security_group" {
 }
 
 data "aws_security_group" "ec2_security_group" {
-  cout = var.create_vpc == "true" ? 1 : 0
+  count = var.create_vpc == "true" ? 1 : 0
   id = aws_security_group.ec2_security_group.id
 }
 
 resource "aws_security_group_rule" "ingress_http" {
-  name              = "Allow HTTP traffic"
+  tags = {
+    name            = "Allow HTTP traffic"
+  }
   type              = "ingress"
   description       = "${var.aws_resource_identifier} - HTTP"
   from_port         = 80
@@ -91,7 +93,9 @@ resource "aws_security_group_rule" "ingress_http" {
 }
 
 resource "aws_security_group_rule" "ingress_https" {
-  name              = "Allow HTTPS traffic"
+  tags = {
+    name            = "Allow HTTPS traffic"
+  }
   type              = "ingress"
   description       = "${var.aws_resource_identifier} - HTTPS"
   from_port         = 443
@@ -102,7 +106,9 @@ resource "aws_security_group_rule" "ingress_https" {
 }
 
 resource "aws_security_group_rule" "ingress_ssh" {
-  name              = "Allow SSH traffic"
+  tags = {
+    name              = "Allow SSH traffic"
+  }
   type              = "ingress"
   description       = "SSH"
   from_port         = 22
