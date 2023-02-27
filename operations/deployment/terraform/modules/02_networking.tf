@@ -59,62 +59,55 @@ resource "aws_route_table_association" "public" {
 }
 
 
-
-
-
-resource "aws_security_group" "allow_http" {
- name = "${var.aws_resource_identifier_supershort}-http"
- description = "Allow HTTP traffic"
- vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
- ingress {
-   description = "HTTP"
-   from_port   = 80
-   to_port     = 80
-   protocol    = "tcp"
-   cidr_blocks = ["0.0.0.0/0"]
- }
- egress {
-   from_port   = 0
-   to_port     = 0
-   protocol    = "-1"
-   cidr_blocks = ["0.0.0.0/0"]
- }
-}
- 
-resource "aws_security_group" "allow_https" {
- name = "${var.aws_resource_identifier_supershort}-https"
- description = "Allow HTTPS traffic"
- vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
- ingress {
-   description = "HTTPS"
-   from_port   = 443
-   to_port     = 443
-   protocol    = "tcp"
-   cidr_blocks = ["0.0.0.0/0"]
- }
- egress {
-   from_port   = 0
-   to_port     = 0
-   protocol    = "-1"
-   cidr_blocks = ["0.0.0.0/0"]
- }
+resource "aws_security_group" "ec2_security_group" {
+  name        = "${var.aws_resource_identifier_supershort}-SG"
+  description = "SG for ${var.aws_resource_identifier}"
+  vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "${var.aws_resource_identifier}-instance-sg"
+  }
 }
 
-resource "aws_security_group" "allow_ssh" {
- name = "${var.aws_resource_identifier_supershort}-ssh"
- description = "Allow SSH traffic"
- vpc_id      = var.create_vpc == "true" ? aws_vpc.main[0].id : null
- ingress {
-   description = "SSH"
-   from_port   = 22
-   to_port     = 22
-   protocol    = "tcp"
-   cidr_blocks = ["0.0.0.0/0"]
- }
- egress {
-   from_port   = 0
-   to_port     = 0
-   protocol    = "-1"
-   cidr_blocks = ["0.0.0.0/0"]
- }
+data "aws_security_group" "ec2_security_group" {
+  cout = var.create_vpc == "true" ? 1 : 0
+  id = aws_security_group.ec2_security_group.id
+}
+
+resource "aws_security_group_rule" "ingress_http" {
+  name              = "Allow HTTP traffic"
+  type              = "ingress"
+  description       = "${var.aws_resource_identifier} - HTTP"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ec2_security_group.id
+}
+
+resource "aws_security_group_rule" "ingress_https" {
+  name              = "Allow HTTPS traffic"
+  type              = "ingress"
+  description       = "${var.aws_resource_identifier} - HTTPS"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ec2_security_group.id
+}
+
+resource "aws_security_group_rule" "ingress_ssh" {
+  name              = "Allow SSH traffic"
+  type              = "ingress"
+  description       = "SSH"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ec2_security_group.id
 }
