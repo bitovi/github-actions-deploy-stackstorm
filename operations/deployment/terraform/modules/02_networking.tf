@@ -80,11 +80,8 @@ data "aws_security_group" "ec2_security_group" {
 }
 
 resource "aws_security_group_rule" "ingress_http" {
-  tags = {
-    name            = "Allow HTTP traffic"
-  }
   type              = "ingress"
-  description       = "${var.aws_resource_identifier} - HTTP"
+  description       = "Allow HTTP"
   from_port         = 80
   to_port           = 80
   protocol          = "tcp"
@@ -93,11 +90,8 @@ resource "aws_security_group_rule" "ingress_http" {
 }
 
 resource "aws_security_group_rule" "ingress_https" {
-  tags = {
-    name            = "Allow HTTPS traffic"
-  }
   type              = "ingress"
-  description       = "${var.aws_resource_identifier} - HTTPS"
+  description       = "Allow HTTPS"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
@@ -106,11 +100,8 @@ resource "aws_security_group_rule" "ingress_https" {
 }
 
 resource "aws_security_group_rule" "ingress_ssh" {
-  tags = {
-    name              = "Allow SSH traffic"
-  }
   type              = "ingress"
-  description       = "SSH"
+  description       = "Allow SSH"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
