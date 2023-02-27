@@ -7,6 +7,6 @@ locals {
     GitHubBranchName          = "${var.app_branch_name}"
     GitHubAction              = "bitovi/github-actions-deploy-stackstorm"
     OperationsRepoEnvironment = "deployment"
-    created_with              = "terraform"
+    CreatedWith               = "terraform"
   }
 }
