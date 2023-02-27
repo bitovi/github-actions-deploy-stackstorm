@@ -33,7 +33,7 @@ inputs:
   aws_create_vpc:
     description: 'Bool, whether an AWS VPC should be created in the action. Otherwise, the existing default VPC will be used.'
     default: "false"
-  aws_additional_tags:
+  aws_extra_tags:
     description: 'A list of additional tags that will be included on created resources. Example: `{"key1": "value1", "key2": "value2"}`'
     required: false
     default: '{}'
@@ -99,7 +99,7 @@ runs:
         STACK_DESTROY: ${{ inputs.tf_stack_destroy }}
         AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
         CREATE_VPC: ${{ inputs.aws_create_vpc }}
-        AWS_ADDITIONAL_TAGS: ${{ inputs.aws_additional_tags }}
+        AWS_EXTRA_TAGS: ${{ inputs.aws_extra_tags }}
 
 
         # Skip ansible deployment if deploying only infrastructure
