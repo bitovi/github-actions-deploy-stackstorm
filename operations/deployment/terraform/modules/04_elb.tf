@@ -3,7 +3,7 @@ resource "aws_elb" "vm" {
   subnets            = var.create_vpc == "true" ? aws_subnet.public.*.id : null
   availability_zones = var.create_vpc == "true" ? null : [aws_instance.server.availability_zone]
 
-  security_groups = [aws_security_group.allow_http.id, aws_security_group.allow_https.id]
+  security_groups = [aws_security_group.ec2_security_group.id]
 
   listener {
     instance_port      = 443

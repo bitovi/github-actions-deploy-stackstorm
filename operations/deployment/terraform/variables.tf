@@ -138,6 +138,13 @@ variable "route53_zone_id" {
   type        = string
 }
 
+variable "aws_extra_tags" {
+  type        = map(string)
+  description = "A list of tags that will be added to created resources"
+  default     = {}
+
+}
+
 # variable "common_tags" {
 #   default     = {}
 #   description = "Common resource tags"
