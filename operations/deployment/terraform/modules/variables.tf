@@ -199,22 +199,22 @@ variable "route53_zone_id" {
 #   type        = string
 # }
 
-variable "lb_healthcheck" {
-    default     = "HTTPS:443/"
-    description = "Load balancer health check string. Defaults to HTTP:app_port"
-    type        = string
-}
-
-variable "sub_domain_name" {
-  type        = string
-  description = "Subdomain name for DNS record"
-  default     = ""
-}
-variable "domain_name" {
-  type        = string
-  description = "root domain name without any subdomains"
-  default     = ""
-}
+#variable "lb_healthcheck" {
+#    default     = "HTTPS:443/"
+#    description = "Load balancer health check string. Defaults to HTTP:app_port"
+#    type        = string
+#}
+#
+#variable "sub_domain_name" {
+#  type        = string
+#  description = "Subdomain name for DNS record"
+#  default     = ""
+#}
+#variable "domain_name" {
+#  type        = string
+#  description = "root domain name without any subdomains"
+#  default     = ""
+#}
 variable "root_domain" {
   type        = string
   description = "deploy to root domain"
