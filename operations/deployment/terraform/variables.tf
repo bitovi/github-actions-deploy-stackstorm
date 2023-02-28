@@ -1,6 +1,6 @@
 variable "app_port" {
   type = string
-  default = "3000"
+  default = "443"
   description = "app port"
 }
 variable "lb_port" {
@@ -10,7 +10,7 @@ variable "lb_port" {
 }
 variable "lb_healthcheck" {
   type = string
-  default = ""
+  default = "HTTPS:443/"
   description = "Load balancer health check string. Defaults to HTTP:app_port"
 }
 variable "app_repo_name" {
@@ -78,16 +78,16 @@ variable "aws_resource_identifier_supershort" {
   description = "Identifier to use for AWS resources (defaults to GITHUB_ORG-GITHUB_REPO-GITHUB_BRANCH) shortened to 30 chars"
 }
 
-variable "sub_domain_name" {
-  type = string
-  description = "Subdomain name for DNS record"
-  default = ""
-}
-variable "domain_name" {
-  type = string
-  description = "root domain name without any subdomains"
-  default = ""
-}
+# variable "sub_domain_name" {
+#   type = string
+#   description = "Subdomain name for DNS record"
+#   default = ""
+# }
+# variable "domain_name" {
+#   type = string
+#   description = "root domain name without any subdomains"
+#   default = ""
+# }
 variable "create_vpc" {
   type = string
   default = "false"
@@ -132,11 +132,11 @@ variable "region" {
 #   default = false
 # }
 
-variable "route53_zone_id" {
-  default     = ""
-  description = "Route53 Zone ID"
-  type        = string
-}
+# variable "route53_zone_id" {
+#   default     = ""
+#   description = "Route53 Zone ID"
+#   type        = string
+# }
 
 variable "aws_extra_tags" {
   type        = map(string)
@@ -189,3 +189,44 @@ variable "aws_extra_tags" {
 #   description = "Domain Name"
 #   type        = string
 # }
+
+
+variable "sub_domain_name" {
+  type        = string
+  description = "Subdomain name for DNS record"
+  default     = ""
+}
+variable "domain_name" {
+  type        = string
+  description = "root domain name without any subdomains"
+  default     = ""
+}
+variable "root_domain" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
+
+variable "cert_arn" {
+  type        = string
+  description = "Certificate ARN to use"
+  default     = ""
+}
+
+variable "create_root_cert" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
+
+variable "create_sub_cert" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
+
+variable "no_cert" {
+  type        = string
+  description = "disable cert lookup"
+  default     = ""
+}  
