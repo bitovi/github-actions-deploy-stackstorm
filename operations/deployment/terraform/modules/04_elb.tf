@@ -38,7 +38,6 @@ resource "aws_s3_bucket_acl" "lb_access_logs_acl" {
 }
 
 resource "aws_elb" "vm_lb" {
-  count              = local.cert_available ? 1 : 0
   name               = var.aws_resource_identifier_supershort
   security_groups    = [aws_security_group.ec2_security_group.id]
   availability_zones = var.create_vpc == "true" ? null : [aws_instance.server.availability_zone]
@@ -78,5 +77,5 @@ resource "aws_elb" "vm_lb" {
 
 output "lb_public_dns" {
   description = "Public DNS address of the LB"
-  value       = aws_elb.vm_lb[0].dns_name
+  value       = aws_elb.vm_lb.dns_name
 }
