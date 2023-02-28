@@ -40,7 +40,7 @@ echo "
 
 lb_port = \"$LB_PORT\"
 
-lb_healthcheck = \"$LB_HEALTHCHECK\"
+# lb_healthcheck = \"$LB_HEALTHCHECK\"
 
 # the name of the operations repo environment directory
 ops_repo_environment = \"deployment\"
