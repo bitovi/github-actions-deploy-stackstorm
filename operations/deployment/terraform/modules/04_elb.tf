@@ -53,7 +53,7 @@ resource "aws_elb" "vm_lb" {
     instance_port      = var.app_port
     instance_protocol  = "https"
     lb_port            = var.lb_port != "" ? var.lb_port : local.cert_available != "true" ? 80 : 443
-    lb_protocol        = local.cert_available != "true" ? tcp : ssl
+    lb_protocol        = local.cert_available != "true" ? "tcp" : "ssl"
     ssl_certificate_id = local.selected_arn
   }
 

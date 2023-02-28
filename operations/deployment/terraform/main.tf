@@ -19,7 +19,7 @@ module "Stackstorm-Single-VM" {
   create_vpc=var.create_vpc
   #create_domain=var.create_domain
   availability_zones=local.availability_zones
-  route53_zone_id=var.route53_zone_id
+  #route53_zone_id=var.route53_zone_id
   sub_domain_name=var.sub_domain_name
   domain_name=var.domain_name
   root_domain=var.root_domain
@@ -31,7 +31,7 @@ module "Stackstorm-Single-VM" {
 
 locals {
   availability_zones = "${formatlist("${var.region}%s", var.availability_zones)}"
-  url = "${module.Stackstorm-Single-VM.loadbalancer_protocol}${module.Stackstorm-Single-VM.loadbalancer_public_dns}"
+  #url = "${module.Stackstorm-Single-VM.loadbalancer_protocol}${module.Stackstorm-Single-VM.loadbalancer_public_dns}"
 }
 
 output "availability_zone" {
