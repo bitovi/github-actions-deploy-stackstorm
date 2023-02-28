@@ -1,6 +1,6 @@
 variable "app_port" {
   type = string
-  default = "3000"
+  default = "443"
   description = "app port"
 }
 variable "lb_port" {
@@ -10,7 +10,7 @@ variable "lb_port" {
 }
 variable "lb_healthcheck" {
   type = string
-  default = ""
+  default = "HTTPS:443/"
   description = "Load balancer health check string. Defaults to HTTP:app_port"
 }
 variable "app_repo_name" {
@@ -198,3 +198,49 @@ variable "route53_zone_id" {
 #   description = "Domain Name"
 #   type        = string
 # }
+
+variable "lb_healthcheck" {
+    default     = "HTTPS:443/"
+    description = "Load balancer health check string. Defaults to HTTP:app_port"
+    type        = string
+}
+
+variable "sub_domain_name" {
+  type        = string
+  description = "Subdomain name for DNS record"
+  default     = ""
+}
+variable "domain_name" {
+  type        = string
+  description = "root domain name without any subdomains"
+  default     = ""
+}
+variable "root_domain" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
+
+variable "cert_arn" {
+  type        = string
+  description = "Certificate ARN to use"
+  default     = ""
+}
+
+variable "create_root_cert" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
+
+variable "create_sub_cert" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
+
+variable "no_cert" {
+  type        = string
+  description = "disable cert lookup"
+  default     = ""
+}
