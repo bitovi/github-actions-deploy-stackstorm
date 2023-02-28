@@ -36,7 +36,7 @@ if [ -z "${EC2_INSTANCE_PROFILE}" ]; then
 fi
 
 echo "
-app_port = \"$APP_PORT\"
+# app_port = \"$APP_PORT\"
 
 lb_port = \"$LB_PORT\"
 

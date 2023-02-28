@@ -115,7 +115,6 @@ runs:
         TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
         TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
 
-        APP_PORT: ${{ inputs.app_port }}
         EC2_INSTANCE_PROFILE: ${{ inputs.aws_ec2_instance_profile }}
         EC2_INSTANCE_TYPE: ${{ inputs.aws_ec2_instance_type }}
         STACK_DESTROY: ${{ inputs.tf_stack_destroy }}
