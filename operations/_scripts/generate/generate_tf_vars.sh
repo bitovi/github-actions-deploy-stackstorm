@@ -75,6 +75,13 @@ aws_resource_identifier_supershort = \"${GITHUB_IDENTIFIER_SS}\"
 sub_domain_name = \"${SUB_DOMAIN}\"
 domain_name = \"${DOMAIN_NAME}\"
 
+# Cert stuff
+root_domain = \"${ROOT_DOMAIN}\"
+cert_arn = \"${CERT_ARN}\"
+create_root_cert = \"${CREATE_ROOT_CERT}\"
+create_sub_cert = \"${CREATE_SUB_CERT}\"
+no_cert = \"${NO_CERT}\"
+
 # VPC
 create_vpc = \"${CREATE_VPC}\"
 

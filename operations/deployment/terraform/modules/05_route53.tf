@@ -62,7 +62,7 @@ locals {
 }
 
 locals {
-  protocol    = local.selected_arn != "" ? "https://" : "http://"
+  protocol    = local.cert_available ? "https://" : "http://"
   public_port = var.lb_port != "" ? ":${var.lb_port}" : ""
   url = (local.fqdn_provided ?
     (var.root_domain == "true" ?
