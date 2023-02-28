@@ -51,8 +51,8 @@ resource "aws_elb" "vm_lb" {
   listener {
     instance_port      = var.app_port
     instance_protocol  = "https"
-    lb_port            = var.lb_port != "" ? var.lb_port : local.cert_available != "true" ? 80 : 443
-    lb_protocol        = local.cert_available != "true" ? "http" : "https"
+    lb_port            = var.lb_port != "" ? var.lb_port : local.cert_available ? 443 : 80
+    lb_protocol        = local.cert_available ? "https": "http"
     ssl_certificate_id = local.selected_arn
   }
 

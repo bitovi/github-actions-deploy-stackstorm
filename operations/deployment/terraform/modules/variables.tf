@@ -128,11 +128,11 @@ variable "availability_zones" {
 #   default = false
 # }
 
-variable "route53_zone_id" {
-  default     = ""
-  description = "Route53 Zone ID"
-  type        = string
-}
+# variable "route53_zone_id" {
+#   default     = ""
+#   description = "Route53 Zone ID"
+#   type        = string
+# }
 
 
 
