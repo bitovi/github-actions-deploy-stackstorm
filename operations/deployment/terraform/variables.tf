@@ -126,18 +126,6 @@ variable "region" {
   default = ""
 }
 
-# variable "create_domain" {
-#   type = bool
-#   description = "Create domain using Terraform"
-#   default = false
-# }
-
-# variable "route53_zone_id" {
-#   default     = ""
-#   description = "Route53 Zone ID"
-#   type        = string
-# }
-
 variable "aws_extra_tags" {
   type        = map(string)
   description = "A list of tags that will be added to created resources"
@@ -184,13 +172,6 @@ variable "aws_extra_tags" {
 
 
 
-# variable "domain_name" {
-#   default     = ""
-#   description = "Domain Name"
-#   type        = string
-# }
-
-
 variable "sub_domain_name" {
   type        = string
   description = "Subdomain name for DNS record"
@@ -215,13 +196,13 @@ variable "cert_arn" {
 
 variable "create_root_cert" {
   type        = string
-  description = "deploy to root domain"
+  description = "Create root cert"
   default     = ""
 }
 
 variable "create_sub_cert" {
   type        = string
-  description = "deploy to root domain"
+  description = "Create sub_domain certificate"
   default     = ""
 }
 
@@ -229,4 +210,4 @@ variable "no_cert" {
   type        = string
   description = "disable cert lookup"
   default     = ""
-}  
+}

@@ -25,11 +25,6 @@ export LB_LOGS_BUCKET="$(/bin/bash $GITHUB_ACTION_PATH/operations/_scripts/gener
 # Generate app repo
 /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_app_repo.sh
 
-# Generate `00_acm_create`
-#if [[ "$CREATE_DOMAIN" == "true" ]]; then
-#  /bin/bash $GITHUB_ACTION_PATH/operations/_scripts/generate/generate_acm_tf.sh
-#fi
-
 if [ "$STACK_DESTROY" == "true" ]; then
   export BITOPS_TERRAFORM_STACK_ACTION="destroy"
   export BITOPS_ANSIBLE_SKIP_DEPLOY="true"

@@ -78,13 +78,13 @@ The following inputs can be used as `steps.with` keys:
 | `aws_extra_tags` | json | | A list of additional tags that will be included on created resources. Example: `{"key1": "value1", "key2": "value2"}`. |
 | `infrastructure_only` | bool | `false` | Set to true to provision infrastructure (with Terraform) but skip the app deployment (with ansible) |
 | **Domain and certificates configuration** |
-| `domain_name` | String | | Define the root domain name for the application. e.g. bitovi.com'. |
-| `sub_domain` | String | `${org}-${repo}-${branch}` | Define the sub-domain part of the URL. |
-| `root_domain` | Boolean | `false` | Deploy application to root domain. Will create root and www records. |
-| `cert_arn` | String | | Define the certificate ARN to use for the application. **See note**. |
-| `create_root_cert` | Boolean | `false`| Generates and manage the root cert for the application. **See note**.|
-| `create_sub_cert` | Boolean | `false` | Generates and manage the sub-domain certificate for the application. **See note**.|
-| `no_cert` | Boolean | `false` | Set this to true if no certificate is present for the domain. **See note**. |
+| `aws_domain_name` | string | | Define the root domain name for the application. e.g. bitovi.com'. If empty, ELB URL will be provided. |
+| `aws_sub_domain` | string | `${org}-${repo}-${branch}` | Define the sub-domain part of the URL. |
+| `aws_root_domain` | bool | `false` | Deploy application to root domain. Will create root and www DNS records. Domain must exist in Route53. |
+| `aws_cert_arn` | string | | Existing certificate ARN. Use if you want to manage a certificate outside this action. **See note**. |
+| `aws_create_root_cert` | bool | `false`| Generates and manage the root cert for the application. **See note**.|
+| `aws_create_sub_cert` | bool | `false` | Generates and manage the sub-domain certificate for the application. **See note**.|
+| `no_cert` | bool | `false` | Set this to true if no certificate is present for the domain. **See note**. |
 | **Teraform configuration** |
 | `tf_state_bucket` | string | `${org}-${repo}-${branch}-tf-state` | AWS S3 bucket to use for Terraform state. By default, a new deployment will be created for each unique branch. Hardcode if you want to keep a shared resource state between the several branches. |
 | **StackStorm configuration** |
@@ -106,19 +106,22 @@ For some specific resources, we have a `32` characters limit. If the identifier 
 ### S3 buckets naming
 Bucket names can be made of up to 63 characters. If the length allows us to add `-tf-state`, we will do so. If not, a simple `-tf` will be added.
 
-## CERTIFICATES - Only for AWS Managed domains with Route53
+## Domain and Certificates - Only for AWS Managed domains with Route53
 
 As a default, the application will be deployed and the ELB public URL will be displayed.
 
-If `domain_name` is defined, we will look up for a certificate with the name of that domain (eg. `example.com`). We expect that certificate to contain both `example.com` and `*.example.com`. 
+If `aws_domain_name` is defined, we will look up for a certificate with the name of that domain (eg. `example.com`). We expect that certificate to contain both `example.com` and `*.example.com`. Resulting URL will be `aws_sub_domain.aws_domain_name`
 
-If you wish to set up `domain_name` and disable the certificate lookup, set up `no_cert` to true.
+If no certificate is available for `aws_domain_name`, then set up `no_cert` to true. 
 
-Setting `create_root_cert` to `true` will create this certificate with both `example.com` and `*.example.com` for you, and validate them. (DNS validation).
+If you want to use an already created certificate, or prefer to manage it manually, you can set up `aws_cert_arn`. 
+Check the [AWS notes](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-list.html) for how to find the certificate ARN in AWS.
 
-Setting `create_sub_cert` to `true` will create a certificate **just for the subdomain**, and validate it.
+Setting `aws_create_root_cert` to `true` will create this certificate with both `example.com` and `*.example.com` for you, and validate them. (DNS validation).
 
-> :warning: Be very careful here! **Created certificates are fully managed by Terraform**. Therefor **they will be destroyed upon stack destruction**.
+Setting `aws_create_sub_cert` to `true` will create a certificate **just for the subdomain**, and validate it.
+
+> :warning: Be very careful here! **Created certificates are fully managed by Terraform**. Therefore **they will be destroyed upon stack destruction**.
 
 To change a certificate (root_cert, sub_cert, ARN or pre-existing root cert), you must first set the `no_cert` flag to true, run the action, then set the `no_cert` flag to false, add the desired settings and excecute the action again. (**This will destroy the first certificate.**)
 

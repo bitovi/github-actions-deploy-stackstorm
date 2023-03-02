@@ -96,7 +96,6 @@ variable "create_vpc" {
 
 
 
-
 ## NEW NEEDS REVIEW
 variable "vpc_cidr" {
   description = "CIDR of the VPC"
@@ -121,23 +120,6 @@ variable "availability_zones" {
   description = "A list of availability zones (to be mapped to the region \"{region}{availability_zones}\""
   type        = list(string)
 }
-
-# variable "create_domain" {
-#   type = bool
-#   description = "Create domain using Terraform"
-#   default = false
-# }
-
-# variable "route53_zone_id" {
-#   default     = ""
-#   description = "Route53 Zone ID"
-#   type        = string
-# }
-
-
-
-
-
 
 # variable "common_tags" {
 #   default     = {}
@@ -187,34 +169,6 @@ variable "availability_zones" {
 #   type        = list(string)
 # }
 
-# variable "route53_zone_id" {
-#   default     = ""
-#   description = "Route53 Zone ID"
-#   type        = string
-# }
-
-# variable "domain_name" {
-#   default     = ""
-#   description = "Domain Name"
-#   type        = string
-# }
-
-#variable "lb_healthcheck" {
-#    default     = "HTTPS:443/"
-#    description = "Load balancer health check string. Defaults to HTTP:app_port"
-#    type        = string
-#}
-#
-#variable "sub_domain_name" {
-#  type        = string
-#  description = "Subdomain name for DNS record"
-#  default     = ""
-#}
-#variable "domain_name" {
-#  type        = string
-#  description = "root domain name without any subdomains"
-#  default     = ""
-#}
 variable "root_domain" {
   type        = string
   description = "deploy to root domain"
@@ -229,13 +183,13 @@ variable "cert_arn" {
 
 variable "create_root_cert" {
   type        = string
-  description = "deploy to root domain"
+  description = "Create root cert"
   default     = ""
 }
 
 variable "create_sub_cert" {
   type        = string
-  description = "deploy to root domain"
+  description = "Create sub_domain certificate"
   default     = ""
 }
 

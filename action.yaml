@@ -69,21 +69,21 @@ inputs:
     default: "false"
 
   # Domains
-  domain_name:
+  aws_domain_name:
     description: 'Define the root domain name for the application. e.g. app.com'
     required: false
-  sub_domain:
+  aws_sub_domain:
     description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
-  root_domain:
+  aws_root_domain:
     description: 'Deploy to root domain. Will generate two DNS recrods, one for root, another for www'
     required: false
-  cert_arn:
+  aws_cert_arn:
     description: 'Define the certificate ARN to use for the application'
     required: false
-  create_root_cert:
+  aws_create_root_cert:
     description: 'Generates and manage the root cert for the application'
     required: false
-  create_sub_cert: 
+  aws_create_sub_cert: 
     description: 'Generates and manage the sub-domain certificate for the application'
     required: false
   no_cert:
@@ -123,12 +123,12 @@ runs:
         AWS_EXTRA_TAGS: ${{ inputs.aws_extra_tags }}
 
         # Domain / cert management
-        DOMAIN_NAME: ${{ inputs.domain_name }}
-        SUB_DOMAIN: ${{ inputs.sub_domain }}
-        ROOT_DOMAIN: ${{ inputs.root_domain }}
-        CERT_ARN: ${{ inputs.cert_arn }}
-        CREATE_ROOT_CERT: ${{ inputs.create_root_cert }}
-        CREATE_SUB_CERT: ${{ inputs.create_sub_cert }}
+        DOMAIN_NAME: ${{ inputs.aws_domain_name }}
+        SUB_DOMAIN: ${{ inputs.aws_sub_domain }}
+        ROOT_DOMAIN: ${{ inputs.aws_root_domain }}
+        CERT_ARN: ${{ inputs.aws_cert_arn }}
+        CREATE_ROOT_CERT: ${{ inputs.aws_create_root_cert }}
+        CREATE_SUB_CERT: ${{ inputs.aws_create_sub_cert }}
         NO_CERT: ${{ inputs.no_cert }}
 
         # Skip ansible deployment if deploying only infrastructure
