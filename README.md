@@ -81,10 +81,10 @@ The following inputs can be used as `steps.with` keys:
 | `aws_domain_name` | string | | Define the root domain name for the application. e.g. bitovi.com'. If empty, ELB URL will be provided. |
 | `aws_sub_domain` | string | `${org}-${repo}-${branch}` | Define the sub-domain part of the URL. |
 | `aws_root_domain` | bool | `false` | Deploy application to root domain. Will create root and www DNS records. Domain must exist in Route53. |
-| `aws_cert_arn` | string | | Existing certificate ARN. Use if you want to manage a certificate outside this action. **See note**. |
-| `aws_create_root_cert` | bool | `false`| Generates and manage the root cert for the application. **See note**.|
-| `aws_create_sub_cert` | bool | `false` | Generates and manage the sub-domain certificate for the application. **See note**.|
-| `no_cert` | bool | `false` | Set this to true if no certificate is present for the domain. **See note**. |
+| `aws_cert_arn` | string | | Existing certificate ARN to be used in the ELB. Use if you manage a certificate outside of this action. See [this](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-list.html) for how to find the certificate ARN. **See note**. |
+| `aws_create_root_cert` | bool | `false`| Generates and manage the root certificate for the application to be used in the ELB. **See note**.|
+| `aws_create_sub_cert` | bool | `false` | Generates and manage the sub-domain certificate for the application to be used in the ELB. **See note**.|
+| `aws_no_cert` | bool | `false` | Set this to true if you want not to use a certificate in the ELB. **See note**. |
 | **Teraform configuration** |
 | `tf_state_bucket` | string | `${org}-${repo}-${branch}-tf-state` | AWS S3 bucket to use for Terraform state. By default, a new deployment will be created for each unique branch. Hardcode if you want to keep a shared resource state between the several branches. |
 | **StackStorm configuration** |

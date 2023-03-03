@@ -78,16 +78,6 @@ variable "aws_resource_identifier_supershort" {
   description = "Identifier to use for AWS resources (defaults to GITHUB_ORG-GITHUB_REPO-GITHUB_BRANCH) shortened to 30 chars"
 }
 
-# variable "sub_domain_name" {
-#   type = string
-#   description = "Subdomain name for DNS record"
-#   default = ""
-# }
-# variable "domain_name" {
-#   type = string
-#   description = "root domain name without any subdomains"
-#   default = ""
-# }
 variable "create_vpc" {
   type = string
   default = "false"

@@ -70,24 +70,24 @@ inputs:
 
   # Domains
   aws_domain_name:
-    description: 'Define the root domain name for the application. e.g. app.com'
+    description: 'Define the root domain name for the application. e.g. bitovi.com'. If empty, ELB URL will be provided.'
     required: false
   aws_sub_domain:
     description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
   aws_root_domain:
-    description: 'Deploy to root domain. Will generate two DNS recrods, one for root, another for www'
+    description: 'Deploy application to root domain. Will create root and www DNS records. Domain must exist in Route53.'
     required: false
   aws_cert_arn:
-    description: 'Define the certificate ARN to use for the application'
+    description: 'Existing certificate ARN to be used in the ELB. Use if you manage a certificate outside of this action. See https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-list.html for how to find the certificate ARN.'
     required: false
   aws_create_root_cert:
-    description: 'Generates and manage the root cert for the application'
+    description: 'Generates and manage the root certificate for the application to be used in the ELB.'
     required: false
   aws_create_sub_cert: 
-    description: 'Generates and manage the sub-domain certificate for the application'
+    description: 'Generates and manage the sub-domain certificate for the application to be used in the ELB.'
     required: false
-  no_cert:
-    description: 'Makes the application not to use a certificate by disabling certificate lookup.'
+  aws_no_cert:
+    description: 'Set this to true if you want not to use a certificate in the ELB.'
     required: false
 
 outputs:
@@ -129,7 +129,7 @@ runs:
         CERT_ARN: ${{ inputs.aws_cert_arn }}
         CREATE_ROOT_CERT: ${{ inputs.aws_create_root_cert }}
         CREATE_SUB_CERT: ${{ inputs.aws_create_sub_cert }}
-        NO_CERT: ${{ inputs.no_cert }}
+        NO_CERT: ${{ inputs.aws_no_cert }}
 
         # Skip ansible deployment if deploying only infrastructure
         ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}
