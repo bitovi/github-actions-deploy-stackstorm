@@ -1,6 +1,6 @@
 variable "app_port" {
   type = string
-  default = "3000"
+  default = "443"
   description = "app port"
 }
 variable "lb_port" {
@@ -10,7 +10,7 @@ variable "lb_port" {
 }
 variable "lb_healthcheck" {
   type = string
-  default = ""
+  default = "HTTPS:443/"
   description = "Load balancer health check string. Defaults to HTTP:app_port"
 }
 variable "app_repo_name" {
@@ -96,7 +96,6 @@ variable "create_vpc" {
 
 
 
-
 ## NEW NEEDS REVIEW
 variable "vpc_cidr" {
   description = "CIDR of the VPC"
@@ -121,23 +120,6 @@ variable "availability_zones" {
   description = "A list of availability zones (to be mapped to the region \"{region}{availability_zones}\""
   type        = list(string)
 }
-
-# variable "create_domain" {
-#   type = bool
-#   description = "Create domain using Terraform"
-#   default = false
-# }
-
-variable "route53_zone_id" {
-  default     = ""
-  description = "Route53 Zone ID"
-  type        = string
-}
-
-
-
-
-
 
 # variable "common_tags" {
 #   default     = {}
@@ -187,14 +169,32 @@ variable "route53_zone_id" {
 #   type        = list(string)
 # }
 
-# variable "route53_zone_id" {
-#   default     = ""
-#   description = "Route53 Zone ID"
-#   type        = string
-# }
+variable "root_domain" {
+  type        = string
+  description = "deploy to root domain"
+  default     = ""
+}
 
-# variable "domain_name" {
-#   default     = ""
-#   description = "Domain Name"
-#   type        = string
-# }
+variable "cert_arn" {
+  type        = string
+  description = "Certificate ARN to use"
+  default     = ""
+}
+
+variable "create_root_cert" {
+  type        = string
+  description = "Create root cert"
+  default     = ""
+}
+
+variable "create_sub_cert" {
+  type        = string
+  description = "Create sub_domain certificate"
+  default     = ""
+}
+
+variable "no_cert" {
+  type        = string
+  description = "disable cert lookup"
+  default     = ""
+}

@@ -16,17 +16,22 @@ module "Stackstorm-Single-VM" {
   lb_access_bucket_name=var.lb_access_bucket_name
   aws_resource_identifier=var.aws_resource_identifier
   aws_resource_identifier_supershort=var.aws_resource_identifier_supershort
-  sub_domain_name=var.sub_domain_name
-  domain_name=var.domain_name
   create_vpc=var.create_vpc
   #create_domain=var.create_domain
   availability_zones=local.availability_zones
-  route53_zone_id=var.route53_zone_id
+  #route53_zone_id=var.route53_zone_id
+  sub_domain_name=var.sub_domain_name
+  domain_name=var.domain_name
+  root_domain=var.root_domain
+  cert_arn=var.cert_arn
+  create_root_cert=var.create_root_cert
+  create_sub_cert=var.create_sub_cert
+  no_cert=var.no_cert
 }
 
 locals {
   availability_zones = "${formatlist("${var.region}%s", var.availability_zones)}"
-  url = "${module.Stackstorm-Single-VM.loadbalancer_protocol}${module.Stackstorm-Single-VM.loadbalancer_public_dns}"
+  #url = "${module.Stackstorm-Single-VM.loadbalancer_protocol}${module.Stackstorm-Single-VM.loadbalancer_public_dns}"
 }
 
 output "availability_zone" {

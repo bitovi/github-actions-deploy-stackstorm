@@ -36,11 +36,7 @@ if [ -z "${EC2_INSTANCE_PROFILE}" ]; then
 fi
 
 echo "
-app_port = \"$APP_PORT\"
-
 lb_port = \"$LB_PORT\"
-
-lb_healthcheck = \"$LB_HEALTHCHECK\"
 
 # the name of the operations repo environment directory
 ops_repo_environment = \"deployment\"
@@ -74,6 +70,13 @@ aws_resource_identifier_supershort = \"${GITHUB_IDENTIFIER_SS}\"
 # Domain+Sub Names
 sub_domain_name = \"${SUB_DOMAIN}\"
 domain_name = \"${DOMAIN_NAME}\"
+
+# Cert stuff
+root_domain = \"${ROOT_DOMAIN}\"
+cert_arn = \"${CERT_ARN}\"
+create_root_cert = \"${CREATE_ROOT_CERT}\"
+create_sub_cert = \"${CREATE_SUB_CERT}\"
+no_cert = \"${NO_CERT}\"
 
 # VPC
 create_vpc = \"${CREATE_VPC}\"

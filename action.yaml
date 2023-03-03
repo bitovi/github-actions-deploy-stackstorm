@@ -68,10 +68,32 @@ inputs:
     description: 'Force purge and deletion of tf_state_bucket defined. Any file contained there will be destroyed. tf_stack_destroy must also be true.'
     default: "false"
 
+  # Domains
+  aws_domain_name:
+    description: 'Define the root domain name for the application. e.g. bitovi.com'. If empty, ELB URL will be provided.'
+    required: false
+  aws_sub_domain:
+    description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
+  aws_root_domain:
+    description: 'Deploy application to root domain. Will create root and www DNS records. Domain must exist in Route53.'
+    required: false
+  aws_cert_arn:
+    description: 'Existing certificate ARN to be used in the ELB. Use if you manage a certificate outside of this action. See https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-list.html for how to find the certificate ARN.'
+    required: false
+  aws_create_root_cert:
+    description: 'Generates and manage the root certificate for the application to be used in the ELB.'
+    required: false
+  aws_create_sub_cert: 
+    description: 'Generates and manage the sub-domain certificate for the application to be used in the ELB.'
+    required: false
+  aws_no_cert:
+    description: 'Set this to true if you want not to use a certificate in the ELB.'
+    required: false
+
 outputs:
-  lb_url:
+  vm_url:
     description: 'The URL of the generated app'
-    value: ${{ steps.deploy.outputs.lb_url }}
+    value: ${{ steps.deploy.outputs.vm_url }}
 
 runs:
   using: 'composite'
@@ -93,7 +115,6 @@ runs:
         TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
         TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
 
-        APP_PORT: ${{ inputs.app_port }}
         EC2_INSTANCE_PROFILE: ${{ inputs.aws_ec2_instance_profile }}
         EC2_INSTANCE_TYPE: ${{ inputs.aws_ec2_instance_type }}
         STACK_DESTROY: ${{ inputs.tf_stack_destroy }}
@@ -101,6 +122,14 @@ runs:
         CREATE_VPC: ${{ inputs.aws_create_vpc }}
         AWS_EXTRA_TAGS: ${{ inputs.aws_extra_tags }}
 
+        # Domain / cert management
+        DOMAIN_NAME: ${{ inputs.aws_domain_name }}
+        SUB_DOMAIN: ${{ inputs.aws_sub_domain }}
+        ROOT_DOMAIN: ${{ inputs.aws_root_domain }}
+        CERT_ARN: ${{ inputs.aws_cert_arn }}
+        CREATE_ROOT_CERT: ${{ inputs.aws_create_root_cert }}
+        CREATE_SUB_CERT: ${{ inputs.aws_create_sub_cert }}
+        NO_CERT: ${{ inputs.aws_no_cert }}
 
         # Skip ansible deployment if deploying only infrastructure
         ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}
@@ -118,13 +147,13 @@ runs:
         $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
 
     # output results to GitHub
-    - if: ${{ steps.deploy.outputs.lb_url != '' }}
+    - if: ${{ steps.deploy.outputs.vm_url != '' }}
       name: Print result created
       shell: bash
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo " ${{ steps.deploy.outputs.lb_url }}" >> $GITHUB_STEP_SUMMARY
-    - if: ${{ steps.deploy.outputs.lb_url == '' }}
+        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
+    - if: ${{ steps.deploy.outputs.vm_url == '' }}
       name: Print result destroyed
       shell: bash
       run: |
