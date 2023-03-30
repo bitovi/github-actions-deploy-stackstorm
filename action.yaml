@@ -70,7 +70,7 @@ inputs:
 
   # Domains
   aws_domain_name:
-    description: 'Define the root domain name for the application. e.g. bitovi.com'. If empty, ELB URL will be provided.'
+    description: "Define the root domain name for the application. e.g. bitovi.com. If empty, ELB URL will be provided."
     required: false
   aws_sub_domain:
     description: 'Define the sub-domain part of the URL. Defaults to `${org}-${repo}-{branch}`'
