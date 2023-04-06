@@ -177,7 +177,7 @@ runs:
       with:
         # Current repo vars
         gh_calling_repo: ${{ github.action_path }}
-        gh_inout_ansible: ansible
+        gh_input_ansible: ansible
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}
