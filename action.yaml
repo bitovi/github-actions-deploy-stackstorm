@@ -224,6 +224,7 @@ runs:
         # AWS ELB
         aws_elb_create: true
         aws_elb_app_port: 443
+        aws_elb_app_protocol: ssl
         #aws_elb_listen_port: ${{ inputs.lb_port }}
         aws_elb_healthcheck: "HTTPS:443/"
 
