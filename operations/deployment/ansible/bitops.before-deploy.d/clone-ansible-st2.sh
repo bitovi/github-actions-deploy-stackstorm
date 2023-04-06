@@ -3,6 +3,13 @@ set -xe
 
 echo "In clone-ansible-st2.sh"
 
+### ADDED - TBD 
+echo "#Printing Envs"
+env
+echo "Treeing"
+tree $BITOPS_ENVROOT
+###
+
 TF_DIR="${BITOPS_ENVROOT}/terraform"
 
 ANSIBLE_DIR="${BITOPS_ENVROOT}/ansible"
