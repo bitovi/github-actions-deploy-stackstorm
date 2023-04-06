@@ -204,7 +204,7 @@ runs:
 
         # EC2
         aws_ec2_instance_create: true
-        aws_ec2_instance_filter: 'ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*'
+        aws_ec2_ami_filter: 'ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*'
         #aws_ec2_ami_id: ${{ inputs.aws_ami_id }}
         aws_ec2_iam_instance_profile: ${{ inputs.aws_ec2_instance_profile }}
         aws_ec2_instance_type: ${{ inputs.aws_ec2_instance_type }}
