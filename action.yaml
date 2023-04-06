@@ -95,67 +95,161 @@ outputs:
     description: 'The URL of the generated app'
     value: ${{ steps.deploy.outputs.vm_url }}
 
+#runs:
+#  using: 'composite'
+#  steps:
+#    - name: Checkout if required
+#      if: ${{ inputs.checkout == 'true' }}
+#      uses: actions/checkout@v3
+#
+#    - name: Deploy with BitOps
+#      id: deploy
+#      shell: bash
+#      env:
+#        GITHUB_ACTION_PATH: ${{ github.action_path }}
+#        BITOPS_ENVIRONMENT: deployment
+#        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
+#        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
+#        AWS_SESSION_TOKEN: ${{ inputs.aws_session_token }}
+#        AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
+#        TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
+#        TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
+#
+#        EC2_INSTANCE_PROFILE: ${{ inputs.aws_ec2_instance_profile }}
+#        EC2_INSTANCE_TYPE: ${{ inputs.aws_ec2_instance_type }}
+#        STACK_DESTROY: ${{ inputs.tf_stack_destroy }}
+#        AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
+#        CREATE_VPC: ${{ inputs.aws_create_vpc }}
+#        AWS_EXTRA_TAGS: ${{ inputs.aws_extra_tags }}
+#
+#        # Domain / cert management
+#        DOMAIN_NAME: ${{ inputs.aws_domain_name }}
+#        SUB_DOMAIN: ${{ inputs.aws_sub_domain }}
+#        ROOT_DOMAIN: ${{ inputs.aws_root_domain }}
+#        CERT_ARN: ${{ inputs.aws_cert_arn }}
+#        CREATE_ROOT_CERT: ${{ inputs.aws_create_root_cert }}
+#        CREATE_SUB_CERT: ${{ inputs.aws_create_sub_cert }}
+#        NO_CERT: ${{ inputs.aws_no_cert }}
+#
+#        # Skip ansible deployment if deploying only infrastructure
+#        ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}
+#
+#        # ST2 config
+#        ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
+#        ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
+#        ST2_PACKS: ${{ inputs.st2_packs }}
+#        ST2_ANSIBLE_EXTRA_VARS_FILE: ${{ inputs.st2_ansible_extra_vars_file }}
+#      run: |
+#        echo "running operations/_scripts/deploy/deploy.sh"
+#        $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
+#
+#        echo "Setting up vars for GitHub"
+#        $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
+#
+#    # output results to GitHub
+#    - if: ${{ steps.deploy.outputs.vm_url != '' }}
+#      name: Print result created
+#      shell: bash
+#      run: |
+#        echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
+#        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
+#    - if: ${{ steps.deploy.outputs.vm_url == '' }}
+#      name: Print result destroyed
+#      shell: bash
+#      run: |
+#        echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
+#        echo "Buckets and whole infrastructure should be gone now!" >> $GITHUB_STEP_SUMMARY
+
+
 runs:
   using: 'composite'
   steps:
-    - name: Checkout if required
-      if: ${{ inputs.checkout == 'true' }}
-      uses: actions/checkout@v3
-
+    - name: Invert boolean Variable
+      shell: bash
+      id: set-cert
+      if: ${{ inputs.aws_no_cert == 'false' }}
+      run: echo "enable_cert=true" >> $GITHUB_OUTPUT
+      
+      
     - name: Deploy with BitOps
       id: deploy
-      shell: bash
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
-        BITOPS_ENVIRONMENT: deployment
-        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
-        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
-        AWS_SESSION_TOKEN: ${{ inputs.aws_session_token }}
-        AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
-        TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
-        TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
+      uses: bitovi/github-actions-commons@13-add-support-to-add-terraform-ansible-code
+      with:
+        # Current repo vars
+        gh_calling_repo: ${{ github.action_path }}
+        gh_inout_ansible: ansible
 
-        EC2_INSTANCE_PROFILE: ${{ inputs.aws_ec2_instance_profile }}
-        EC2_INSTANCE_TYPE: ${{ inputs.aws_ec2_instance_type }}
-        STACK_DESTROY: ${{ inputs.tf_stack_destroy }}
-        AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
-        CREATE_VPC: ${{ inputs.aws_create_vpc }}
-        AWS_EXTRA_TAGS: ${{ inputs.aws_extra_tags }}
+        # Action main inputs
+        checkout: ${{ inputs.checkout }}
+        tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
+        tf_state_bucket: ${{ inputs.tf_state_bucket }}
+        tf_state_bucket_destroy: ${{ inputs.tf_state_bucket_destroy }}
+        tf_state_bucket_provider: 'aws'
+        #tf_targets: ''
 
-        # Domain / cert management
-        DOMAIN_NAME: ${{ inputs.aws_domain_name }}
-        SUB_DOMAIN: ${{ inputs.aws_sub_domain }}
-        ROOT_DOMAIN: ${{ inputs.aws_root_domain }}
-        CERT_ARN: ${{ inputs.aws_cert_arn }}
-        CREATE_ROOT_CERT: ${{ inputs.aws_create_root_cert }}
-        CREATE_SUB_CERT: ${{ inputs.aws_create_sub_cert }}
-        NO_CERT: ${{ inputs.aws_no_cert }}
 
-        # Skip ansible deployment if deploying only infrastructure
-        ANSIBLE_SKIP_DEPLOY: ${{ inputs.infrastructure_only }}
+        # AWS - ALL CHECK
+        aws_access_key_id: ${{ inputs.aws_access_key_id }}
+        aws_secret_access_key: ${{ inputs.aws_secret_access_key }}
+        aws_session_token: ${{ inputs.aws_session_token }}
+        aws_default_region: ${{ inputs.aws_default_region }}
+        aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
+        aws_additional_tags: ${{ inputs.aws_extra_tags }}
 
-        # ST2 config
-        ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
-        ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
-        ST2_PACKS: ${{ inputs.st2_packs }}
-        ST2_ANSIBLE_EXTRA_VARS_FILE: ${{ inputs.st2_ansible_extra_vars_file }}
-      run: |
-        echo "running operations/_scripts/deploy/deploy.sh"
-        $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
+        # ENV
+        #env_aws_secret: ''
+        #env_repo: ''
+        #env_ghs: ''
+        #env_ghv: ''
 
-        echo "Setting up vars for GitHub"
-        $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
+        # EC2
+        aws_ec2_instance_create: true
+        aws_ec2_instance_filter: 'ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*'
+        #aws_ec2_ami_id: ${{ inputs.aws_ami_id }}
+        aws_ec2_iam_instance_profile: ${{ inputs.aws_ec2_instance_profile }}
+        aws_ec2_instance_type: ${{ inputs.aws_ec2_instance_type }}
+        #aws_ec2_create_keypair_sm: ${{ inputs.create_keypair_sm_entry }}
+        aws_ec2_instance_public_ip: true
 
-    # output results to GitHub
-    - if: ${{ steps.deploy.outputs.vm_url != '' }}
-      name: Print result created
-      shell: bash
-      run: |
-        echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
-    - if: ${{ steps.deploy.outputs.vm_url == '' }}
-      name: Print result destroyed
-      shell: bash
-      run: |
-        echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
-        echo "Buckets and whole infrastructure should be gone now!" >> $GITHUB_STEP_SUMMARY
+        # AWS Route53 Domains abd Certificates
+        aws_r53_enable: true
+        aws_r53_domain_name: ${{ inputs.aws_domain_name }}
+        aws_r53_sub_domain_name: ${{ inputs.aws_sub_domain }}
+        aws_r53_root_domain_deploy: ${{ inputs.aws_root_domain }}
+        aws_r53_enable_cert: ${{ steps.set-cert.outputs.enable_cert }}
+        aws_r53_cert_arn: ${{ inputs.aws_cert_arn }}
+        aws_r53_create_root_cert: ${{ inputs.aws_create_root_cert }}
+        aws_r53_create_sub_cert: ${{ inputs.aws_create_sub_cert }}
+
+        # AWS ELB
+        aws_elb_create: true
+        aws_elb_app_port: 443
+        #aws_elb_listen_port: ${{ inputs.lb_port }}
+        aws_elb_healthcheck: "HTTPS:443/"
+
+        # AWS EFS
+        # aws_efs_create: false
+        # aws_efs_create_ha: ${{ inputs.aws_create_ha_efs }}
+        # aws_efs_create_replica: ${{ inputs.aws_create_efs_replica }}
+        # aws_efs_enable_backup_policy: ${{ inputs.aws_enable_efs_backup_policy }}
+        # aws_efs_zone_mapping: ${{ inputs.aws_efs_zone_mapping }}
+        # aws_efs_transition_to_inactive: ${{ inputs.aws_efs_transition_to_inactive }}
+        # aws_efs_replication_destination: ${{ inputs.aws_replication_configuration_destination }}
+        # aws_efs_mount_id: ${{ inputs.aws_mount_efs_id }}
+        # aws_efs_mount_security_group_id: ${{ inputs.aws_mount_efs_security_group_id }}
+        # aws_efs_ec2_mount_point: ${{ inputs.application_mount_target }}
+        # aws_efs_mount_target: ${{ inputs.efs_mount_target }}
+
+        # POSTGRES
+        # aws_postgres_enable: ${{ inputs.aws_enable_postgres }}
+        # aws_postgres_engine:  ${{ inputs.aws_postgres_engine }}
+        # aws_postgres_engine_version:  ${{ inputs.aws_postgres_engine_version }}
+        # aws_postgres_instance_class: ${{ inputs.aws_postgres_instance_class }}
+        # aws_postgres_subnets: ${{ inputs.aws_postgres_subnets }}
+        # aws_postgres_database_name: ${{ inputs.aws_postgres_database_name }}
+        # aws_postgres_database_port: ${{ inputs.aws_postgres_database_port}}
+
+        # DOCKER
+        #docker_install: true
+        #docker_repo_app_directory: ${{ inputs.app_directory }}
+        #docker_efs_mount_target: ${{ inputs.data_mount_target }}
