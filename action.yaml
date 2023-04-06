@@ -88,6 +88,7 @@ inputs:
     required: false
   aws_no_cert:
     description: 'Set this to true if you want not to use a certificate in the ELB.'
+    default: false
     required: false
 
 outputs:
@@ -169,7 +170,6 @@ runs:
       id: set-cert
       if: ${{ inputs.aws_no_cert == 'false' }}
       run: echo "enable_cert=true" >> $GITHUB_OUTPUT
-      
       
     - name: Deploy with BitOps
       id: deploy
