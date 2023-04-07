@@ -186,6 +186,7 @@ runs:
         tf_state_bucket_destroy: ${{ inputs.tf_state_bucket_destroy }}
         tf_state_bucket_provider: 'aws'
         #tf_targets: ''
+        ansible_skip : ${{ inputs.infrastructure_only }}
 
 
         # AWS - ALL CHECK
@@ -223,7 +224,7 @@ runs:
 
         # AWS ELB
         aws_elb_create: true
-        aws_elb_app_port: 443
+        aws_elb_app_port: "443"
         aws_elb_app_protocol: ssl
         #aws_elb_listen_port: ${{ inputs.lb_port }}
         aws_elb_healthcheck: "HTTPS:443/"
