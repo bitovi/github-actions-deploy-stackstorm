@@ -197,7 +197,9 @@ runs:
         aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
         aws_additional_tags: ${{ inputs.aws_extra_tags }}
 
-        # ENV
+
+
+        gh_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
         #env_aws_secret: ''
         #env_repo: ''
         #env_ghs: ''
