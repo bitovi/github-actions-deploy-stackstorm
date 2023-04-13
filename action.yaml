@@ -178,6 +178,9 @@ runs:
          echo "ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} " >> env_bitops
          echo "ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} " >> env_bitops
          echo "ST2_PACKS=${{ inputs.st2_packs }} " >> env_bitops
+         pwd
+         echo "File generated"
+         cat env_bitops
       
     - name: Deploy with BitOps
       id: deploy
