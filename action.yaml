@@ -170,17 +170,6 @@ runs:
       id: set-cert
       if: ${{ inputs.aws_no_cert == 'false' }}
       run: echo "enable_cert=true" >> $GITHUB_OUTPUT
-
-    - name: Vars to env_bitops
-      shell: bash
-      id: vars-to-bitops
-      run: |
-         echo "ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} " >> env_bitops
-         echo "ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} " >> env_bitops
-         echo "ST2_PACKS=${{ inputs.st2_packs }} " >> env_bitops
-         pwd
-         echo "File generated"
-         cat env_bitops
       
     - name: Deploy with BitOps
       id: deploy
@@ -211,11 +200,10 @@ runs:
 
 
         gh_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
-        env_bitops: env_bitops
         #env_aws_secret: ''
         #env_repo: ''
         #env_ghs: ''
-        #env_ghv: ''
+        env_ghv: "ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }}\n ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}\n ST2_PACKS=${{ inputs.st2_packs }}"
 
         # EC2
         aws_ec2_instance_create: true
