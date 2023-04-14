@@ -203,7 +203,7 @@ runs:
         #env_aws_secret: ''
         #env_repo: ''
         #env_ghs: ''
-        env_bitops: "ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }},ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }},ST2_PACKS=${{ inputs.st2_packs }}"
+        env_bitops: "-e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} -e ST2_PACKS=${{ inputs.st2_packs }}"
 
         # EC2
         aws_ec2_instance_create: true
