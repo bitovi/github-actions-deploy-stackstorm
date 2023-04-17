@@ -112,6 +112,11 @@ runs:
       id: set-cert
       if: ${{ inputs.aws_no_cert == 'false' }}
       run: echo "enable_cert=true" >> $GITHUB_OUTPUT
+
+    - name: Push ST2_PACKS to env_file
+      shell: bash
+      id: set-env_file
+      run: echo "ST2_PACKS=${{ inputs.st2_packs }}" >> ${{ github.action_path }}/extra_env
       
     - name: Deploy with BitOps
       id: deploy
@@ -122,8 +127,9 @@ runs:
         gh_input_ansible: operations/deployment/ansible
 
         # Action main inputs
-        bitops_extra_env_vars: -e ST2_AUTH_USERNAME='${{ inputs.st2_auth_username }}' -e ST2_AUTH_PASSWORD='${{ inputs.st2_auth_password }}'
+        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
 #        bitops_extra_env_vars: -e ST2_AUTH_USERNAME='${{ inputs.st2_auth_username }}' -e ST2_AUTH_PASSWORD='${{ inputs.st2_auth_password }}' -e ST2_PACKS='${{ inputs.st2_packs }}'
+        bitops_extra_env_vars: extra_env
         checkout: ${{ inputs.checkout }}
         tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
         tf_state_bucket: ${{ inputs.tf_state_bucket }}
