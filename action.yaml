@@ -97,13 +97,6 @@ outputs:
     value: ${{ steps.deploy.outputs.vm_url }}
 #        CREATE_VPC: ${{ inputs.aws_create_vpc }}
 
-#        # ST2 config
-#        ST2_AUTH_USERNAME: ${{ inputs.st2_auth_username }}
-#        ST2_AUTH_PASSWORD: ${{ inputs.st2_auth_password }}
-#        ST2_PACKS: ${{ inputs.st2_packs }}
-#        ST2_ANSIBLE_EXTRA_VARS_FILE: ${{ inputs.st2_ansible_extra_vars_file }}
-
-
 runs:
   using: 'composite'
   steps:
@@ -117,11 +110,9 @@ runs:
       shell: bash
       id: set-env_file
       run: |
-        echo "ST2_PACKS=${{ inputs.st2_packs }}" > ${{ github.action_path }}/extra_env
-        pwd
-        cat ${{ github.action_path }}/extra_env
+        echo "::add-mask::ST2_PACKS=${{ inputs.st2_packs }}" > ${{ github.action_path }}/extra_env
+        echo "::add-mask::ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} " > ${{ github.action_path }}/extra_env
 
-      
     - name: Deploy with BitOps
       id: deploy
       uses: bitovi/github-actions-commons@13-add-support-to-add-terraform-ansible-code
@@ -131,8 +122,7 @@ runs:
         gh_input_ansible: operations/deployment/ansible
 
         # Action main inputs
-        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
-#        bitops_extra_env_vars: -e ST2_AUTH_USERNAME='${{ inputs.st2_auth_username }}' -e ST2_AUTH_PASSWORD='${{ inputs.st2_auth_password }}' -e ST2_PACKS='${{ inputs.st2_packs }}'
+        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }}
         bitops_extra_env_vars_file: extra_env
         checkout: ${{ inputs.checkout }}
         tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
