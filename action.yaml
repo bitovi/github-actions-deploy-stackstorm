@@ -110,8 +110,8 @@ runs:
       shell: bash
       id: set-env_file
       run: |
-        echo "::add-mask::ST2_PACKS=${{ inputs.st2_packs }}" > ${{ github.action_path }}/extra_env
-        echo "::add-mask::ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} " > ${{ github.action_path }}/extra_env
+        echo "ST2_PACKS=${{ inputs.st2_packs }}" > ${{ github.action_path }}/extra_env
+        echo "ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} " >> ${{ github.action_path }}/extra_env
 
     - name: Deploy with BitOps
       id: deploy
