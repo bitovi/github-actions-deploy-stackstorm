@@ -111,7 +111,6 @@ runs:
       id: set-env_file
       run: |
         echo "ST2_PACKS=${{ inputs.st2_packs }}" > ${{ github.action_path }}/extra_env
-        echo "ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} " >> ${{ github.action_path }}/extra_env
 
     - name: Deploy with BitOps
       id: deploy
@@ -122,7 +121,7 @@ runs:
         gh_input_ansible: operations/deployment/ansible
 
         # Action main inputs
-        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }}
+        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
         bitops_extra_env_vars_file: extra_env
         checkout: ${{ inputs.checkout }}
         tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
