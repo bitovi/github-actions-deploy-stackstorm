@@ -117,8 +117,8 @@ runs:
       uses: bitovi/github-actions-commons@13-add-support-to-add-terraform-ansible-code
       with:
         # Current repo vars
-        gh_calling_repo: ${{ github.action_path }}
-        gh_input_ansible: operations/deployment/ansible
+        gh_action_repo: ${{ github.action_path }}
+        gh_action_input_ansible: operations/deployment/ansible
 
         # Action main inputs
         bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
@@ -138,7 +138,7 @@ runs:
         aws_default_region: ${{ inputs.aws_default_region }}
         aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
         aws_additional_tags: ${{ inputs.aws_extra_tags }}
-        gh_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
+        gh_deployment_ansible_action_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
 
         # EC2
         aws_ec2_instance_create: true
