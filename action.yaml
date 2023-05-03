@@ -114,7 +114,7 @@ runs:
 
     - name: Deploy with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@13-add-support-to-add-terraform-ansible-code
+      uses: bitovi/github-actions-commons@main
       with:
         # Current repo vars
         gh_action_repo: ${{ github.action_path }}
@@ -129,7 +129,6 @@ runs:
         tf_state_bucket_destroy: ${{ inputs.tf_state_bucket_destroy }}
         tf_state_bucket_provider: 'aws'
         ansible_skip : ${{ inputs.infrastructure_only }}
-
 
         # AWS - ALL CHECK
         aws_access_key_id: ${{ inputs.aws_access_key_id }}
