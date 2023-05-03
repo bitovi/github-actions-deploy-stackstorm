@@ -137,7 +137,7 @@ runs:
         aws_default_region: ${{ inputs.aws_default_region }}
         aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
         aws_additional_tags: ${{ inputs.aws_extra_tags }}
-        gh_deployment_ansible_action_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
+        gh_deployment_action_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
 
         # EC2
         aws_ec2_instance_create: true
