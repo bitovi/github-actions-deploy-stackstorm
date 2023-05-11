@@ -95,6 +95,9 @@ inputs:
     description: "The name of the deployment environment"
     required: false
     default: single-vm
+  aws_eks_foo:
+    description: example input param to TF
+    default: gha-repo
 
 outputs:
   vm_url:
@@ -110,7 +113,7 @@ runs:
 
     - name: Deploy EKS with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@main
+      uses: bitovi/github-actions-commons@eks
       if: ${{ inputs.deploy_mode == 'eks' }}
       with:
         # Current repo vars
@@ -136,21 +139,25 @@ runs:
         aws_additional_tags: ${{ inputs.aws_extra_tags }}
         gh_deployment_action_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
 
-        # AWS Route53 Domains abd Certificates
-        aws_r53_enable: true
-        aws_r53_domain_name: ${{ inputs.aws_domain_name }}
-        aws_r53_sub_domain_name: ${{ inputs.aws_sub_domain }}
-        aws_r53_root_domain_deploy: ${{ inputs.aws_root_domain }}
-        aws_r53_enable_cert: ${{ steps.set-cert.outputs.enable_cert }}
-        aws_r53_cert_arn: ${{ inputs.aws_cert_arn }}
-        aws_r53_create_root_cert: ${{ inputs.aws_create_root_cert }}
-        aws_r53_create_sub_cert: ${{ inputs.aws_create_sub_cert }}
+        # # AWS Route53 Domains abd Certificates
+        # aws_r53_enable: true
+        # aws_r53_domain_name: ${{ inputs.aws_domain_name }}
+        # aws_r53_sub_domain_name: ${{ inputs.aws_sub_domain }}
+        # aws_r53_root_domain_deploy: ${{ inputs.aws_root_domain }}
+        # aws_r53_enable_cert: ${{ steps.set-cert.outputs.enable_cert }}
+        # aws_r53_cert_arn: ${{ inputs.aws_cert_arn }}
+        # aws_r53_create_root_cert: ${{ inputs.aws_create_root_cert }}
+        # aws_r53_create_sub_cert: ${{ inputs.aws_create_sub_cert }}
 
-        # AWS ELB
-        aws_elb_create: true
-        aws_elb_app_port: "443"
-        aws_elb_app_protocol: ssl
-        aws_elb_healthcheck: "HTTPS:443/"
+        # # AWS ELB
+        # aws_elb_create: true
+        # aws_elb_app_port: "443"
+        # aws_elb_app_protocol: ssl
+        # aws_elb_healthcheck: "HTTPS:443/"
+
+
+        # AWS EKS
+        aws_eks_foo: ${{ inputs.aws_eks_foo }}
 
     - name: Deploy single-vm with BitOps
       id: deploy
