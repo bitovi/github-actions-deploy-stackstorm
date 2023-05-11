@@ -122,7 +122,7 @@ runs:
 
         # Action main inputs
         bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
-        bitops_extra_env_vars_file: extra_env
+        # bitops_extra_env_vars_file: extra_env
         checkout: ${{ inputs.checkout }}
         tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
         tf_state_bucket: ${{ inputs.tf_state_bucket }}
