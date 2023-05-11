@@ -90,6 +90,12 @@ inputs:
     description: 'Set this to true if you want not to use a certificate in the ELB.'
     required: false
 
+  # Deployment Mode: EKS
+  deploy_mode:
+    description: "The name of the deployment environment"
+    required: false
+    default: single-vm
+
 outputs:
   vm_url:
     description: 'The URL of the generated app'
@@ -102,9 +108,54 @@ runs:
       if: ${{ inputs.checkout == 'true' }}
       uses: actions/checkout@v3
 
-    - name: Deploy with BitOps
+    - name: Deploy EKS with BitOps
+      id: deploy
+      uses: bitovi/github-actions-commons@main
+      if: ${{ inputs.deploy_mode == 'eks' }}
+      with:
+        # Current repo vars
+        gh_action_repo: ${{ github.action_path }}
+        gh_action_input_ansible: operations/deployment/ansible
+
+        # Action main inputs
+        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
+        bitops_extra_env_vars_file: extra_env
+        checkout: ${{ inputs.checkout }}
+        tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
+        tf_state_bucket: ${{ inputs.tf_state_bucket }}
+        tf_state_bucket_destroy: ${{ inputs.tf_state_bucket_destroy }}
+        tf_state_bucket_provider: 'aws'
+        ansible_skip : ${{ inputs.infrastructure_only }}
+
+        # AWS - ALL CHECK
+        aws_access_key_id: ${{ inputs.aws_access_key_id }}
+        aws_secret_access_key: ${{ inputs.aws_secret_access_key }}
+        aws_session_token: ${{ inputs.aws_session_token }}
+        aws_default_region: ${{ inputs.aws_default_region }}
+        aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
+        aws_additional_tags: ${{ inputs.aws_extra_tags }}
+        gh_deployment_action_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
+
+        # AWS Route53 Domains abd Certificates
+        aws_r53_enable: true
+        aws_r53_domain_name: ${{ inputs.aws_domain_name }}
+        aws_r53_sub_domain_name: ${{ inputs.aws_sub_domain }}
+        aws_r53_root_domain_deploy: ${{ inputs.aws_root_domain }}
+        aws_r53_enable_cert: ${{ steps.set-cert.outputs.enable_cert }}
+        aws_r53_cert_arn: ${{ inputs.aws_cert_arn }}
+        aws_r53_create_root_cert: ${{ inputs.aws_create_root_cert }}
+        aws_r53_create_sub_cert: ${{ inputs.aws_create_sub_cert }}
+
+        # AWS ELB
+        aws_elb_create: true
+        aws_elb_app_port: "443"
+        aws_elb_app_protocol: ssl
+        aws_elb_healthcheck: "HTTPS:443/"
+
+    - name: Deploy single-vm with BitOps
       id: deploy
       shell: bash
+      if: ${{ inputs.deploy_mode == 'single-vm' }}
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
         BITOPS_ENVIRONMENT: deployment
