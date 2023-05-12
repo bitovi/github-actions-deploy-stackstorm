@@ -158,6 +158,7 @@ runs:
 
         # AWS EKS
         aws_eks_foo: ${{ inputs.aws_eks_foo }}
+        aws_eks_create: true
 
     - name: Deploy single-vm with BitOps
       id: deploy
