@@ -22,3 +22,5 @@ local.sh
 # Github Action
 00_create_*
 00_generated_*
+
+.vscode
