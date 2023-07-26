@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
-
+echo ""
+echo "###########################################################################"
+echo "                  Initializing StackStorm installation"
+echo "###########################################################################"
+echo ""
 echo "In clone-ansible-st2.sh"
 
 TF_DIR="${BITOPS_ENVROOT}/terraform"
