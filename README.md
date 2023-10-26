@@ -1,13 +1,29 @@
-# Github Action: Deploy StackStorm (βeta)
+# Github Action: Deploy StackStorm
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-green)](LICENSE.md)
 [![Latest Release](https://img.shields.io/github/v/release/bitovi/github-actions-deploy-stackstorm)](https://github.com/bitovi/github-actions-deploy-stackstorm/releases)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/bitovi/github-actions-deploy-stackstorm)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/bitovi/github-actions-deploy-stackstorm)
-[![Join our Slack](https://img.shields.io/badge/slack-join%20chat-611f69.svg?logo=slack)](https://www.bitovi.com/community/slack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Discrod Community](https://img.shields.io/discord/1007137664606150746?logo=discord&label=Discord)](https://discord.gg/J7ejFsZnJ4Z)
 
 
-GitHub action to deploy [StackStorm](https://stackstorm.com/) to an AWS VM (EC2) with [Terraform](operations/deployment/terraform/modules) and [Ansible](https://github.com/stackstorm/ansible-st2).
+## You are here
+This action deploys a Stackstorm instance to an AWS VM (EC2) with [Terraform](operations/deployment/terraform/modules) and [Ansible](https://github.com/stackstorm/ansible-st2).  
+
+If you would like to deploy a backend app/service, check out our other actions:
+| Action | Purpose |
+| ------ | ------- |
+| [Deploy Docker to EC2](https://github.com/bitovi/github-actions-deploy-docker-to-ec2) | Deploys a repo with a Dockerized application to a virtual machine (EC2) on AWS |
+| [Deploy static site to AWS (S3/CDN/R53)](https://github.com/marketplace/actions/deploy-static-site-to-aws-s3-cdn-r53) | Hosts a static site in AWS S3 with CloudFront |
+
+# Need help or have questions?
+This project is supported by [Bitovi, A DevOps consultancy](https://www.bitovi.com/services/devops-consulting).
+
+You can **get help or ask questions** on our:
+
+- [Discord Community](https://discord.gg/J7ejFsZnJ4Z)
+
+Or, you can hire us for training, consulting, or development. [Set up a free consultation](https://www.bitovi.com/services/devops-consulting).
 
 ## Prerequisites
 - An [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) and [Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html)
@@ -16,7 +32,6 @@ GitHub action to deploy [StackStorm](https://stackstorm.com/) to an AWS VM (EC2)
   - `AWS_SECRET_ACCESS_KEY`
   - `ST2_AUTH_USERNAME`
   - `ST2_AUTH_PASSWORD`
-
 
 ## Example usage
 
@@ -38,7 +53,7 @@ jobs:
       name: Deploy StackStorm
       # NOTE: we recommend pinning to the latest numeric version
       # See: https://github.com/bitovi/github-actions-deploy-stackstorm/releases
-      uses: bitovi/github-actions-deploy-stackstorm@main
+      uses: bitovi/github-actions-deploy-stackstorm@v0.4.0
       with:
         aws_default_region: us-east-1
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
@@ -170,7 +185,7 @@ jobs:
     steps:
     - id: deploy-st2-advanced
       name: Deploy StackStorm with extra Ansible vars
-      uses: bitovi/github-actions-deploy-stackstorm@main
+      uses: bitovi/github-actions-deploy-stackstorm@v0.4.0
       with:
         aws_default_region: us-east-1
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
@@ -190,7 +205,7 @@ We encourage to keep your infrastructure codified!
 You can pass additional `BITOPS_` ENV variables to adjust the deployment behavior.
 ```yaml
 - name: Deploy StackStorm to AWS (dry-run)
-  uses: bitovi/github-actions-deploy-stackstorm@main
+  uses: bitovi/github-actions-deploy-stackstorm@v0.4.0
   env:
     # Extra BitOps configuration:
     BITOPS_LOGGING_LEVEL: INFO
