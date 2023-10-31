@@ -104,6 +104,7 @@ The following inputs can be used as `steps.with` keys:
 | `st2_auth_password` | string | | Password used by StackStorm standalone authentication. Set as a secret in GH Actions. |
 | `st2_packs` | string |`"st2"` | Comma separated list of packs to install. If you modify this option, be sure to also include `st2` in the list. |
 | `st2_ansible_extra_vars_file` | string | | Relative path from project root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth, etc. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings. The Ansible vars will take higher precedence over the GHA inputs. |
+| `st2_version_tag` | | Stackstorm Ansible release tag to use. See https://github.com/StackStorm/ansible-st2/releases |
 | **Stack Management** |
 | `tf_stack_destroy` | bool | `false` | Set to `true` to Destroy the created AWS infrastructure for this instance |
 | `tf_state_file_name` | string | `tf-state-aws` | Change this to be anything you want to. Carefull to be consistent here. A missing file could trigger recreation, or stepping over destruction of non-defined objects. |
@@ -189,7 +190,7 @@ jobs:
     steps:
     - id: deploy-st2-advanced
       name: Deploy StackStorm with extra Ansible vars
-      uses: bitovi/github-actions-deploy-stackstorm@v0.4.0
+      uses: bitovi/github-actions-deploy-stackstorm@v0.4.1
       with:
         aws_default_region: us-east-1
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
@@ -209,7 +210,7 @@ We encourage to keep your infrastructure codified!
 You can pass additional `BITOPS_` ENV variables to adjust the deployment behavior.
 ```yaml
 - name: Deploy StackStorm to AWS (dry-run)
-  uses: bitovi/github-actions-deploy-stackstorm@v0.4.0
+  uses: bitovi/github-actions-deploy-stackstorm@v0.4.1
   env:
     # Extra BitOps configuration:
     BITOPS_LOGGING_LEVEL: INFO
