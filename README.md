@@ -7,14 +7,18 @@
 [![Discrod Community](https://img.shields.io/discord/1007137664606150746?logo=discord&label=Discord)](https://discord.gg/J7ejFsZnJ4Z)
 
 
-## You are here
+## Action Summary
 This action deploys a Stackstorm instance to an AWS VM (EC2) with [Terraform](operations/deployment/terraform/modules) and [Ansible](https://github.com/stackstorm/ansible-st2).  
 
 If you would like to deploy a backend app/service, check out our other actions:
 | Action | Purpose |
 | ------ | ------- |
-| [Deploy Docker to EC2](https://github.com/bitovi/github-actions-deploy-docker-to-ec2) | Deploys a repo with a Dockerized application to a virtual machine (EC2) on AWS |
+| [Deploy Docker to EC2](https://github.com/marketplace/actions/deploy-docker-to-aws-ec2) | Deploys a repo with a Dockerized application to a virtual machine (EC2) on AWS |
+| [Deploy React to GitHub Pages](https://github.com/marketplace/actions/deploy-react-to-github-pages) | Builds and deploys a React application to GitHub Pages. |
 | [Deploy static site to AWS (S3/CDN/R53)](https://github.com/marketplace/actions/deploy-static-site-to-aws-s3-cdn-r53) | Hosts a static site in AWS S3 with CloudFront |
+<br/>
+
+**And more!**, check our [list of actions in the GitHub marketplace](https://github.com/marketplace?category=&type=actions&verification=&query=bitovi)
 
 # Need help or have questions?
 This project is supported by [Bitovi, A DevOps consultancy](https://www.bitovi.com/services/devops-consulting).
