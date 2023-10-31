@@ -170,7 +170,7 @@ runs:
         gh_action_input_ansible: operations/deployment/ansible
         gh_deployment_action_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
         checkout: ${{ inputs.checkout }}
-        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} -e ST2_VERSION_TAG=${{ inputs.st2_version }}
+        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} -e ST2_VERSION_TAG=${{ inputs.st2_version_tag }}
         bitops_extra_env_vars_file: extra_env
         ansible_skip : ${{ inputs.infrastructure_only }}
 
