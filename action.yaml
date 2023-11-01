@@ -65,7 +65,11 @@ inputs:
     description: 'Comma separated list of packs to install. If you modify this option, be sure to also include `st2` in the list.'
     default: "st2"
   st2_ansible_extra_vars_file:
-     description: "Relative path from project root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth, etc. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings. The Ansible vars will take higher precedence over the GHA inputs."
+    description: "Relative path from project root to Ansible vars file. If you'd like to adjust more advanced configuration; st2 version, st2.conf, RBAC, chatops, auth, etc. See https://github.com/stackStorm/ansible-st2#variables for the full list of settings. The Ansible vars will take higher precedence over the GHA inputs."
+    required: false
+  st2_version_tag: 
+    description: "Stackstorm Ansible release tag to use. See https://github.com/StackStorm/ansible-st2/releases"
+    required: false
 
   # Stack Management
   tf_stack_destroy:
@@ -159,14 +163,14 @@ runs:
 
     - name: Deploy with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@v0.0.5
+      uses: bitovi/github-actions-commons@v0.0.7
       with:
         # Current repo vars
         gh_action_repo: ${{ github.action_path }}
         gh_action_input_ansible: operations/deployment/ansible
         gh_deployment_action_input_ansible_extra_vars_file: ${{ inputs.st2_ansible_extra_vars_file }}
         checkout: ${{ inputs.checkout }}
-        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }}
+        bitops_extra_env_vars: -e ST2_AUTH_USERNAME=${{ inputs.st2_auth_username }} -e ST2_AUTH_PASSWORD=${{ inputs.st2_auth_password }} -e ST2_VERSION_TAG=${{ inputs.st2_version_tag }}
         bitops_extra_env_vars_file: extra_env
         ansible_skip : ${{ inputs.infrastructure_only }}
 

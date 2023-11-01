@@ -18,6 +18,14 @@ echo "  Cloning..."
 git clone https://github.com/StackStorm/ansible-st2 $ANSIBLE_DIR/ansible-st2
 echo "  Cloning...Done"
 
+if [[ -n $ST2_VERSION_TAG ]]; then 
+  echo "  Switching to specific tag..."
+  cd $ANSIBLE_DIR/ansible-st2 
+  git fetch --tags
+  git checkout $ST2_VERSION_TAG
+  echo "  Switching to specific tag...Done"
+fi
+
 echo "  Copying files from ansible-st2"
 
 echo "    $ANSIBLE_DIR/ansible-st2/roles/ -> $ANSIBLE_DIR/roles"
