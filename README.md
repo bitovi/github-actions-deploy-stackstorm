@@ -6,7 +6,7 @@
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/bitovi/github-actions-deploy-stackstorm)
 [![Discrod Community](https://img.shields.io/discord/1007137664606150746?logo=discord&label=Discord)](https://discord.gg/J7ejFsZnJ4Z)
 
-
+![alt](https://bitovi-gha-pixel-tracker-deployment-main.bitovi-sandbox.com/pixel/fBfJvGWta6ZyohS-moZ34)
 ## Action Summary
 This action deploys a Stackstorm instance to an AWS VM (EC2) with [Terraform](operations/deployment/terraform/modules) and [Ansible](https://github.com/stackstorm/ansible-st2).  
 
