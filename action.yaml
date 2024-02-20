@@ -195,7 +195,7 @@ runs:
         aws_session_token: ${{ inputs.aws_session_token }}
         aws_default_region: ${{ inputs.aws_default_region }}
         aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
-        aws_additional_tags: ${{ inputs.aws_extra_tags }}
+        aws_additional_tags: ${{ inputs.aws_additional_tags }}
 
         # EC2
         aws_ec2_instance_create: true
@@ -225,13 +225,13 @@ runs:
 
         # AWS Route53 Domains abd Certificates
         aws_r53_enable: true
-        aws_r53_domain_name: ${{ inputs.aws_domain_name }}
-        aws_r53_sub_domain_name: ${{ inputs.aws_sub_domain }}
-        aws_r53_root_domain_deploy: ${{ inputs.aws_root_domain }}
-        aws_r53_enable_cert: ${{ steps.set-cert.outputs.enable_cert }}
-        aws_r53_cert_arn: ${{ inputs.aws_cert_arn }}
-        aws_r53_create_root_cert: ${{ inputs.aws_create_root_cert }}
-        aws_r53_create_sub_cert: ${{ inputs.aws_create_sub_cert }}
+        aws_r53_domain_name: ${{ inputs.aws_r53_domain_name }}
+        aws_r53_sub_domain_name: ${{ inputs.aws_r53_sub_domain_name }}
+        aws_r53_root_domain_deploy: ${{ inputs.aws_r53_root_domain_deploy }}
+        aws_r53_enable_cert: ${{ inputs.aws_r53_enable_cert }}
+        aws_r53_cert_arn: ${{ inputs.aws_r53_cert_arn }}
+        aws_r53_create_root_cert: ${{ inputs.aws_r53_create_root_cert }}
+        aws_r53_create_sub_cert: ${{ inputs.aws_r53_create_sub_cert }}
         aws_r53_additional_tags: ${{ inputs.aws_r53_additional_tags }}
 
         aws_vpc_create: ${{ inputs.aws_vpc_create }}
