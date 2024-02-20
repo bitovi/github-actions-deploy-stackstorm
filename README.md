@@ -267,7 +267,7 @@ jobs:
     steps:
     - id: deploy-st2-advanced
       name: Deploy StackStorm with extra Ansible vars
-      uses: bitovi/github-actions-deploy-stackstorm@v0.4.1
+      uses: bitovi/github-actions-deploy-stackstorm@v0.4.2
       with:
         aws_default_region: us-east-1
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
@@ -287,7 +287,7 @@ We encourage to keep your infrastructure codified!
 You can pass additional `BITOPS_` ENV variables to adjust the deployment behavior.
 ```yaml
 - name: Deploy StackStorm to AWS (dry-run)
-  uses: bitovi/github-actions-deploy-stackstorm@v0.4.1
+  uses: bitovi/github-actions-deploy-stackstorm@v0.4.2
   env:
     # Extra BitOps configuration:
     BITOPS_LOGGING_LEVEL: INFO
